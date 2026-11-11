@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "yJqXaTB0X8A=",
+  "success": true,
+  "projectFilePath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Entities/UA.Entities.csproj",
+  "expectedPackageFiles": [
+    "/Users/ratul/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.14/microsoft.entityframeworkcore.abstractions.10.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

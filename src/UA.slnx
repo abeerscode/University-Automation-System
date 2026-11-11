@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/API/">
+    <Project Path="API/UA.API/UA.API.csproj" />
+  </Folder>
+  <Folder Name="/Business/">
+    <Project Path="Business/UA.Facade/UA.Facade.csproj" />
+  </Folder>
+  <Folder Name="/Library/">
+    <Project Path="Library/UA.DataAccess/UA.DataAccess.csproj" />
+    <Project Path="Library/UA.Entities/UA.Entities.csproj" />
+    <Project Path="Library/UA.Framework/UA.Framework.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Presentation/UA.Web.UI/UA.Web.UI.csproj" />
+  </Folder>
+</Solution>

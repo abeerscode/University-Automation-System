@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\UA.DataAccess\UA.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Library\UA.Entities\UA.Entities.csproj" />
+    <ProjectReference Include="..\..\Library\UA.Framework\UA.Framework.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
