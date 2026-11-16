@@ -1,0 +1,8 @@
+@model NoticeFormViewModel
+@{ViewData["Title"]="Draft notice";}
+<h1>Draft notice</h1><form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="Title"></label><input asp-for="Title" class="form-control" />
+<label asp-for="Body"></label><textarea asp-for="Body" rows="9" class="form-control"></textarea>
+<label asp-for="DepartmentId">Department ID (optional)</label><input asp-for="DepartmentId" class="form-control" />
+<label><input asp-for="IsPublic" /> Visible on public website after approval</label><br />
+<button class="btn btn-primary mt-2">Save draft</button></form>

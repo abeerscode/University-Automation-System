@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Weekly class slots of an offering.</summary>
 /// <remarks>Requirements: FR-ACA-10</remarks>

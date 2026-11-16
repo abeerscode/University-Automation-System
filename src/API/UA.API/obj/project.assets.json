@@ -1028,22 +1028,6 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "System.Formats.Asn1/11.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net10.0/System.Formats.Asn1.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net10.0/System.Formats.Asn1.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net10.0/_._": {}
-        }
-      },
       "System.IdentityModel.Tokens.Jwt/7.7.1": {
         "type": "package",
         "dependencies": {
@@ -1077,26 +1061,23 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "System.Security.Cryptography.Pkcs/11.0.0": {
+      "System.Security.Cryptography.Pkcs/9.0.11": {
         "type": "package",
-        "dependencies": {
-          "System.Formats.Asn1": "11.0.0"
-        },
         "compile": {
-          "lib/net10.0/System.Security.Cryptography.Pkcs.dll": {
+          "lib/net9.0/System.Security.Cryptography.Pkcs.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net10.0/System.Security.Cryptography.Pkcs.dll": {
+          "lib/net9.0/System.Security.Cryptography.Pkcs.dll": {
             "related": ".xml"
           }
         },
         "build": {
-          "buildTransitive/net10.0/_._": {}
+          "buildTransitive/net8.0/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/win/lib/net10.0/System.Security.Cryptography.Pkcs.dll": {
+          "runtimes/win/lib/net9.0/System.Security.Cryptography.Pkcs.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -1124,7 +1105,6 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "10.0.14",
           "Microsoft.EntityFrameworkCore.SqlServer": "10.0.14",
-          "System.Security.Cryptography.Pkcs": "11.0.0",
           "UA.Entities": "1.0.0",
           "UA.Framework": "1.0.0"
         },
@@ -1172,6 +1152,20 @@
         },
         "runtime": {
           "bin/placeholder/UA.Framework.dll": {}
+        }
+      },
+      "UA.Integration/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "UA.Facade": "1.0.0",
+          "UA.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UA.Integration.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UA.Integration.dll": {}
         }
       }
     }
@@ -3122,33 +3116,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Formats.Asn1/11.0.0": {
-      "sha512": "RSIrJ7D8gEHykZWTfS/r9tz/G5YpxIQAaFFXSLLHhVaRed+/26KvqaXvUtqqMJMlNjubAcMvf3UJ+E6ABT8AWw==",
-      "type": "package",
-      "path": "system.formats.asn1/11.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "PACKAGE.md",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net10.0/_._",
-        "buildTransitive/net461/System.Formats.Asn1.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/netcoreapp2.0/System.Formats.Asn1.targets",
-        "lib/net10.0/System.Formats.Asn1.dll",
-        "lib/net10.0/System.Formats.Asn1.xml",
-        "lib/net11.0/System.Formats.Asn1.dll",
-        "lib/net11.0/System.Formats.Asn1.xml",
-        "lib/net462/System.Formats.Asn1.dll",
-        "lib/net462/System.Formats.Asn1.xml",
-        "lib/netstandard2.0/System.Formats.Asn1.dll",
-        "lib/netstandard2.0/System.Formats.Asn1.xml",
-        "system.formats.asn1.11.0.0.nupkg.sha512",
-        "system.formats.asn1.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
-    },
     "System.IdentityModel.Tokens.Jwt/7.7.1": {
       "sha512": "rQkO1YbAjLwnDJSMpRhRtrc6XwIcEOcUvoEcge+evurpzSZM3UNK+MZfD3sKyTlYsvknZ6eJjSBfnmXqwOsT9Q==",
       "type": "package",
@@ -3202,34 +3169,35 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Security.Cryptography.Pkcs/11.0.0": {
-      "sha512": "G8mTjSWrwaPJ2bJRbKuI4ZqdKUYcANK0KtNH3s8/va3nXiF/Pk/yhv2R17rv5PBKJO5+ZXDyhTnZXh0W9v0J8w==",
+    "System.Security.Cryptography.Pkcs/9.0.11": {
+      "sha512": "YS2YqtN6fFjlTDIQI+ucjbbrEvwMn796r+VLTQRr/5Oy6g+i+m7nIou83KnJCnAcKna2I+5eVJRks6SoHSpetQ==",
       "type": "package",
-      "path": "system.security.cryptography.pkcs/11.0.0",
+      "path": "system.security.cryptography.pkcs/9.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
+        "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net10.0/_._",
         "buildTransitive/net461/System.Security.Cryptography.Pkcs.targets",
         "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
         "buildTransitive/netcoreapp2.0/System.Security.Cryptography.Pkcs.targets",
-        "lib/net10.0/System.Security.Cryptography.Pkcs.dll",
-        "lib/net10.0/System.Security.Cryptography.Pkcs.xml",
-        "lib/net11.0/System.Security.Cryptography.Pkcs.dll",
-        "lib/net11.0/System.Security.Cryptography.Pkcs.xml",
         "lib/net462/System.Security.Cryptography.Pkcs.dll",
         "lib/net462/System.Security.Cryptography.Pkcs.xml",
+        "lib/net8.0/System.Security.Cryptography.Pkcs.dll",
+        "lib/net8.0/System.Security.Cryptography.Pkcs.xml",
+        "lib/net9.0/System.Security.Cryptography.Pkcs.dll",
+        "lib/net9.0/System.Security.Cryptography.Pkcs.xml",
         "lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll",
         "lib/netstandard2.0/System.Security.Cryptography.Pkcs.xml",
         "lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll",
         "lib/netstandard2.1/System.Security.Cryptography.Pkcs.xml",
-        "runtimes/win/lib/net10.0/System.Security.Cryptography.Pkcs.dll",
-        "runtimes/win/lib/net10.0/System.Security.Cryptography.Pkcs.xml",
-        "runtimes/win/lib/net11.0/System.Security.Cryptography.Pkcs.dll",
-        "runtimes/win/lib/net11.0/System.Security.Cryptography.Pkcs.xml",
-        "system.security.cryptography.pkcs.11.0.0.nupkg.sha512",
+        "runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.xml",
+        "runtimes/win/lib/net9.0/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/net9.0/System.Security.Cryptography.Pkcs.xml",
+        "system.security.cryptography.pkcs.9.0.11.nupkg.sha512",
         "system.security.cryptography.pkcs.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -3287,16 +3255,20 @@
       "type": "project",
       "path": "../../Library/UA.Framework/UA.Framework.csproj",
       "msbuildProject": "../../Library/UA.Framework/UA.Framework.csproj"
+    },
+    "UA.Integration/1.0.0": {
+      "type": "project",
+      "path": "../../Library/UA.Integration/UA.Integration.csproj",
+      "msbuildProject": "../../Library/UA.Integration/UA.Integration.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "Microsoft.AspNetCore.OpenApi >= 10.0.12",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.14",
-      "UA.DataAccess >= 1.0.0",
-      "UA.Entities >= 1.0.0",
       "UA.Facade >= 1.0.0",
-      "UA.Framework >= 1.0.0"
+      "UA.Framework >= 1.0.0",
+      "UA.Integration >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3311,6 +3283,7 @@
       "packagesPath": "/Users/ratul/.nuget/packages/",
       "outputPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/API/UA.API/obj/",
       "projectStyle": "PackageReference",
+      "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
         "/Users/ratul/.nuget/NuGet/NuGet.Config"
       ],
@@ -3328,14 +3301,11 @@
             "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Business/UA.Facade/UA.Facade.csproj": {
               "projectPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Business/UA.Facade/UA.Facade.csproj"
             },
-            "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.DataAccess/UA.DataAccess.csproj": {
-              "projectPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.DataAccess/UA.DataAccess.csproj"
-            },
-            "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Entities/UA.Entities.csproj": {
-              "projectPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Entities/UA.Entities.csproj"
-            },
             "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Framework/UA.Framework.csproj": {
               "projectPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Framework/UA.Framework.csproj"
+            },
+            "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Integration/UA.Integration.csproj": {
+              "projectPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Integration/UA.Integration.csproj"
             }
           }
         }
@@ -3359,14 +3329,23 @@
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
-            "version": "[10.0.12, )"
+            "version": "[10.0.12, )",
+            "versionCentrallyManaged": true
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.14, )"
+            "version": "[10.0.14, )",
+            "versionCentrallyManaged": true
           }
+        },
+        "centralPackageVersions": {
+          "Microsoft.AspNetCore.OpenApi": "10.0.12",
+          "Microsoft.EntityFrameworkCore": "10.0.14",
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.14",
+          "Microsoft.EntityFrameworkCore.Design": "10.0.14",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.14"
         },
         "imports": [
           "net461",
@@ -3804,5 +3783,27 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Security.Cryptography.Pkcs' 9.0.11 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-2fmv-rv2c-59x7",
+      "libraryId": "System.Security.Cryptography.Pkcs",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Security.Cryptography.Pkcs' 9.0.11 has a known high severity vulnerability, https://github.com/advisories/GHSA-846f-f764-76mx",
+      "libraryId": "System.Security.Cryptography.Pkcs",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

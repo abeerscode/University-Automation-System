@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Version history of website pages.</summary>
 /// <remarks>Requirements: FR-WEB-07</remarks>

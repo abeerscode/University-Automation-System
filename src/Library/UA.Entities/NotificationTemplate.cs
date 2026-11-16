@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Message templates.</summary>
 /// <remarks>Requirements: SR-17, FR-SEC-07</remarks>

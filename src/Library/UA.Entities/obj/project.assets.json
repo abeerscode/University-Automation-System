@@ -67,6 +67,7 @@
       "packagesPath": "/Users/ratul/.nuget/packages/",
       "outputPath": "/Users/ratul/Documents/Practicum/UniversityAutomation/src/Library/UA.Entities/obj/",
       "projectStyle": "PackageReference",
+      "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
         "/Users/ratul/.nuget/NuGet/NuGet.Config"
       ],
@@ -106,8 +107,16 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": {
             "target": "Package",
-            "version": "[10.0.14, )"
+            "version": "[10.0.14, )",
+            "versionCentrallyManaged": true
           }
+        },
+        "centralPackageVersions": {
+          "Microsoft.AspNetCore.OpenApi": "10.0.12",
+          "Microsoft.EntityFrameworkCore": "10.0.14",
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.14",
+          "Microsoft.EntityFrameworkCore.Design": "10.0.14",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.14"
         },
         "imports": [
           "net461",

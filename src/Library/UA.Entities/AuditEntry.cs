@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Append-only log of sensitive actions.</summary>
 /// <remarks>Requirements: FR-SEC-06, SR-14</remarks>

@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Mark components and maximum marks per department and course type.</summary>
 /// <remarks>Requirements: FR-EXM-13, BR-11</remarks>

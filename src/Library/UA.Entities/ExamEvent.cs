@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Midterm or final examination of a term.</summary>
 /// <remarks>Requirements: FR-EXM-01</remarks>

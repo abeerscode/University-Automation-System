@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Semester of the academic calendar with its main deadlines.</summary>
 /// <remarks>Requirements: FR-ACA-04, SR-05, BR-02</remarks>

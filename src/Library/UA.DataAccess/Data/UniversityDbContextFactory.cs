@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace UniversityAutomation.Data;
+namespace UA.DataAccess.Data;
 
 /// <summary>
 /// Design-time factory used by dotnet-ef for migrations and database updates.

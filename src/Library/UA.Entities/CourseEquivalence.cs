@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Course equivalence decided for a rejoining student when curriculum versions differ.</summary>
 /// <remarks>Requirements: FR-STU-17, A-19</remarks>

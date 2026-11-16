@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Verification and password-reset codes.</summary>
 /// <remarks>Requirements: FR-ADM-02, FR-SEC-01, NFR-INT-10</remarks>

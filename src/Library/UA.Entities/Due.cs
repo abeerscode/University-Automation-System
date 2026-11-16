@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Amount owed by an applicant or student.</summary>
 /// <remarks>Requirements: FR-FIN-03, FR-FIN-04, FR-FIN-07</remarks>

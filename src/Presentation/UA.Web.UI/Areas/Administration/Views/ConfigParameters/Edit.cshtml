@@ -1,0 +1,8 @@
+@model ConfigFormViewModel
+@{ViewData["Title"]="New configuration";}
+<h1>New parameter version</h1><form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="Key"></label><input asp-for="Key" class="form-control" />
+<label asp-for="Value"></label><input asp-for="Value" class="form-control" />
+<label asp-for="DepartmentId">Department ID (leave blank for university-wide)</label><input asp-for="DepartmentId" class="form-control" />
+<label asp-for="EffectiveTermId">Effective term ID</label><input asp-for="EffectiveTermId" class="form-control" />
+<button class="btn btn-primary mt-2">Add version</button></form>

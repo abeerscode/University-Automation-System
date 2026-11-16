@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>State of long-running jobs.</summary>
 /// <remarks>Requirements: SR-16, SR-19</remarks>

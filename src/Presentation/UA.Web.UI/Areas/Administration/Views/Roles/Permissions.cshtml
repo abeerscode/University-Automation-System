@@ -1,0 +1,5 @@
+@{ViewData["Title"]="Permission matrix";}
+<h1>Permission matrix</h1><p>Changes affect future authorization checks immediately.</p>
+<form method="post" asp-action="Permissions" asp-route-id="@ViewBag.RoleId"><div class="row row-cols-1 row-cols-md-3">
+@foreach(var code in (string[])ViewBag.Catalog){<label class="col mb-2"><input type="checkbox" name="permissions" value="@code" checked="@(((HashSet<string>)ViewBag.Selected).Contains(code))" /> @code</label>}
+</div><button class="btn btn-primary mt-3">Save grants</button></form>

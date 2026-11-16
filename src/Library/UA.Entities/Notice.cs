@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>University and department notices, public or internal.</summary>
 /// <remarks>Requirements: FR-SEC-09, FR-WEB-03</remarks>

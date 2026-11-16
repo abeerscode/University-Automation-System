@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Public website pages.</summary>
 /// <remarks>Requirements: FR-WEB-01, FR-WEB-02, FR-WEB-07</remarks>

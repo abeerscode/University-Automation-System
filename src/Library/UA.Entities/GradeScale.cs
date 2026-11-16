@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Grading scale of a department.</summary>
 /// <remarks>Requirements: FR-EXM-24, BR-08</remarks>

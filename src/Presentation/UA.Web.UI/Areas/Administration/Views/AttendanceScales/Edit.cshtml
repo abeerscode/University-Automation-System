@@ -1,0 +1,8 @@
+@model RuleVersionForm
+@{ViewData["Title"]="New attendance bands";}
+<h1>New attendance band version</h1><p>One row per band: minimum attendance %,mark percentage. Include the 0% band.</p>
+<form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="DepartmentId"></label><input asp-for="DepartmentId" class="form-control"/>
+<label asp-for="EffectiveFrom"></label><input asp-for="EffectiveFrom" type="date" class="form-control"/>
+<label asp-for="Rows">Attendance rows</label><textarea asp-for="Rows" rows="10" class="form-control font-monospace"></textarea>
+<button class="btn btn-primary">Add version</button></form>

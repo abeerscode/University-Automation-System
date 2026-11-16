@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Permission matrix of the roles.</summary>
 /// <remarks>Requirements: FR-SEC-03, SR-04</remarks>

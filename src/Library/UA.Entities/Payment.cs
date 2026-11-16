@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Online or counter payment, including reversing entries.</summary>
 /// <remarks>Requirements: FR-FIN-05, FR-FIN-06, FR-FIN-11</remarks>

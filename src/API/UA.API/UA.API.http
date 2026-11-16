@@ -1,6 +1,1 @@
 @UA.API_HostAddress = http://localhost:5080
-
-GET {{UA.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

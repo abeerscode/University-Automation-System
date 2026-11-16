@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Fee types and amounts per department.</summary>
 /// <remarks>Requirements: FR-FIN-01, FR-FIN-02, BR-22</remarks>

@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Receipt issued for a payment.</summary>
 /// <remarks>Requirements: FR-FIN-06, UR-02</remarks>

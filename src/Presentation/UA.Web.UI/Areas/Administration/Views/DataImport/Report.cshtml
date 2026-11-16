@@ -1,0 +1,5 @@
+@{var report=(UA.Facade.DTO.Administration.ImportValidationDto)ViewBag.Report;ViewData["Title"]="CSV validation report";}
+<h1>CSV validation report</h1><p>Valid rows: @report.ValidRows. Issues: @report.Issues.Count.</p>
+<table class="table"><thead><tr><th>Line</th><th>Issue</th></tr></thead><tbody>
+@foreach(var issue in report.Issues){<tr><td>@issue.LineNumber</td><td>@issue.Message</td></tr>}</tbody></table>
+<p class="small-note">Preview only. Nothing has been written to the database.</p>

@@ -9,8 +9,13 @@
     <Project Path="Library/UA.DataAccess/UA.DataAccess.csproj" />
     <Project Path="Library/UA.Entities/UA.Entities.csproj" />
     <Project Path="Library/UA.Framework/UA.Framework.csproj" />
+    <Project Path="Library/UA.Integration/UA.Integration.csproj" />
   </Folder>
   <Folder Name="/Presentation/">
     <Project Path="Presentation/UA.Web.UI/UA.Web.UI.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/UA.Facade.Tests/UA.Facade.Tests.csproj" />
+    <Project Path="Tests/UA.DataAccess.Tests/UA.DataAccess.Tests.csproj" />
   </Folder>
 </Solution>

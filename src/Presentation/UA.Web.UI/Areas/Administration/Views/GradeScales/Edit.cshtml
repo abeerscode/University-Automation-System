@@ -1,0 +1,8 @@
+@model RuleVersionForm
+@{ViewData["Title"]="New grade version";}
+<h1>New grade scale version</h1><p>One row per grade: letter,min,max,points. Intervals must cover 0–100 without gaps.</p>
+<form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="DepartmentId"></label><input asp-for="DepartmentId" class="form-control"/>
+<label asp-for="EffectiveFrom"></label><input asp-for="EffectiveFrom" type="date" class="form-control"/>
+<label asp-for="Rows">Grade rows</label><textarea asp-for="Rows" rows="12" class="form-control font-monospace"></textarea>
+<button class="btn btn-primary">Add version</button></form>

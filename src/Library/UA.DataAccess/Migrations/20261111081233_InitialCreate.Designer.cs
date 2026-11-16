@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UniversityAutomation.Data;
+using UA.DataAccess.Data;
 
 #nullable disable
 
@@ -25,7 +25,7 @@ namespace UA.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicCalendarEvent", b =>
+            modelBuilder.Entity("UA.Entities.AcademicCalendarEvent", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Academic_Calendar_Event");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicProgram", b =>
+            modelBuilder.Entity("UA.Entities.AcademicProgram", b =>
                 {
                     b.Property<int>("ProgramId")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Program");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicTerm", b =>
+            modelBuilder.Entity("UA.Entities.AcademicTerm", b =>
                 {
                     b.Property<int>("TermId")
                         .ValueGeneratedOnAdd()
@@ -145,7 +145,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Academic_Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AdmissionCircular", b =>
+            modelBuilder.Entity("UA.Entities.AdmissionCircular", b =>
                 {
                     b.Property<int>("CircularId")
                         .ValueGeneratedOnAdd()
@@ -198,7 +198,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Admission_Circular");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Applicant", b =>
+            modelBuilder.Entity("UA.Entities.Applicant", b =>
                 {
                     b.Property<int>("ApplicantId")
                         .ValueGeneratedOnAdd()
@@ -294,7 +294,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Applicant");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Application", b =>
+            modelBuilder.Entity("UA.Entities.Application", b =>
                 {
                     b.Property<int>("ApplicationId")
                         .ValueGeneratedOnAdd()
@@ -360,7 +360,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Application");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ApprovalRecord", b =>
+            modelBuilder.Entity("UA.Entities.ApprovalRecord", b =>
                 {
                     b.Property<int>("ApprovalId")
                         .ValueGeneratedOnAdd()
@@ -416,7 +416,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Approval_Record");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AttendanceRecord", b =>
+            modelBuilder.Entity("UA.Entities.AttendanceRecord", b =>
                 {
                     b.Property<long>("AttendanceId")
                         .ValueGeneratedOnAdd()
@@ -459,7 +459,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Attendance_Record");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AttendanceScale", b =>
+            modelBuilder.Entity("UA.Entities.AttendanceScale", b =>
                 {
                     b.Property<int>("ScaleId")
                         .ValueGeneratedOnAdd()
@@ -496,7 +496,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Attendance_Scale");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AuditEntry", b =>
+            modelBuilder.Entity("UA.Entities.AuditEntry", b =>
                 {
                     b.Property<long>("AuditId")
                         .ValueGeneratedOnAdd()
@@ -546,7 +546,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Audit_Entry");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.BackgroundJob", b =>
+            modelBuilder.Entity("UA.Entities.BackgroundJob", b =>
                 {
                     b.Property<int>("JobId")
                         .ValueGeneratedOnAdd()
@@ -595,7 +595,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Background_Job");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Batch", b =>
+            modelBuilder.Entity("UA.Entities.Batch", b =>
                 {
                     b.Property<int>("BatchId")
                         .ValueGeneratedOnAdd()
@@ -630,7 +630,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Batch");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CircularSeat", b =>
+            modelBuilder.Entity("UA.Entities.CircularSeat", b =>
                 {
                     b.Property<int>("CircularId")
                         .HasColumnType("int")
@@ -651,7 +651,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Circular_Seat");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ClassRoutine", b =>
+            modelBuilder.Entity("UA.Entities.ClassRoutine", b =>
                 {
                     b.Property<int>("RoutineId")
                         .ValueGeneratedOnAdd()
@@ -689,7 +689,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Class_Routine");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ConfigParameter", b =>
+            modelBuilder.Entity("UA.Entities.ConfigParameter", b =>
                 {
                     b.Property<int>("ParameterId")
                         .ValueGeneratedOnAdd()
@@ -739,7 +739,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Config_Parameter");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Course", b =>
+            modelBuilder.Entity("UA.Entities.Course", b =>
                 {
                     b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
@@ -784,7 +784,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Course");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CourseEquivalence", b =>
+            modelBuilder.Entity("UA.Entities.CourseEquivalence", b =>
                 {
                     b.Property<int>("EquivalenceId")
                         .ValueGeneratedOnAdd()
@@ -824,7 +824,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Course_Equivalence");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CoursePrerequisite", b =>
+            modelBuilder.Entity("UA.Entities.CoursePrerequisite", b =>
                 {
                     b.Property<int>("CourseId")
                         .HasColumnType("int")
@@ -841,7 +841,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Course_Prerequisite");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CurriculumCourse", b =>
+            modelBuilder.Entity("UA.Entities.CurriculumCourse", b =>
                 {
                     b.Property<int>("CurriculumId")
                         .HasColumnType("int")
@@ -862,7 +862,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Curriculum_Course");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CurriculumVersion", b =>
+            modelBuilder.Entity("UA.Entities.CurriculumVersion", b =>
                 {
                     b.Property<int>("CurriculumId")
                         .ValueGeneratedOnAdd()
@@ -903,7 +903,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Curriculum_Version");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Department", b =>
+            modelBuilder.Entity("UA.Entities.Department", b =>
                 {
                     b.Property<int>("DepartmentId")
                         .ValueGeneratedOnAdd()
@@ -950,7 +950,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.DocumentRequest", b =>
+            modelBuilder.Entity("UA.Entities.DocumentRequest", b =>
                 {
                     b.Property<int>("RequestId")
                         .ValueGeneratedOnAdd()
@@ -998,7 +998,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Document_Request");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Due", b =>
+            modelBuilder.Entity("UA.Entities.Due", b =>
                 {
                     b.Property<int>("DueId")
                         .ValueGeneratedOnAdd()
@@ -1060,7 +1060,7 @@ namespace UA.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.EligibilityHold", b =>
+            modelBuilder.Entity("UA.Entities.EligibilityHold", b =>
                 {
                     b.Property<int>("HoldId")
                         .ValueGeneratedOnAdd()
@@ -1127,7 +1127,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Eligibility_Hold");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Enrollment", b =>
+            modelBuilder.Entity("UA.Entities.Enrollment", b =>
                 {
                     b.Property<int>("EnrollmentId")
                         .ValueGeneratedOnAdd()
@@ -1178,7 +1178,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Enrollment");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ExamEvent", b =>
+            modelBuilder.Entity("UA.Entities.ExamEvent", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
@@ -1218,7 +1218,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Exam_Event");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ExamSitting", b =>
+            modelBuilder.Entity("UA.Entities.ExamSitting", b =>
                 {
                     b.Property<int>("SittingId")
                         .ValueGeneratedOnAdd()
@@ -1262,7 +1262,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Exam_Sitting");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Faculty", b =>
+            modelBuilder.Entity("UA.Entities.Faculty", b =>
                 {
                     b.Property<int>("FacultyId")
                         .ValueGeneratedOnAdd()
@@ -1337,7 +1337,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Faculty");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.FeeType", b =>
+            modelBuilder.Entity("UA.Entities.FeeType", b =>
                 {
                     b.Property<int>("FeeTypeId")
                         .ValueGeneratedOnAdd()
@@ -1377,7 +1377,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Fee_Type");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.FeeWaiver", b =>
+            modelBuilder.Entity("UA.Entities.FeeWaiver", b =>
                 {
                     b.Property<int>("WaiverId")
                         .ValueGeneratedOnAdd()
@@ -1416,7 +1416,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Fee_Waiver");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.GatewayCallback", b =>
+            modelBuilder.Entity("UA.Entities.GatewayCallback", b =>
                 {
                     b.Property<long>("CallbackId")
                         .ValueGeneratedOnAdd()
@@ -1460,7 +1460,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Gateway_Callback");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.GradeScale", b =>
+            modelBuilder.Entity("UA.Entities.GradeScale", b =>
                 {
                     b.Property<int>("ScaleId")
                         .ValueGeneratedOnAdd()
@@ -1507,7 +1507,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Grade_Scale");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkComponent", b =>
+            modelBuilder.Entity("UA.Entities.MarkComponent", b =>
                 {
                     b.Property<int>("ComponentId")
                         .ValueGeneratedOnAdd()
@@ -1556,7 +1556,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Mark_Component");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkEntry", b =>
+            modelBuilder.Entity("UA.Entities.MarkEntry", b =>
                 {
                     b.Property<long>("EntryId")
                         .ValueGeneratedOnAdd()
@@ -1603,7 +1603,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Mark_Entry");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkSubmission", b =>
+            modelBuilder.Entity("UA.Entities.MarkSubmission", b =>
                 {
                     b.Property<int>("SubmissionId")
                         .ValueGeneratedOnAdd()
@@ -1664,7 +1664,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Mark_Submission");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MentorAssignment", b =>
+            modelBuilder.Entity("UA.Entities.MentorAssignment", b =>
                 {
                     b.Property<int>("AssignmentId")
                         .ValueGeneratedOnAdd()
@@ -1704,7 +1704,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Mentor_Assignment");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Notice", b =>
+            modelBuilder.Entity("UA.Entities.Notice", b =>
                 {
                     b.Property<int>("NoticeId")
                         .ValueGeneratedOnAdd()
@@ -1755,7 +1755,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Notice");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Notification", b =>
+            modelBuilder.Entity("UA.Entities.Notification", b =>
                 {
                     b.Property<long>("NotificationId")
                         .ValueGeneratedOnAdd()
@@ -1808,7 +1808,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Notification");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.NotificationTemplate", b =>
+            modelBuilder.Entity("UA.Entities.NotificationTemplate", b =>
                 {
                     b.Property<int>("TemplateId")
                         .ValueGeneratedOnAdd()
@@ -1851,7 +1851,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Notification_Template");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Offering", b =>
+            modelBuilder.Entity("UA.Entities.Offering", b =>
                 {
                     b.Property<int>("OfferingId")
                         .ValueGeneratedOnAdd()
@@ -1900,7 +1900,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Offering");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.OfferingTeacher", b =>
+            modelBuilder.Entity("UA.Entities.OfferingTeacher", b =>
                 {
                     b.Property<int>("OfferingId")
                         .HasColumnType("int")
@@ -1929,7 +1929,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Offering_Teacher");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Payment", b =>
+            modelBuilder.Entity("UA.Entities.Payment", b =>
                 {
                     b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
@@ -2005,7 +2005,7 @@ namespace UA.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.PaymentAllocation", b =>
+            modelBuilder.Entity("UA.Entities.PaymentAllocation", b =>
                 {
                     b.Property<int>("PaymentId")
                         .HasColumnType("int")
@@ -2026,7 +2026,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Payment_Allocation");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Receipt", b =>
+            modelBuilder.Entity("UA.Entities.Receipt", b =>
                 {
                     b.Property<int>("ReceiptId")
                         .ValueGeneratedOnAdd()
@@ -2060,7 +2060,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Receipt");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Result", b =>
+            modelBuilder.Entity("UA.Entities.Result", b =>
                 {
                     b.Property<int>("ResultId")
                         .ValueGeneratedOnAdd()
@@ -2138,7 +2138,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Result");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Role", b =>
+            modelBuilder.Entity("UA.Entities.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
@@ -2165,7 +2165,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.RolePermission", b =>
+            modelBuilder.Entity("UA.Entities.RolePermission", b =>
                 {
                     b.Property<int>("RoleId")
                         .HasColumnType("int")
@@ -2181,7 +2181,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Role_Permission");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Room", b =>
+            modelBuilder.Entity("UA.Entities.Room", b =>
                 {
                     b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
@@ -2214,7 +2214,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Room");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SeatAllocation", b =>
+            modelBuilder.Entity("UA.Entities.SeatAllocation", b =>
                 {
                     b.Property<int>("SeatId")
                         .ValueGeneratedOnAdd()
@@ -2265,7 +2265,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Seat_Allocation");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Section", b =>
+            modelBuilder.Entity("UA.Entities.Section", b =>
                 {
                     b.Property<int>("SectionId")
                         .ValueGeneratedOnAdd()
@@ -2296,7 +2296,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Section");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SemesterDrop", b =>
+            modelBuilder.Entity("UA.Entities.SemesterDrop", b =>
                 {
                     b.Property<int>("DropId")
                         .ValueGeneratedOnAdd()
@@ -2355,7 +2355,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Semester_Drop");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SemesterResult", b =>
+            modelBuilder.Entity("UA.Entities.SemesterResult", b =>
                 {
                     b.Property<int>("SemesterResultId")
                         .ValueGeneratedOnAdd()
@@ -2413,7 +2413,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Semester_Result");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Student", b =>
+            modelBuilder.Entity("UA.Entities.Student", b =>
                 {
                     b.Property<string>("StudentId")
                         .HasMaxLength(8)
@@ -2521,7 +2521,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.StudentBatchHistory", b =>
+            modelBuilder.Entity("UA.Entities.StudentBatchHistory", b =>
                 {
                     b.Property<int>("MoveId")
                         .ValueGeneratedOnAdd()
@@ -2575,7 +2575,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Student_Batch_History");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.StudentStatusHistory", b =>
+            modelBuilder.Entity("UA.Entities.StudentStatusHistory", b =>
                 {
                     b.Property<int>("HistoryId")
                         .ValueGeneratedOnAdd()
@@ -2625,7 +2625,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Student_Status_History");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.UploadedDocument", b =>
+            modelBuilder.Entity("UA.Entities.UploadedDocument", b =>
                 {
                     b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
@@ -2681,7 +2681,7 @@ namespace UA.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.UserAccount", b =>
+            modelBuilder.Entity("UA.Entities.UserAccount", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -2750,7 +2750,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("User_Account");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.UserRole", b =>
+            modelBuilder.Entity("UA.Entities.UserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int")
@@ -2773,7 +2773,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("User_Role");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.VerificationToken", b =>
+            modelBuilder.Entity("UA.Entities.VerificationToken", b =>
                 {
                     b.Property<int>("TokenId")
                         .ValueGeneratedOnAdd()
@@ -2817,7 +2817,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Verification_Token");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.WebPage", b =>
+            modelBuilder.Entity("UA.Entities.WebPage", b =>
                 {
                     b.Property<int>("PageId")
                         .ValueGeneratedOnAdd()
@@ -2858,7 +2858,7 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Web_Page");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.WebPageVersion", b =>
+            modelBuilder.Entity("UA.Entities.WebPageVersion", b =>
                 {
                     b.Property<int>("VersionId")
                         .ValueGeneratedOnAdd()
@@ -2904,9 +2904,9 @@ namespace UA.DataAccess.Migrations
                     b.ToTable("Web_Page_Version");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicCalendarEvent", b =>
+            modelBuilder.Entity("UA.Entities.AcademicCalendarEvent", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "Term")
+                    b.HasOne("UA.Entities.AcademicTerm", "Term")
                         .WithMany("AcademicCalendarEvents")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2915,48 +2915,48 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicProgram", b =>
+            modelBuilder.Entity("UA.Entities.AcademicProgram", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithOne("Program")
-                        .HasForeignKey("UniversityAutomation.Models.AcademicProgram", "DepartmentId")
+                        .HasForeignKey("UA.Entities.AcademicProgram", "DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Applicant", b =>
+            modelBuilder.Entity("UA.Entities.Applicant", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "User")
+                    b.HasOne("UA.Entities.UserAccount", "User")
                         .WithOne("Applicant")
-                        .HasForeignKey("UniversityAutomation.Models.Applicant", "UserId")
+                        .HasForeignKey("UA.Entities.Applicant", "UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Application", b =>
+            modelBuilder.Entity("UA.Entities.Application", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Applicant", "Applicant")
+                    b.HasOne("UA.Entities.Applicant", "Applicant")
                         .WithMany("Applications")
                         .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("Applications")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.AdmissionCircular", "Circular")
+                    b.HasOne("UA.Entities.AdmissionCircular", "Circular")
                         .WithMany("Applications")
                         .HasForeignKey("CircularId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("Applications")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2971,15 +2971,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ApprovalRecord", b =>
+            modelBuilder.Entity("UA.Entities.ApprovalRecord", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "Approver")
+                    b.HasOne("UA.Entities.UserAccount", "Approver")
                         .WithMany("RecordedApprovalRecords")
                         .HasForeignKey("ApproverId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Supersedes")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Supersedes")
                         .WithMany("SupersedingApprovalRecords")
                         .HasForeignKey("SupersedesId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -2989,21 +2989,21 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Supersedes");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AttendanceRecord", b =>
+            modelBuilder.Entity("UA.Entities.AttendanceRecord", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Enrollment", "Enrollment")
+                    b.HasOne("UA.Entities.Enrollment", "Enrollment")
                         .WithMany("AttendanceRecords")
                         .HasForeignKey("EnrollmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "RecordedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "RecordedByUser")
                         .WithMany("RecordedAttendanceRecords")
                         .HasForeignKey("RecordedBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.ClassRoutine", "Routine")
+                    b.HasOne("UA.Entities.ClassRoutine", "Routine")
                         .WithMany("AttendanceRecords")
                         .HasForeignKey("RoutineId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3016,9 +3016,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Routine");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AttendanceScale", b =>
+            modelBuilder.Entity("UA.Entities.AttendanceScale", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("AttendanceScales")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3027,9 +3027,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AuditEntry", b =>
+            modelBuilder.Entity("UA.Entities.AuditEntry", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "User")
+                    b.HasOne("UA.Entities.UserAccount", "User")
                         .WithMany("AuditEntries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3037,9 +3037,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.BackgroundJob", b =>
+            modelBuilder.Entity("UA.Entities.BackgroundJob", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "RequestedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "RequestedByUser")
                         .WithMany("RequestedBackgroundJobs")
                         .HasForeignKey("RequestedBy")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3048,15 +3048,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("RequestedByUser");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Batch", b =>
+            modelBuilder.Entity("UA.Entities.Batch", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.CurriculumVersion", "Curriculum")
+                    b.HasOne("UA.Entities.CurriculumVersion", "Curriculum")
                         .WithMany("Batches")
                         .HasForeignKey("CurriculumId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("Batches")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3067,15 +3067,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CircularSeat", b =>
+            modelBuilder.Entity("UA.Entities.CircularSeat", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.AdmissionCircular", "Circular")
+                    b.HasOne("UA.Entities.AdmissionCircular", "Circular")
                         .WithMany("CircularSeats")
                         .HasForeignKey("CircularId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("CircularSeats")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3086,15 +3086,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ClassRoutine", b =>
+            modelBuilder.Entity("UA.Entities.ClassRoutine", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Offering", "Offering")
+                    b.HasOne("UA.Entities.Offering", "Offering")
                         .WithMany("ClassRoutines")
                         .HasForeignKey("OfferingId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Room", "Room")
+                    b.HasOne("UA.Entities.Room", "Room")
                         .WithMany("ClassRoutines")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3105,20 +3105,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ConfigParameter", b =>
+            modelBuilder.Entity("UA.Entities.ConfigParameter", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ChangedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ChangedByUser")
                         .WithMany("ChangedConfigParameters")
                         .HasForeignKey("ChangedBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("ConfigParameters")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "EffectiveTerm")
+                    b.HasOne("UA.Entities.AcademicTerm", "EffectiveTerm")
                         .WithMany("EffectiveConfigParameters")
                         .HasForeignKey("EffectiveTermId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3131,9 +3131,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("EffectiveTerm");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Course", b =>
+            modelBuilder.Entity("UA.Entities.Course", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("Courses")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3142,27 +3142,27 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CourseEquivalence", b =>
+            modelBuilder.Entity("UA.Entities.CourseEquivalence", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("CourseEquivalences")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Course", "NewCourse")
+                    b.HasOne("UA.Entities.Course", "NewCourse")
                         .WithMany("NewCourseEquivalences")
                         .HasForeignKey("NewCourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Course", "OldCourse")
+                    b.HasOne("UA.Entities.Course", "OldCourse")
                         .WithMany("OldCourseEquivalences")
                         .HasForeignKey("OldCourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("CourseEquivalences")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3177,15 +3177,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CoursePrerequisite", b =>
+            modelBuilder.Entity("UA.Entities.CoursePrerequisite", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Course", "Course")
+                    b.HasOne("UA.Entities.Course", "Course")
                         .WithMany("Prerequisites")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Course", "PrerequisiteCourse")
+                    b.HasOne("UA.Entities.Course", "PrerequisiteCourse")
                         .WithMany("RequiredByPrerequisites")
                         .HasForeignKey("PrerequisiteCourseId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3196,15 +3196,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("PrerequisiteCourse");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CurriculumCourse", b =>
+            modelBuilder.Entity("UA.Entities.CurriculumCourse", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Course", "Course")
+                    b.HasOne("UA.Entities.Course", "Course")
                         .WithMany("CurriculumCourses")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.CurriculumVersion", "Curriculum")
+                    b.HasOne("UA.Entities.CurriculumVersion", "Curriculum")
                         .WithMany("CurriculumCourses")
                         .HasForeignKey("CurriculumId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3215,14 +3215,14 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Curriculum");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CurriculumVersion", b =>
+            modelBuilder.Entity("UA.Entities.CurriculumVersion", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("CurriculumVersions")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.AcademicProgram", "Program")
+                    b.HasOne("UA.Entities.AcademicProgram", "Program")
                         .WithMany("CurriculumVersions")
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3233,14 +3233,14 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Program");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.DocumentRequest", b =>
+            modelBuilder.Entity("UA.Entities.DocumentRequest", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Due", "Due")
+                    b.HasOne("UA.Entities.Due", "Due")
                         .WithMany("DocumentRequests")
                         .HasForeignKey("DueId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("DocumentRequests")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3251,30 +3251,30 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Due", b =>
+            modelBuilder.Entity("UA.Entities.Due", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Applicant", "Applicant")
+                    b.HasOne("UA.Entities.Applicant", "Applicant")
                         .WithMany("Dues")
                         .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Enrollment", "Enrollment")
+                    b.HasOne("UA.Entities.Enrollment", "Enrollment")
                         .WithMany("Dues")
                         .HasForeignKey("EnrollmentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.FeeType", "FeeType")
+                    b.HasOne("UA.Entities.FeeType", "FeeType")
                         .WithMany("Dues")
                         .HasForeignKey("FeeTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("Dues")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "Term")
+                    b.HasOne("UA.Entities.AcademicTerm", "Term")
                         .WithMany("Dues")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3290,30 +3290,30 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.EligibilityHold", b =>
+            modelBuilder.Entity("UA.Entities.EligibilityHold", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("EligibilityHolds")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Course", "Course")
+                    b.HasOne("UA.Entities.Course", "Course")
                         .WithMany("EligibilityHolds")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.ExamEvent", "Event")
+                    b.HasOne("UA.Entities.ExamEvent", "Event")
                         .WithMany("EligibilityHolds")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ReleasedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ReleasedByUser")
                         .WithMany("ReleasedEligibilityHolds")
                         .HasForeignKey("ReleasedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("EligibilityHolds")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3330,20 +3330,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Enrollment", b =>
+            modelBuilder.Entity("UA.Entities.Enrollment", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("Enrollments")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Offering", "Offering")
+                    b.HasOne("UA.Entities.Offering", "Offering")
                         .WithMany("Enrollments")
                         .HasForeignKey("OfferingId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("Enrollments")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3356,9 +3356,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ExamEvent", b =>
+            modelBuilder.Entity("UA.Entities.ExamEvent", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "Term")
+                    b.HasOne("UA.Entities.AcademicTerm", "Term")
                         .WithMany("ExamEvents")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3367,15 +3367,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ExamSitting", b =>
+            modelBuilder.Entity("UA.Entities.ExamSitting", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Course", "Course")
+                    b.HasOne("UA.Entities.Course", "Course")
                         .WithMany("ExamSittings")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.ExamEvent", "Event")
+                    b.HasOne("UA.Entities.ExamEvent", "Event")
                         .WithMany("ExamSittings")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3386,17 +3386,17 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Faculty", b =>
+            modelBuilder.Entity("UA.Entities.Faculty", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("Faculties")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "User")
+                    b.HasOne("UA.Entities.UserAccount", "User")
                         .WithOne("Faculty")
-                        .HasForeignKey("UniversityAutomation.Models.Faculty", "UserId")
+                        .HasForeignKey("UA.Entities.Faculty", "UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -3405,9 +3405,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.FeeType", b =>
+            modelBuilder.Entity("UA.Entities.FeeType", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("FeeTypes")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3416,21 +3416,21 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.FeeWaiver", b =>
+            modelBuilder.Entity("UA.Entities.FeeWaiver", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("FeeWaivers")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("FeeWaivers")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "Term")
+                    b.HasOne("UA.Entities.AcademicTerm", "Term")
                         .WithMany("FeeWaivers")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3443,9 +3443,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.GatewayCallback", b =>
+            modelBuilder.Entity("UA.Entities.GatewayCallback", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Payment", "Payment")
+                    b.HasOne("UA.Entities.Payment", "Payment")
                         .WithMany("GatewayCallbacks")
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3453,9 +3453,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Payment");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.GradeScale", b =>
+            modelBuilder.Entity("UA.Entities.GradeScale", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("GradeScales")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3464,9 +3464,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkComponent", b =>
+            modelBuilder.Entity("UA.Entities.MarkComponent", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("MarkComponents")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3475,27 +3475,27 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkEntry", b =>
+            modelBuilder.Entity("UA.Entities.MarkEntry", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.MarkComponent", "Component")
+                    b.HasOne("UA.Entities.MarkComponent", "Component")
                         .WithMany("MarkEntries")
                         .HasForeignKey("ComponentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Enrollment", "Enrollment")
+                    b.HasOne("UA.Entities.Enrollment", "Enrollment")
                         .WithMany("MarkEntries")
                         .HasForeignKey("EnrollmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "EnteredByUser")
+                    b.HasOne("UA.Entities.UserAccount", "EnteredByUser")
                         .WithMany("EnteredMarkEntries")
                         .HasForeignKey("EnteredBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.MarkSubmission", "Submission")
+                    b.HasOne("UA.Entities.MarkSubmission", "Submission")
                         .WithMany("MarkEntries")
                         .HasForeignKey("SubmissionId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3510,26 +3510,26 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Submission");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkSubmission", b =>
+            modelBuilder.Entity("UA.Entities.MarkSubmission", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ApprovedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ApprovedByUser")
                         .WithMany("ApprovedMarkSubmissions")
                         .HasForeignKey("ApprovedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Offering", "Offering")
+                    b.HasOne("UA.Entities.Offering", "Offering")
                         .WithMany("MarkSubmissions")
                         .HasForeignKey("OfferingId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "SubmittedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "SubmittedByUser")
                         .WithMany("SubmittedMarkSubmissions")
                         .HasForeignKey("SubmittedBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "VerifiedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "VerifiedByUser")
                         .WithMany("VerifiedMarkSubmissions")
                         .HasForeignKey("VerifiedBy")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3543,21 +3543,21 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("VerifiedByUser");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MentorAssignment", b =>
+            modelBuilder.Entity("UA.Entities.MentorAssignment", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Batch", "Batch")
+                    b.HasOne("UA.Entities.Batch", "Batch")
                         .WithMany("MentorAssignments")
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Faculty", "Faculty")
+                    b.HasOne("UA.Entities.Faculty", "Faculty")
                         .WithMany("MentorAssignments")
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Section", "Section")
+                    b.HasOne("UA.Entities.Section", "Section")
                         .WithMany("MentorAssignments")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3569,20 +3569,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Section");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Notice", b =>
+            modelBuilder.Entity("UA.Entities.Notice", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ApprovedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ApprovedByUser")
                         .WithMany("ApprovedNotices")
                         .HasForeignKey("ApprovedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "Author")
+                    b.HasOne("UA.Entities.UserAccount", "Author")
                         .WithMany("AuthoredNotices")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("Notices")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3594,15 +3594,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Notification", b =>
+            modelBuilder.Entity("UA.Entities.Notification", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "RecipientUser")
+                    b.HasOne("UA.Entities.UserAccount", "RecipientUser")
                         .WithMany("ReceivedNotifications")
                         .HasForeignKey("RecipientUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.NotificationTemplate", "Template")
+                    b.HasOne("UA.Entities.NotificationTemplate", "Template")
                         .WithMany("Notifications")
                         .HasForeignKey("TemplateId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3613,27 +3613,27 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Template");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Offering", b =>
+            modelBuilder.Entity("UA.Entities.Offering", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Batch", "Batch")
+                    b.HasOne("UA.Entities.Batch", "Batch")
                         .WithMany("Offerings")
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Course", "Course")
+                    b.HasOne("UA.Entities.Course", "Course")
                         .WithMany("Offerings")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Section", "Section")
+                    b.HasOne("UA.Entities.Section", "Section")
                         .WithMany("Offerings")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "Term")
+                    b.HasOne("UA.Entities.AcademicTerm", "Term")
                         .WithMany("Offerings")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3648,15 +3648,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.OfferingTeacher", b =>
+            modelBuilder.Entity("UA.Entities.OfferingTeacher", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Faculty", "Faculty")
+                    b.HasOne("UA.Entities.Faculty", "Faculty")
                         .WithMany("OfferingTeachers")
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Offering", "Offering")
+                    b.HasOne("UA.Entities.Offering", "Offering")
                         .WithMany("OfferingTeachers")
                         .HasForeignKey("OfferingId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3667,24 +3667,24 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Offering");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Payment", b =>
+            modelBuilder.Entity("UA.Entities.Payment", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Applicant", "Applicant")
+                    b.HasOne("UA.Entities.Applicant", "Applicant")
                         .WithMany("Payments")
                         .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "RecordedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "RecordedByUser")
                         .WithMany("RecordedPayments")
                         .HasForeignKey("RecordedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Payment", "ReversesPayment")
+                    b.HasOne("UA.Entities.Payment", "ReversesPayment")
                         .WithMany("Reversals")
                         .HasForeignKey("ReversesPaymentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("Payments")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3698,15 +3698,15 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.PaymentAllocation", b =>
+            modelBuilder.Entity("UA.Entities.PaymentAllocation", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Due", "Due")
+                    b.HasOne("UA.Entities.Due", "Due")
                         .WithMany("PaymentAllocations")
                         .HasForeignKey("DueId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Payment", "Payment")
+                    b.HasOne("UA.Entities.Payment", "Payment")
                         .WithMany("PaymentAllocations")
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3717,31 +3717,31 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Payment");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Receipt", b =>
+            modelBuilder.Entity("UA.Entities.Receipt", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Payment", "Payment")
+                    b.HasOne("UA.Entities.Payment", "Payment")
                         .WithOne("Receipt")
-                        .HasForeignKey("UniversityAutomation.Models.Receipt", "PaymentId")
+                        .HasForeignKey("UA.Entities.Receipt", "PaymentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Payment");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Result", b =>
+            modelBuilder.Entity("UA.Entities.Result", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("Results")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Enrollment", "Enrollment")
+                    b.HasOne("UA.Entities.Enrollment", "Enrollment")
                         .WithMany("Results")
                         .HasForeignKey("EnrollmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Result", "SupersedesResult")
+                    b.HasOne("UA.Entities.Result", "SupersedesResult")
                         .WithMany("SupersedingResults")
                         .HasForeignKey("SupersedesResultId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3753,9 +3753,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("SupersedesResult");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.RolePermission", b =>
+            modelBuilder.Entity("UA.Entities.RolePermission", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Role", "Role")
+                    b.HasOne("UA.Entities.Role", "Role")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3764,26 +3764,26 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SeatAllocation", b =>
+            modelBuilder.Entity("UA.Entities.SeatAllocation", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ClashConfirmedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ClashConfirmedByUser")
                         .WithMany("ClashConfirmedSeatAllocations")
                         .HasForeignKey("ClashConfirmedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Room", "Room")
+                    b.HasOne("UA.Entities.Room", "Room")
                         .WithMany("SeatAllocations")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.ExamSitting", "Sitting")
+                    b.HasOne("UA.Entities.ExamSitting", "Sitting")
                         .WithMany("SeatAllocations")
                         .HasForeignKey("SittingId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("SeatAllocations")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3798,9 +3798,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Section", b =>
+            modelBuilder.Entity("UA.Entities.Section", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Batch", "Batch")
+                    b.HasOne("UA.Entities.Batch", "Batch")
                         .WithMany("Sections")
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3809,26 +3809,26 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Batch");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SemesterDrop", b =>
+            modelBuilder.Entity("UA.Entities.SemesterDrop", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("SemesterDrops")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "RecommendedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "RecommendedByUser")
                         .WithMany("RecommendedSemesterDrops")
                         .HasForeignKey("RecommendedBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithOne("SemesterDrop")
-                        .HasForeignKey("UniversityAutomation.Models.SemesterDrop", "StudentId")
+                        .HasForeignKey("UA.Entities.SemesterDrop", "StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Batch", "TargetBatch")
+                    b.HasOne("UA.Entities.Batch", "TargetBatch")
                         .WithMany("TargetBatchSemesterDrops")
                         .HasForeignKey("TargetBatchId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3842,20 +3842,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("TargetBatch");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SemesterResult", b =>
+            modelBuilder.Entity("UA.Entities.SemesterResult", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("SemesterResults")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.SemesterResult", "Supersedes")
+                    b.HasOne("UA.Entities.SemesterResult", "Supersedes")
                         .WithMany("SupersedingSemesterResults")
                         .HasForeignKey("SupersedesId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.AcademicTerm", "Term")
+                    b.HasOne("UA.Entities.AcademicTerm", "Term")
                         .WithMany("SemesterResults")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3868,40 +3868,40 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Term");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Student", b =>
+            modelBuilder.Entity("UA.Entities.Student", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Batch", "AdmissionBatch")
+                    b.HasOne("UA.Entities.Batch", "AdmissionBatch")
                         .WithMany("AdmissionBatchStudents")
                         .HasForeignKey("AdmissionBatchId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Application", "Application")
+                    b.HasOne("UA.Entities.Application", "Application")
                         .WithOne("Student")
-                        .HasForeignKey("UniversityAutomation.Models.Student", "ApplicationId")
+                        .HasForeignKey("UA.Entities.Student", "ApplicationId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Batch", "CurrentBatch")
+                    b.HasOne("UA.Entities.Batch", "CurrentBatch")
                         .WithMany("CurrentBatchStudents")
                         .HasForeignKey("CurrentBatchId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("Students")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Section", "Section")
+                    b.HasOne("UA.Entities.Section", "Section")
                         .WithMany("Students")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "User")
+                    b.HasOne("UA.Entities.UserAccount", "User")
                         .WithOne("Student")
-                        .HasForeignKey("UniversityAutomation.Models.Student", "UserId")
+                        .HasForeignKey("UA.Entities.Student", "UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -3918,26 +3918,26 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.StudentBatchHistory", b =>
+            modelBuilder.Entity("UA.Entities.StudentBatchHistory", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("StudentBatchHistories")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Batch", "Batch")
+                    b.HasOne("UA.Entities.Batch", "Batch")
                         .WithMany("StudentBatchHistories")
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Section", "Section")
+                    b.HasOne("UA.Entities.Section", "Section")
                         .WithMany("StudentBatchHistories")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("StudentBatchHistories")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3952,20 +3952,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.StudentStatusHistory", b =>
+            modelBuilder.Entity("UA.Entities.StudentStatusHistory", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.ApprovalRecord", "Approval")
+                    b.HasOne("UA.Entities.ApprovalRecord", "Approval")
                         .WithMany("StudentStatusHistories")
                         .HasForeignKey("ApprovalId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ChangedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ChangedByUser")
                         .WithMany("ChangedStudentStatusHistories")
                         .HasForeignKey("ChangedBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("StudentStatusHistories")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3978,14 +3978,14 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.UploadedDocument", b =>
+            modelBuilder.Entity("UA.Entities.UploadedDocument", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Applicant", "Applicant")
+                    b.HasOne("UA.Entities.Applicant", "Applicant")
                         .WithMany("UploadedDocuments")
                         .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Student", "Student")
+                    b.HasOne("UA.Entities.Student", "Student")
                         .WithMany("UploadedDocuments")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -3995,20 +3995,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.UserRole", b =>
+            modelBuilder.Entity("UA.Entities.UserRole", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("UserRoles")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.Role", "Role")
+                    b.HasOne("UA.Entities.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "User")
+                    b.HasOne("UA.Entities.UserAccount", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -4021,9 +4021,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.VerificationToken", b =>
+            modelBuilder.Entity("UA.Entities.VerificationToken", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "User")
+                    b.HasOne("UA.Entities.UserAccount", "User")
                         .WithMany("VerificationTokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -4032,9 +4032,9 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.WebPage", b =>
+            modelBuilder.Entity("UA.Entities.WebPage", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.Department", "Department")
+                    b.HasOne("UA.Entities.Department", "Department")
                         .WithMany("WebPages")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -4042,20 +4042,20 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.WebPageVersion", b =>
+            modelBuilder.Entity("UA.Entities.WebPageVersion", b =>
                 {
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "ApprovedByUser")
+                    b.HasOne("UA.Entities.UserAccount", "ApprovedByUser")
                         .WithMany("ApprovedWebPageVersions")
                         .HasForeignKey("ApprovedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("UniversityAutomation.Models.UserAccount", "Author")
+                    b.HasOne("UA.Entities.UserAccount", "Author")
                         .WithMany("AuthoredWebPageVersions")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UniversityAutomation.Models.WebPage", "Page")
+                    b.HasOne("UA.Entities.WebPage", "Page")
                         .WithMany("WebPageVersions")
                         .HasForeignKey("PageId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -4068,12 +4068,12 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Page");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicProgram", b =>
+            modelBuilder.Entity("UA.Entities.AcademicProgram", b =>
                 {
                     b.Navigation("CurriculumVersions");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AcademicTerm", b =>
+            modelBuilder.Entity("UA.Entities.AcademicTerm", b =>
                 {
                     b.Navigation("AcademicCalendarEvents");
 
@@ -4090,14 +4090,14 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("SemesterResults");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.AdmissionCircular", b =>
+            modelBuilder.Entity("UA.Entities.AdmissionCircular", b =>
                 {
                     b.Navigation("Applications");
 
                     b.Navigation("CircularSeats");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Applicant", b =>
+            modelBuilder.Entity("UA.Entities.Applicant", b =>
                 {
                     b.Navigation("Applications");
 
@@ -4108,12 +4108,12 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("UploadedDocuments");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Application", b =>
+            modelBuilder.Entity("UA.Entities.Application", b =>
                 {
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ApprovalRecord", b =>
+            modelBuilder.Entity("UA.Entities.ApprovalRecord", b =>
                 {
                     b.Navigation("Applications");
 
@@ -4138,7 +4138,7 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("SupersedingApprovalRecords");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Batch", b =>
+            modelBuilder.Entity("UA.Entities.Batch", b =>
                 {
                     b.Navigation("AdmissionBatchStudents");
 
@@ -4155,12 +4155,12 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("TargetBatchSemesterDrops");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ClassRoutine", b =>
+            modelBuilder.Entity("UA.Entities.ClassRoutine", b =>
                 {
                     b.Navigation("AttendanceRecords");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Course", b =>
+            modelBuilder.Entity("UA.Entities.Course", b =>
                 {
                     b.Navigation("CurriculumCourses");
 
@@ -4179,14 +4179,14 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("RequiredByPrerequisites");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.CurriculumVersion", b =>
+            modelBuilder.Entity("UA.Entities.CurriculumVersion", b =>
                 {
                     b.Navigation("Batches");
 
                     b.Navigation("CurriculumCourses");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Department", b =>
+            modelBuilder.Entity("UA.Entities.Department", b =>
                 {
                     b.Navigation("Applications");
 
@@ -4219,14 +4219,14 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("WebPages");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Due", b =>
+            modelBuilder.Entity("UA.Entities.Due", b =>
                 {
                     b.Navigation("DocumentRequests");
 
                     b.Navigation("PaymentAllocations");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Enrollment", b =>
+            modelBuilder.Entity("UA.Entities.Enrollment", b =>
                 {
                     b.Navigation("AttendanceRecords");
 
@@ -4237,46 +4237,46 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Results");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ExamEvent", b =>
+            modelBuilder.Entity("UA.Entities.ExamEvent", b =>
                 {
                     b.Navigation("EligibilityHolds");
 
                     b.Navigation("ExamSittings");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.ExamSitting", b =>
+            modelBuilder.Entity("UA.Entities.ExamSitting", b =>
                 {
                     b.Navigation("SeatAllocations");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Faculty", b =>
+            modelBuilder.Entity("UA.Entities.Faculty", b =>
                 {
                     b.Navigation("MentorAssignments");
 
                     b.Navigation("OfferingTeachers");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.FeeType", b =>
+            modelBuilder.Entity("UA.Entities.FeeType", b =>
                 {
                     b.Navigation("Dues");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkComponent", b =>
+            modelBuilder.Entity("UA.Entities.MarkComponent", b =>
                 {
                     b.Navigation("MarkEntries");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.MarkSubmission", b =>
+            modelBuilder.Entity("UA.Entities.MarkSubmission", b =>
                 {
                     b.Navigation("MarkEntries");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.NotificationTemplate", b =>
+            modelBuilder.Entity("UA.Entities.NotificationTemplate", b =>
                 {
                     b.Navigation("Notifications");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Offering", b =>
+            modelBuilder.Entity("UA.Entities.Offering", b =>
                 {
                     b.Navigation("ClassRoutines");
 
@@ -4287,7 +4287,7 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("OfferingTeachers");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Payment", b =>
+            modelBuilder.Entity("UA.Entities.Payment", b =>
                 {
                     b.Navigation("GatewayCallbacks");
 
@@ -4298,26 +4298,26 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Reversals");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Result", b =>
+            modelBuilder.Entity("UA.Entities.Result", b =>
                 {
                     b.Navigation("SupersedingResults");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Role", b =>
+            modelBuilder.Entity("UA.Entities.Role", b =>
                 {
                     b.Navigation("RolePermissions");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Room", b =>
+            modelBuilder.Entity("UA.Entities.Room", b =>
                 {
                     b.Navigation("ClassRoutines");
 
                     b.Navigation("SeatAllocations");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Section", b =>
+            modelBuilder.Entity("UA.Entities.Section", b =>
                 {
                     b.Navigation("MentorAssignments");
 
@@ -4328,12 +4328,12 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.SemesterResult", b =>
+            modelBuilder.Entity("UA.Entities.SemesterResult", b =>
                 {
                     b.Navigation("SupersedingSemesterResults");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.Student", b =>
+            modelBuilder.Entity("UA.Entities.Student", b =>
                 {
                     b.Navigation("CourseEquivalences");
 
@@ -4362,7 +4362,7 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("UploadedDocuments");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.UserAccount", b =>
+            modelBuilder.Entity("UA.Entities.UserAccount", b =>
                 {
                     b.Navigation("Applicant");
 
@@ -4413,7 +4413,7 @@ namespace UA.DataAccess.Migrations
                     b.Navigation("VerifiedMarkSubmissions");
                 });
 
-            modelBuilder.Entity("UniversityAutomation.Models.WebPage", b =>
+            modelBuilder.Entity("UA.Entities.WebPage", b =>
                 {
                     b.Navigation("WebPageVersions");
                 });

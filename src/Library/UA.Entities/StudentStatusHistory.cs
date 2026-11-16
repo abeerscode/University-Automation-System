@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>History of every status change of a student.</summary>
 /// <remarks>Requirements: FR-STU-03, BR-23, BR-24</remarks>

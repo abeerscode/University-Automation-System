@@ -1,0 +1,5 @@
+@{ViewData["Title"]="Import validation";}
+<h1>Initial data import — CSV validation</h1><p>Validate a student CSV before loading records. Actual student import is delivered with the Student module in Phase 3.</p>
+<p><a asp-action="Template">Download CSV template</a></p>
+<form method="post" asp-action="Upload" enctype="multipart/form-data"><label>CSV file, maximum 2 MB</label>
+<input type="file" name="upload" accept=".csv,text/csv" class="form-control"/><button class="btn btn-primary mt-2">Validate</button></form>

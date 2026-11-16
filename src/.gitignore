@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+*.user
+appsettings.*.local.json
+
+# Credentials may already be present in legacy development settings; keep the files locally, not in source control.
+**/appsettings.Development.json
+**/appsettings.*.local.json
+**/private-storage/
+**/.env

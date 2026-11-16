@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>History of batch and section moves of a student.</summary>
 /// <remarks>Requirements: FR-STU-05, FR-STU-06, FR-STU-09</remarks>

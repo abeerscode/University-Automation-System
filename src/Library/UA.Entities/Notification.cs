@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Queue and delivery status of messages.</summary>
 /// <remarks>Requirements: SR-17, NFR-INT-07 to NFR-INT-09</remarks>

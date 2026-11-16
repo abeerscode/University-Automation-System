@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Bands that convert attendance percentage to attendance marks.</summary>
 /// <remarks>Requirements: FR-ACA-13, FR-EXM-26, A-12</remarks>

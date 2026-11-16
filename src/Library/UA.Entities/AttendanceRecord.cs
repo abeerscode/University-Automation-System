@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Attendance of a student in one class.</summary>
 /// <remarks>Requirements: FR-ACA-12</remarks>

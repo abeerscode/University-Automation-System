@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Academic profile of a teacher.</summary>
 /// <remarks>Requirements: FR-FAC-01 to FR-FAC-03, FR-FAC-07</remarks>

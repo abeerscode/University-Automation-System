@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Student request for a transcript, testimonial, certificate or ID card.</summary>
 /// <remarks>Requirements: FR-STU-16, UR-11</remarks>

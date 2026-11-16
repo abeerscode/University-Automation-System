@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Split of a payment across dues.</summary>
 /// <remarks>Requirements: FR-FIN-07</remarks>

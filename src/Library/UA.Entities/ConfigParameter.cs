@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Versioned department and university parameters.</summary>
 /// <remarks>Requirements: SR-03, FR-SEC-07, FR-ACA-01</remarks>

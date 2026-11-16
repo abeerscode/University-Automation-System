@@ -1,0 +1,6 @@
+@model IReadOnlyList<UA.Facade.DTO.Administration.ApprovalDto>
+@{ViewData["Title"]="Approvals";}
+<div class="d-flex justify-content-between"><h1>Recorded paper approvals</h1><a asp-action="Create" class="btn btn-primary">Record approval</a></div>
+<table class="table"><thead><tr><th>Reference</th><th>Type</th><th>Status</th><th>Approver</th><th>Supersedes</th><th></th></tr></thead><tbody>
+@foreach(var a in Model){<tr><td>@a.Reference</td><td>@a.Type</td><td>@a.Status</td><td>@a.ApproverId</td><td>@a.SupersedesId</td>
+<td><a asp-action="Correct" asp-route-id="@a.Id">Correct</a></td></tr>}</tbody></table>

@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Photos and documents kept in the file store.</summary>
 /// <remarks>Requirements: SR-21, FR-ADM-03, FR-STU-01</remarks>

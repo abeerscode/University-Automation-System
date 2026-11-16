@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Assignment of teachers to offerings, with history.</summary>
 /// <remarks>Requirements: FR-FAC-04, FR-FAC-06, A-07, A-14</remarks>

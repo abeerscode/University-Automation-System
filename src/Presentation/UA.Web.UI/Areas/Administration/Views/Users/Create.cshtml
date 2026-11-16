@@ -1,0 +1,11 @@
+@model UserFormViewModel
+@{ViewData["Title"]="Create account";}
+<h1>Create account</h1><form asp-action="Create" method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="Username"></label><input asp-for="Username" class="form-control" />
+<label asp-for="Password"></label><input asp-for="Password" class="form-control" />
+<label asp-for="Email"></label><input asp-for="Email" class="form-control" />
+<label asp-for="Mobile"></label><input asp-for="Mobile" class="form-control" />
+<label asp-for="RoleId">Role</label><select asp-for="RoleId" class="form-select"><option value="">Select role</option>
+@foreach(var r in (IReadOnlyList<UA.Facade.DTO.Administration.RoleDto>)ViewBag.Roles){<option value="@r.RoleId">@r.Name</option>}</select>
+<label asp-for="DepartmentId">Department ID (required for department-scoped roles)</label><input asp-for="DepartmentId" class="form-control" />
+<button class="btn btn-primary mt-2">Create</button></form>

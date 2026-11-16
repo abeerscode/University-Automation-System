@@ -1,0 +1,8 @@
+@model IReadOnlyList<UA.Facade.DTO.Administration.NoticeDto>
+@{ViewData["Title"]="Notice authoring";}
+<div class="d-flex justify-content-between"><h1>Notice authoring</h1><a asp-action="Create" class="btn btn-primary">Draft notice</a></div>
+<table class="table"><thead><tr><th>Title</th><th>Scope</th><th>Public</th><th>Status</th><th></th></tr></thead><tbody>
+@foreach(var n in Model){<tr><td>@n.Title</td><td>@(n.DepartmentId?.ToString() ?? "University")</td><td>@n.IsPublic</td>
+<td>@(n.Published is null ? "Awaiting approval" : "Published")</td><td>
+@if(n.Published is null){<form asp-action="Approve" method="post"><input type="hidden" name="id" value="@n.Id"/><button class="btn btn-sm btn-outline-primary">Approve</button></form>}</td></tr>}
+</tbody></table>

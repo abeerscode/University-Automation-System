@@ -1,0 +1,6 @@
+@model IReadOnlyList<UA.Facade.DTO.Administration.RoleDto>
+@{ViewData["Title"]="Roles";}
+<div class="d-flex justify-content-between align-items-center"><h1>Roles and permissions</h1><a asp-action="Create" class="btn btn-primary">New role</a></div>
+<table class="table"><thead><tr><th>Name</th><th>Department scoped</th><th>Permissions</th></tr></thead><tbody>
+@foreach(var r in Model){<tr><td>@r.Name</td><td>@r.DepartmentScoped</td><td><a asp-action="Permissions" asp-route-id="@r.RoleId">Edit grants</a></td></tr>}
+</tbody></table>

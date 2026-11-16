@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Published semester GPA and CGPA of a student.</summary>
 /// <remarks>Requirements: FR-EXM-17, A-11</remarks>

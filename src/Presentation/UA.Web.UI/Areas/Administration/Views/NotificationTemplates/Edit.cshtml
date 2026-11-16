@@ -1,0 +1,7 @@
+@model TemplateForm
+@{ViewData["Title"]="Edit notification template";}
+<h1>Edit template: @Model.Code</h1><form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<input asp-for="TemplateId" type="hidden"/><input asp-for="Code" type="hidden"/>
+<label asp-for="Subject"></label><input asp-for="Subject" class="form-control"/>
+<label asp-for="Body"></label><textarea asp-for="Body" rows="10" class="form-control"></textarea>
+<label><input asp-for="Enabled"/> Enabled</label><br/><button class="btn btn-primary mt-2">Save</button></form>

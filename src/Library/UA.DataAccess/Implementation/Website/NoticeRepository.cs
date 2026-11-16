@@ -1,0 +1,1 @@
+using UA.DataAccess.Data; using UA.DataAccess.Implementation.Common; using UA.DataAccess.Interface.Website; using UA.Entities; namespace UA.DataAccess.Implementation.Website; public sealed class NoticeRepository(UniversityDbContext db) : Repository<Notice>(db), INoticeRepository { }

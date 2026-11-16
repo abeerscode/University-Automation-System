@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Admission circular of one intake: application window, test details and enrollment deadline.</summary>
 /// <remarks>Requirements: FR-ADM-01, FR-WEB-04</remarks>

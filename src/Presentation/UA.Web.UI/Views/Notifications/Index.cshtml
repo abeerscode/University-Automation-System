@@ -1,0 +1,6 @@
+@model IReadOnlyList<UA.Facade.DTO.Administration.NotificationDto>
+@{ ViewData["Title"] = "Notifications"; }
+<h1>Notifications</h1><table class="table"><thead><tr><th>Message</th><th>Status</th><th>Queued</th><th></th></tr></thead><tbody>
+@foreach(var n in Model) { <tr><td><strong>@n.Subject</strong><p>@n.Body</p></td><td>@n.Status</td><td>@n.Queued</td>
+<td>@if(n.Status != "Read") { <form asp-action="MarkRead" method="post"><input type="hidden" name="id" value="@n.Id"/><button class="btn btn-sm btn-outline-secondary">Mark read</button></form> }</td></tr> }
+</tbody></table>

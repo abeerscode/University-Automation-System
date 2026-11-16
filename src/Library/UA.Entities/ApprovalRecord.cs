@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Outcome of a physical approval with its reference number.</summary>
 /// <remarks>Requirements: FR-SEC-08, FR-SEC-15, BR-19</remarks>

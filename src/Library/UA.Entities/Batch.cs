@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Yearly intake of a department, linked to a curriculum version.</summary>
 /// <remarks>Requirements: FR-ACA-05, A-04</remarks>

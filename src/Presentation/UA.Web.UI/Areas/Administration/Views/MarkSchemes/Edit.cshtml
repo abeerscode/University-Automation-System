@@ -1,0 +1,9 @@
+@model RuleVersionForm
+@{ViewData["Title"]="New mark scheme";}
+<h1>New mark scheme version</h1><p>One row per component: name,max marks,true/false. Marks must sum to exactly 100.</p>
+<form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="DepartmentId"></label><input asp-for="DepartmentId" class="form-control"/>
+<label asp-for="CourseType"></label><select asp-for="CourseType" class="form-select"><option>Theory</option><option>Lab</option></select>
+<label asp-for="EffectiveFrom"></label><input asp-for="EffectiveFrom" type="date" class="form-control"/>
+<label asp-for="Rows">Component rows</label><textarea asp-for="Rows" rows="9" class="form-control font-monospace"></textarea>
+<button class="btn btn-primary">Add version</button></form>

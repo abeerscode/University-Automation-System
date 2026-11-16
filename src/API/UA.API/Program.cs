@@ -1,53 +1,21 @@
-using Microsoft.EntityFrameworkCore;
-using UniversityAutomation.Data;
-
+using UA.Facade;
+using UA.Integration;
+using UA.API.Infrastructure;
+using UA.API.Workers;
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddOpenApi();
-
 var universityConnectionString = Environment.GetEnvironmentVariable("UNIVERSITY_DB")
     ?? builder.Configuration.GetConnectionString("DefaultConnection");
 if (string.IsNullOrWhiteSpace(universityConnectionString))
-{
-    throw new InvalidOperationException(
-        "Database connection string is missing. Set UNIVERSITY_DB or ConnectionStrings:DefaultConnection.");
-}
-builder.Services.AddDbContext<UniversityDbContext>(options =>
-    options.UseSqlServer(universityConnectionString));
-
+    throw new InvalidOperationException("Database connection string is missing. Set UNIVERSITY_DB or ConnectionStrings:DefaultConnection.");
+builder.Services.AddUniversityBusiness(universityConnectionString);
+builder.Services.AddUniversityIntegration();
+builder.Services.AddHealthChecks().AddCheck<DatabaseHealthCheck>("sqlserver");
+builder.Services.AddHostedService<NotificationDispatchWorker>();
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
+if (app.Environment.IsDevelopment()) app.MapOpenApi();
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
+app.MapHealthChecks("/health");
+// Machine endpoints (signed gateway callbacks) will be added with the Finance integration.
+// Do not expose MVC pages or anonymous database operations from UA.API.
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

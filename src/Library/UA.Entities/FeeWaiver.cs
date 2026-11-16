@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Waiver or scholarship discount per student and semester.</summary>
 /// <remarks>Requirements: FR-FIN-15</remarks>

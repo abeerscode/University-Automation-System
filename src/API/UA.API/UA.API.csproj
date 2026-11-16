@@ -7,12 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\UA.DataAccess\UA.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -20,8 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Business\UA.Facade\UA.Facade.csproj" />
-    <ProjectReference Include="..\..\Library\UA.Entities\UA.Entities.csproj" />
     <ProjectReference Include="..\..\Library\UA.Framework\UA.Framework.csproj" />
+    <ProjectReference Include="..\..\Library\UA.Integration\UA.Integration.csproj" />
   </ItemGroup>
 
 </Project>

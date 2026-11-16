@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Master record of an enrolled student: identity, batch, section and status.</summary>
 /// <remarks>Requirements: FR-STU-01 to FR-STU-05, FR-STU-12</remarks>

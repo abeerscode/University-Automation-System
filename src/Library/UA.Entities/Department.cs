@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Master data of the four departments.</summary>
 /// <remarks>Requirements: SR-02, BR-01</remarks>

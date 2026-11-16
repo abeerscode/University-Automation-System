@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Courses of a curriculum version and the semester of each.</summary>
 /// <remarks>Requirements: FR-ACA-02, BR-05</remarks>

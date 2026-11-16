@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Attendance or dues hold on a student for an exam event, with its release.</summary>
 /// <remarks>Requirements: FR-EXM-05, FR-EXM-06, A-17</remarks>

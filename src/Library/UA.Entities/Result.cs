@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Versioned course result of an enrollment.</summary>
 /// <remarks>Requirements: FR-EXM-17 to FR-EXM-21, BR-18</remarks>

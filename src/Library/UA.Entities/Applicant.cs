@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Personal, guardian and education data of a person who applies for admission.</summary>
 /// <remarks>Requirements: FR-ADM-02, FR-ADM-03, FR-ADM-05</remarks>

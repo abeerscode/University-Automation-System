@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Course master data.</summary>
 /// <remarks>Requirements: FR-ACA-02</remarks>

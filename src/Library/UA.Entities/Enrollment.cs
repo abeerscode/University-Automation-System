@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Enrollment of a student in an offering, regular or retake.</summary>
 /// <remarks>Requirements: FR-ACA-07, FR-ACA-08, BR-13</remarks>

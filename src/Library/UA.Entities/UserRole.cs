@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Roles held by users, with department scope.</summary>
 /// <remarks>Requirements: FR-SEC-03, FR-SEC-04</remarks>

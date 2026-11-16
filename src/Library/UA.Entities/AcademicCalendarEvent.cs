@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Other dated events of the academic calendar.</summary>
 /// <remarks>Requirements: FR-ACA-04, FR-FIN-14</remarks>

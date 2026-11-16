@@ -1,0 +1,10 @@
+@model ApprovalFormViewModel
+@{ViewData["Title"]="Record approval";}
+<h1>Record paper approval</h1><p class="small-note">Attach a paper reference or scan path only if it has already been stored securely. This records an existing physical decision.</p>
+<form method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="Type"></label><input asp-for="Type" class="form-control" placeholder="DROP" />
+<label asp-for="Status"></label><select asp-for="Status" class="form-select"><option>Approved</option><option>Rejected</option><option>Pending</option></select>
+<label asp-for="DepartmentId"></label><input asp-for="DepartmentId" class="form-control" />
+<label asp-for="RequestorId">Requestor user ID (cannot be the approver)</label><input asp-for="RequestorId" class="form-control" />
+<label asp-for="ScanPath"></label><input asp-for="ScanPath" class="form-control" />
+<button class="btn btn-primary mt-2">Record decision</button></form>

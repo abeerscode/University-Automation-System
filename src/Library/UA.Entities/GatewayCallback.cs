@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Log of payment gateway callbacks for verification and reconciliation.</summary>
 /// <remarks>Requirements: FR-FIN-12, NFR-INT-01 to NFR-INT-05</remarks>

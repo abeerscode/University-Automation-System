@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Seats offered by each department in a circular.</summary>
 /// <remarks>Requirements: FR-ADM-01, FR-ADM-09</remarks>

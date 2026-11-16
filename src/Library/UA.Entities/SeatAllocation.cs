@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Seat of a student in a sitting, including make-up days for confirmed clashes.</summary>
 /// <remarks>Requirements: FR-EXM-04, FR-EXM-12</remarks>

@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Semester-drop request, approval and rejoin placement of a student.</summary>
 /// <remarks>Requirements: FR-STU-07 to FR-STU-09, BR-16</remarks>

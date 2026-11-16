@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Approval chain of the marks of one offering.</summary>
 /// <remarks>Requirements: FR-EXM-14, FR-EXM-16</remarks>

@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Course offered to a batch and section in a term.</summary>
 /// <remarks>Requirements: FR-ACA-06, BR-06</remarks>

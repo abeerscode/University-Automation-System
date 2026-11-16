@@ -1,0 +1,12 @@
+Phase 1 verification cases (automated test harness pending):
+- Reject short/common password; accept 10+ uppercase/lowercase/digit.
+- Wrong password 5 times locks for 15 minutes; correct password resets counter.
+- Reset link expires after 30 minutes, can be used only once.
+- Verification code expires after 10 minutes and permits no more than 5 attempts.
+- Department-scoped role cannot authorize data from another department.
+- No unprivileged login can access any /Administration route.
+- A notice author cannot approve their own notice.
+- Correcting an approval creates a new row, never overwrites the original.
+- Audit_Entry edit/delete is rejected; a password or reset token never appears in audits.
+- CSV import rejects missing headers and malformed rows.
+- Seed is idempotent on existing DB. Existing passwords and connections never change.

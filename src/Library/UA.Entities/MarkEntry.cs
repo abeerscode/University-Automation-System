@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Mark of an enrollment in one component.</summary>
 /// <remarks>Requirements: FR-EXM-14, FR-EXM-15, FR-EXM-27</remarks>

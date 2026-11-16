@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Mentor assigned to a batch or section.</summary>
 /// <remarks>Requirements: FR-FAC-09</remarks>

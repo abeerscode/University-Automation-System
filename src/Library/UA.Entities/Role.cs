@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Roles of the system.</summary>
 /// <remarks>Requirements: FR-SEC-03</remarks>

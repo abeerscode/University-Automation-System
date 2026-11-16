@@ -1,0 +1,15 @@
+namespace UA.Facade.DTO.Administration;
+public sealed record LoginResult(bool Succeeded, string Message, int? UserId = null, string? Username = null, bool Locked = false);
+public sealed record UserDto(int UserId, string Username, string? Email, string? Mobile, string Status, bool IsVerified);
+public sealed record RoleDto(int RoleId, string Name, bool DepartmentScoped);
+public sealed record RoleAssignmentDto(int UserId, int RoleId, string RoleName, int? DepartmentId, bool Scoped);
+public sealed record AccessSnapshotDto(IReadOnlyList<RoleAssignmentDto> Assignments, IReadOnlyList<string> Permissions);
+public sealed record UserCreateDto(string Username, string Password, string? Email, string? Mobile, int RoleId, int? DepartmentId);
+public sealed record AuditDto(long Id, int? UserId, string Action, string Entity, string Key, DateTime Timestamp, string? Old, string? New);
+public sealed record ApprovalDto(int Id, string Reference, string Type, string Status, int ApproverId, DateTime Date, int? SupersedesId, string? ScanPath);
+public sealed record ConfigDto(int Id, int? DepartmentId, string Key, string Value, int Version, int EffectiveTermId);
+public sealed record NoticeDto(int Id, int? DepartmentId, string Title, string Body, bool IsPublic, DateTime? Published, int AuthorId, int? ApprovedBy);
+public sealed record JobDto(int Id, string Type, int RequestedBy, string Status, int Progress, DateTime Created, string? ErrorPath);
+public sealed record NotificationDto(long Id, string Subject, string Body, string Status, DateTime Queued);
+public sealed record ImportIssue(int LineNumber, string Message);
+public sealed record ImportValidationDto(int ValidRows, IReadOnlyList<ImportIssue> Issues);

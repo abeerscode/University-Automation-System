@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>The single bachelor program of a department.</summary>
 /// <remarks>Requirements: BR-02, FR-ACA-01</remarks>

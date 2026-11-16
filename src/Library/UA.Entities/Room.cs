@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Classrooms, laboratories and exam halls.</summary>
 /// <remarks>Requirements: FR-ACA-11</remarks>

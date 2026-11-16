@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Prerequisite relation between courses.</summary>
 /// <remarks>Requirements: FR-ACA-02, FR-ACA-14, BR-17</remarks>

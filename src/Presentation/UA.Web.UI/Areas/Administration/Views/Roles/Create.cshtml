@@ -1,0 +1,6 @@
+@model RoleFormViewModel
+@{ViewData["Title"]="New role";}
+<h1>New role</h1><form asp-action="Create" method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label asp-for="Name"></label><input asp-for="Name" class="form-control" />
+<label><input asp-for="DepartmentScoped" /> Department scoped</label><br />
+<button class="btn btn-primary mt-3">Create</button></form>

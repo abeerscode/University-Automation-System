@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Login accounts of all users.</summary>
 /// <remarks>Requirements: FR-SEC-01, FR-SEC-04, UR-43</remarks>

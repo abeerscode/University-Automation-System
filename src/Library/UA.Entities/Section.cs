@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Section of a batch.</summary>
 /// <remarks>Requirements: FR-ACA-05, BR-03, A-03</remarks>

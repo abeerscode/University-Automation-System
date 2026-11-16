@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using UniversityAutomation.Models;
+using UA.Entities;
 
-namespace UniversityAutomation.Data;
+namespace UA.DataAccess.Data;
 
 /// <summary>
 /// EF Core model for the redesigned University Automation schema.

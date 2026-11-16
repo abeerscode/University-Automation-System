@@ -1,0 +1,6 @@
+@model IReadOnlyList<UA.Facade.DTO.Administration.ConfigDto>
+@{ViewData["Title"]="Configuration";}
+<div class="d-flex justify-content-between"><h1>Configuration versions</h1><a asp-action="Edit" class="btn btn-primary">New version</a></div>
+<form method="get"><label>Parameter key</label><input type="text" name="key" value="@ViewBag.Key" class="form-control"/><button class="btn btn-outline-primary">Filter</button></form>
+<table class="table mt-3"><thead><tr><th>Key</th><th>Value</th><th>Department</th><th>Version</th><th>Effective term ID</th></tr></thead><tbody>
+@foreach(var c in Model){<tr><td>@c.Key</td><td>@c.Value</td><td>@(c.DepartmentId?.ToString() ?? "University")</td><td>@c.Version</td><td>@c.EffectiveTermId</td></tr>}</tbody></table>

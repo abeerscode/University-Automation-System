@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>One application of an applicant to one department in one circular, with test result and selection outcome.</summary>
 /// <remarks>Requirements: FR-ADM-03 to FR-ADM-14, FR-ADM-17</remarks>

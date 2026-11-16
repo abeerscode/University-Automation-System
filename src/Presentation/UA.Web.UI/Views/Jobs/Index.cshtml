@@ -1,0 +1,5 @@
+@model IReadOnlyList<UA.Facade.DTO.Administration.JobDto>
+@{ ViewData["Title"] = "Jobs"; }
+<h1>My background jobs</h1><table class="table"><thead><tr><th>ID</th><th>Type</th><th>Status</th><th>Progress</th><th>Created</th></tr></thead><tbody>
+@foreach(var j in Model){ <tr><td>@j.Id</td><td>@j.Type</td><td>@j.Status</td><td>@j.Progress%</td><td>@j.Created</td></tr> }
+</tbody></table>

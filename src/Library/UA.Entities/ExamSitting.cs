@@ -1,4 +1,4 @@
-namespace UniversityAutomation.Models;
+namespace UA.Entities;
 
 /// <summary>Examination of one course in an exam event: regular, retake or special retake.</summary>
 /// <remarks>Requirements: FR-EXM-02, FR-EXM-08, FR-EXM-09</remarks>
