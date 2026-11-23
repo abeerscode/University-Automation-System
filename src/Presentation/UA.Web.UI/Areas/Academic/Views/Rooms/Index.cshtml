@@ -1,0 +1,6 @@
+@model IReadOnlyList<RoomDto>
+@{ ViewData["Title"] = "Room master"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>Room master</h1><a asp-action="Create" class="btn btn-primary">Add room</a></div>
+<table class="table table-striped"><thead><tr><th>Room</th><th>Type</th><th>Capacity</th><th></th></tr></thead><tbody>
+@foreach(var r in Model){<tr><td>@r.Name</td><td>@r.Type</td><td>@r.Capacity</td><td><a asp-action="Edit" asp-route-id="@r.Id">Edit</a></td></tr>}
+</tbody></table>

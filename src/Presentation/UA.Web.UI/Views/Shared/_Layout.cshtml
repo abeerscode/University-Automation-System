@@ -9,6 +9,19 @@
     var notice = userId > 0 && await Access.AllowedAsync(userId, "notices.edit");
     var import = userId > 0 && await Access.AllowedAsync(userId, "imports.run");
     var templates = userId > 0 && await Access.AllowedAsync(userId, "templates.manage");
+    var depts = userId > 0 && await Access.AllowedAsync(userId, "departments.manage");
+    var courses = userId > 0 && await Access.AllowedAsync(userId, "courses.manage");
+    var curriculum = userId > 0 && await Access.AllowedAsync(userId, "curriculum.manage");
+    var calendar = userId > 0 && await Access.AllowedAsync(userId, "calendar.manage");
+    var batches = userId > 0 && await Access.AllowedAsync(userId, "batches.manage");
+    var rooms = userId > 0 && await Access.AllowedAsync(userId, "rooms.manage");
+    var studentRecords = userId > 0 && await Access.AllowedAsync(userId, "students.view");
+    var facultyRecords = userId > 0 && await Access.AllowedAsync(userId, "faculty.view");
+    var facultyMentors = userId > 0 && await Access.AllowedAsync(userId, "mentors.manage");
+    var facultyWorkload = userId > 0 && await Access.AllowedAsync(userId, "workload.view");
+    var isFaculty = userId > 0 && (await Access.ForUserAsync(userId)).Assignments.Any(x =>
+        x.RoleName is UA.Framework.Constants.RoleNames.Faculty or UA.Framework.Constants.RoleNames.GuestFaculty);
+    var isStudent = userId > 0 && (await Access.ForUserAsync(userId)).Assignments.Any(x => x.RoleName == UA.Framework.Constants.RoleNames.Student);
 }
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>@ViewData["Title"] | UAS</title><link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -21,9 +34,21 @@
 @if(audit){<a class="nav-link" asp-area="Administration" asp-controller="Audit" asp-action="Index">Audit</a>}
 @if(config){<a class="nav-link" asp-area="Administration" asp-controller="ConfigParameters" asp-action="Index">Configuration</a>}
 @if(notice){<a class="nav-link" asp-area="Website" asp-controller="Notices" asp-action="Index">Notices</a>}
-@if(import){<a class="nav-link" asp-area="Administration" asp-controller="DataImport" asp-action="Index">Import</a>}
+@if(import){<a class="nav-link" asp-area="Administration" asp-controller="DataImport" asp-action="Index">Import validation</a><a class="nav-link" asp-area="Administration" asp-controller="StudentImports" asp-action="Index">Student import</a>}
 @if(config){<a class="nav-link" asp-area="Administration" asp-controller="GradeScales" asp-action="Index">Grades</a><a class="nav-link" asp-area="Administration" asp-controller="MarkSchemes" asp-action="Index">Marks</a><a class="nav-link" asp-area="Administration" asp-controller="AttendanceScales" asp-action="Index">Attendance rules</a>}
 @if(templates){<a class="nav-link" asp-area="Administration" asp-controller="NotificationTemplates" asp-action="Index">Templates</a>}
+@if(depts){<a class="nav-link" asp-area="Academic" asp-controller="Departments" asp-action="Index">Departments</a>}
+@if(courses){<a class="nav-link" asp-area="Academic" asp-controller="Courses" asp-action="Index">Courses</a>}
+@if(curriculum){<a class="nav-link" asp-area="Academic" asp-controller="Curriculum" asp-action="Index">Curriculum</a>}
+@if(calendar){<a class="nav-link" asp-area="Academic" asp-controller="AcademicCalendar" asp-action="Index">Calendar</a>}
+@if(batches){<a class="nav-link" asp-area="Academic" asp-controller="Batches" asp-action="Index">Batches</a>}
+@if(studentRecords){<a class="nav-link" asp-area="Student" asp-controller="Students" asp-action="Index">Students</a>}
+@if(facultyRecords){<a class="nav-link" asp-area="Faculty" asp-controller="FacultyMembers" asp-action="Index">Faculty</a>}
+@if(facultyMentors){<a class="nav-link" asp-area="Faculty" asp-controller="Mentors" asp-action="Index">Mentors</a>}
+@if(facultyWorkload){<a class="nav-link" asp-area="Faculty" asp-controller="Workload" asp-action="Index">Workload</a>}
+@if(isFaculty){<a class="nav-link" asp-area="Portal" asp-controller="FacultyDashboard" asp-action="Index">Faculty portal</a>}
+@if(isStudent){<a class="nav-link" asp-area="Portal" asp-controller="Dashboard" asp-action="Index">My Portal</a>}
+@if(rooms){<a class="nav-link" asp-area="Academic" asp-controller="Rooms" asp-action="Index">Rooms</a>}
 @if(userId > 0){<a class="nav-link" asp-area="" asp-controller="Notifications" asp-action="Index">Inbox</a><a class="nav-link" asp-area="" asp-controller="Jobs" asp-action="Index">Jobs</a>}
 </nav><div class="ms-auto d-flex gap-2 align-items-center text-white small">
 @if(userId > 0){ <span>@User.Identity?.Name</span><a class="btn btn-sm btn-outline-light" asp-area="" asp-controller="Account" asp-action="ChangePassword">Password</a>
@@ -32,7 +57,7 @@ else{<a class="btn btn-sm btn-light" asp-area="" asp-controller="Account" asp-ac
 </div></div></header>
 <main class="container main-content">@if(TempData["Message"] is string message){<div class="alert alert-success">@message</div>}
 @if(TempData["Error"] is string error){<div class="alert alert-danger">@error</div>}
-@RenderBody()</main><footer class="border-top container py-3 text-muted"><small>University Automation System · Administration &amp; Security Core</small></footer>
+@RenderBody()</main><footer class="border-top container py-3 text-muted"><small>University Automation System · Phase 4</small></footer>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/form-guard.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)</body></html>

@@ -1,0 +1,6 @@
+@model IReadOnlyList<CurriculumDto>
+@{ ViewData["Title"] = "Curriculum versions"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>Curriculum versions</h1><a asp-action="Create" class="btn btn-primary">Create draft</a></div>
+<table class="table table-striped"><thead><tr><th>Program</th><th>Version</th><th>From intake</th><th>Status</th><th>Courses</th><th>Approval</th><th></th></tr></thead><tbody>
+@foreach(var c in Model){<tr><td>@c.ProgramName</td><td>v@c.Version</td><td>@c.EffectiveYear</td><td>@c.Status</td><td>@c.Courses.Count</td><td>@c.ApprovalId</td><td><a asp-action="Details" asp-route-id="@c.Id">Details</a></td></tr>}
+</tbody></table>

@@ -1,0 +1,11 @@
+@model SectionChangeForm
+@{ ViewData["Title"] = "Change section"; var opts = ViewBag.Sections as IReadOnlyList<UA.Facade.DTO.Academic.SectionDto>; }
+<h1>Section change — @Model.StudentId</h1><p>Only the department coordinator can move students. Record a Department Head-approved <code>SectionChange</code> reference first.</p>
+<form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="text-danger"></div><input type="hidden" asp-for="StudentId" />
+<div class="mb-3"><label asp-for="SectionId">New section</label><select asp-for="SectionId" class="form-select">
+<option value="">Choose section</option>
+@if(opts is not null) { foreach(var s in opts){<option value="@s.Id">@s.Name — @s.Occupancy / @s.Capacity</option>} }
+</select></div>
+<div class="mb-3"><label asp-for="Reason"></label><textarea asp-for="Reason" class="form-control"></textarea></div>
+<div class="mb-3"><label asp-for="ApprovalReference">Approved SectionChange reference</label><input asp-for="ApprovalReference" class="form-control" /></div>
+<button class="btn btn-primary">Confirm section change</button></form>

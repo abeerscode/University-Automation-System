@@ -1,0 +1,13 @@
+@model FacultyDashboardDto
+@{ ViewData["Title"] = "Faculty portal"; }
+<div class="d-flex align-items-center gap-3 mb-2">
+@if(Model.Profile.HasPhoto){<img src="@Url.Action("Photo", "FacultyDashboard", new { area = "Portal" })" alt="My faculty photo" class="rounded" style="height:88px;width:88px;object-fit:cover" />}
+<h1>Welcome, @Model.Profile.FullName</h1></div>
+<p>@Model.Profile.EmployeeRef · @Model.Profile.Department · @Model.Profile.Designation · @Model.Profile.Type</p>
+<div class="row g-3 mb-4"><div class="col-md-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Assigned courses</h2><p>@Model.Courses.Count currently assigned offering(s)</p>
+<a asp-area="Portal" asp-controller="FacultyCourses" asp-action="Index">View my courses</a></div></div></div>
+<div class="col-md-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Mentoring</h2><p>@Model.ActiveMentorAssignments active assignment(s)</p>
+<a asp-area="Portal" asp-controller="FacultyMentees" asp-action="Index">My mentees</a></div></div></div>
+<div class="col-md-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Notices</h2><p>Faculty announcements and notifications</p>
+<a asp-area="" asp-controller="Notifications" asp-action="Index">Open inbox</a></div></div></div></div>
+<p class="text-muted">Class lists, personal routine, attendance and marks features will activate when the Academic Operations and Examination phases are implemented.</p>

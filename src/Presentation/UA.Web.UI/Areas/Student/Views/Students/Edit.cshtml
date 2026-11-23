@@ -1,0 +1,15 @@
+@model StudentEditForm
+@{ ViewData["Title"] = "Edit student"; }
+<h1>Edit student — @Model.StudentId</h1>
+<p>Changes to identity or guardian information require an existing approved <code>StudentEdit</code> reference from Administration &gt; Approvals. Phone and address can be updated without that reference.</p>
+<form method="post" asp-action="Edit"><div asp-validation-summary="ModelOnly" class="text-danger"></div><input type="hidden" asp-for="StudentId" />
+<div class="row g-3">
+<div class="col-md-6"><label asp-for="FullName"></label><input asp-for="FullName" class="form-control"/><span asp-validation-for="FullName" class="text-danger"></span></div>
+<div class="col-md-3"><label asp-for="DateOfBirth"></label><input asp-for="DateOfBirth" class="form-control"/></div>
+<div class="col-md-3"><label asp-for="Gender"></label><input asp-for="Gender" class="form-control"/></div>
+<div class="col-md-6"><label asp-for="GuardianName"></label><input asp-for="GuardianName" class="form-control"/></div>
+<div class="col-md-6"><label asp-for="GuardianPhone"></label><input asp-for="GuardianPhone" class="form-control"/></div>
+<div class="col-md-4"><label asp-for="Phone"></label><input asp-for="Phone" class="form-control"/></div>
+<div class="col-md-8"><label asp-for="Address"></label><textarea asp-for="Address" class="form-control"></textarea></div>
+<div class="col-md-6"><label asp-for="ApprovalReference">Approval reference (for core changes)</label><input asp-for="ApprovalReference" class="form-control" /></div>
+</div><button class="btn btn-primary mt-3">Save changes</button></form>

@@ -1,0 +1,16 @@
+@model FacultyForm
+@{ var isEdit = ViewContext.RouteData.Values["action"]?.ToString() == "Edit"; }
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="row g-3">
+<div class="col-md-4"><label asp-for="DepartmentId" class="form-label">Department</label><select asp-for="DepartmentId" class="form-select">
+<option value="0">Select department</option>@foreach(var d in ViewBag.Departments){<option value="@d.Id">@d.Code</option>}</select><span asp-validation-for="DepartmentId" class="text-danger"></span></div>
+<div class="col-md-4"><label asp-for="EmployeeRef" class="form-label">Unique employee reference / login</label>@if(isEdit){<input asp-for="EmployeeRef" class="form-control" readonly />}else{<input asp-for="EmployeeRef" class="form-control" />}<span asp-validation-for="EmployeeRef" class="text-danger"></span></div>
+<div class="col-md-4"><label asp-for="FullName" class="form-label">Full name</label><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger"></span></div>
+<div class="col-md-4"><label asp-for="Designation" class="form-label">Designation</label><input asp-for="Designation" class="form-control" /></div>
+<div class="col-md-4"><label asp-for="Type" class="form-label">Faculty type</label><select asp-for="Type" class="form-select"><option value="Full-time">Full-time</option><option value="Part-time">Part-time</option><option value="Guest">Guest (limited permissions)</option></select></div>
+<div class="col-md-4"><label asp-for="Status" class="form-label">Status</label><select asp-for="Status" class="form-select"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Left">Left</option></select></div>
+<div class="col-md-6"><label asp-for="Qualifications" class="form-label">Qualifications</label><input asp-for="Qualifications" class="form-control" /></div>
+<div class="col-md-3"><label asp-for="Phone" class="form-label">Phone</label><input asp-for="Phone" class="form-control" /></div>
+<div class="col-md-3"><label asp-for="Email" class="form-label">Official email</label><input asp-for="Email" class="form-control" /></div>
+<div class="col-md-6"><label asp-for="Photo" class="form-label">Faculty photo (PNG/JPEG, up to 1 MB)</label><input type="file" asp-for="Photo" class="form-control" accept="image/png,image/jpeg" /></div>
+</div><button type="submit" class="btn btn-primary mt-3">Save faculty profile</button>

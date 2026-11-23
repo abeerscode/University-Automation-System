@@ -1,0 +1,4 @@
+@model FacultyForm
+@{ ViewData["Title"] = "Edit faculty"; var facultyId = ViewContext.RouteData.Values["id"]; }
+<h1>Edit faculty profile</h1><p>The employee reference is permanent. Setting status to Inactive or Left disables faculty login.</p>
+<form asp-action="Edit" asp-route-id="@facultyId" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form>

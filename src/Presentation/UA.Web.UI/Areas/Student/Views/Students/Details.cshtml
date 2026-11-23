@@ -1,0 +1,21 @@
+@model StudentDetailDto
+@{ ViewData["Title"] = "Student " + Model.StudentId; }
+<h1>@Model.FullName <small class="text-muted">@Model.StudentId</small></h1>
+<p><span class="badge bg-secondary">@Model.Status</span> @Model.DepartmentCode · Roll @Model.RollNo · Section @Model.Section</p>
+<p><a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.StudentId">Edit record</a>
+<a class="btn btn-outline-secondary" asp-controller="StudentStatus" asp-action="Change" asp-route-id="@Model.StudentId">Change status</a>
+<a class="btn btn-outline-secondary" asp-controller="SectionChanges" asp-action="Create" asp-route-id="@Model.StudentId">Change section</a></p>
+<h2>Identity and contact</h2>
+<dl class="row"><dt class="col-sm-3">Date of birth</dt><dd class="col-sm-9">@Model.DateOfBirth.ToString("yyyy-MM-dd")</dd>
+<dt class="col-sm-3">Gender</dt><dd class="col-sm-9">@Model.Gender</dd>
+<dt class="col-sm-3">Guardian</dt><dd class="col-sm-9">@Model.GuardianName — @Model.GuardianPhone</dd>
+<dt class="col-sm-3">Phone</dt><dd class="col-sm-9">@Model.Phone</dd><dt class="col-sm-3">Address</dt><dd class="col-sm-9">@Model.Address</dd>
+<dt class="col-sm-3">Admission/current batch IDs</dt><dd class="col-sm-9">@Model.AdmissionBatchId / @Model.CurrentBatchId</dd></dl>
+<h2>Previous education</h2>
+@if(Model.PreviousEducation is not null){
+<dl class="row"><dt class="col-sm-3">SSC / equivalent</dt><dd class="col-sm-9">@Model.PreviousEducation.SscBoard, roll @Model.PreviousEducation.SscRoll, result @Model.PreviousEducation.SscResult</dd>
+<dt class="col-sm-3">HSC / equivalent</dt><dd class="col-sm-9">@Model.PreviousEducation.HscBoard, roll @Model.PreviousEducation.HscRoll, result @Model.PreviousEducation.HscResult</dd></dl>
+} else { <p class="text-muted">No linked admission application: previous education is not recorded in the existing Student table.</p> }
+<partial name="_StatusHistory" model="Model" />
+<partial name="_BatchHistory" model="Model" />
+<partial name="_StudentDocuments" model="Model" />

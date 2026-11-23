@@ -1,0 +1,21 @@
+@model CurriculumDto
+@{ ViewData["Title"] = "Curriculum details"; IReadOnlyList<CourseDto> allCourses = ViewBag.Courses; }
+<div class="d-flex justify-content-between align-items-center"><h1>@Model.ProgramName · v@Model.Version</h1><span class="badge bg-secondary">@Model.Status</span></div>
+<p>Effective admission year: @Model.EffectiveYear · Approval ID: @(Model.ApprovalId?.ToString() ?? "Not approved")</p>
+<div class="row g-3"><div class="col-lg-8"><div class="card p-3"><h2 class="h5">Courses by semester</h2>
+@for(byte sem=1; sem<=8; sem++){<h3 class="h6 mt-3">Semester @sem <small class="text-muted">(@Model.Courses.Where(x=>x.Semester==sem).Sum(x=>x.Credits) credits)</small></h3>
+<table class="table table-sm"><tbody>@foreach(var row in Model.Courses.Where(x=>x.Semester==sem)){
+<tr><td>@row.CourseCode</td><td>@row.CourseTitle</td><td>@row.Credits</td><td>
+@if(Model.Status=="Draft"){<form method="post" asp-action="RemoveCourse" class="d-inline"><input type="hidden" name="id" value="@Model.Id"/><input type="hidden" name="courseId" value="@row.CourseId"/><button class="btn btn-sm btn-outline-danger">Remove</button></form>}</td></tr>}</tbody></table>}
+</div></div><div class="col-lg-4">
+@if(Model.Status=="Draft"){
+<div class="card p-3 mb-3"><h2 class="h5">Assign course to semester</h2><form method="post" asp-action="SetCourse">
+<input name="id" type="hidden" value="@Model.Id"/><label for="courseId">Course</label><select id="courseId" name="courseId" class="form-select mb-2" required>
+@foreach(var c in allCourses){<option value="@c.Id">@c.Code (@c.Credits cr)</option>}</select>
+<label for="semester">Semester</label><select id="semester" name="semester" class="form-select mb-2">
+@for(int n=1;n<=8;n++){<option value="@n">Semester @n</option>}</select><button class="btn btn-primary">Add / Move</button></form></div>
+<div class="card p-3"><h2 class="h5">Approve version</h2><p class="small">Requires 8 semesters with 12–18 credits each, exact program total, and an approved Curriculum record from <a asp-area="Administration" asp-controller="Approvals" asp-action="Index">Approvals</a>.</p>
+<form method="post" asp-action="Approve"><input type="hidden" name="id" value="@Model.Id"/><label for="approvalId">Approval record ID</label>
+<input type="number" min="1" id="approvalId" name="approvalId" class="form-control mb-2" required/><button class="btn btn-success">Approve and activate</button></form></div>}
+else{<div class="alert alert-info">Approved versions are immutable. Create a new draft for future admission years.</div>}
+</div></div><a asp-action="Index" class="d-inline-block mt-3">Back to curriculum list</a>

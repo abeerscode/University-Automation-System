@@ -1,0 +1,15 @@
+@model CourseForm
+@{ ViewData["Title"] = Model.Id == 0 ? "New course" : "Edit course"; IReadOnlyList<CourseDto> candidates = ViewBag.Candidates; }
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Save" method="post" class="card p-4" style="max-width:720px"><div asp-validation-summary="All" class="text-danger"></div>
+<input asp-for="Id" type="hidden" /><input asp-for="DepartmentId" type="hidden" />
+<div class="row"><div class="col-md-4 mb-3"><label asp-for="Code" class="form-label"></label><input asp-for="Code" class="form-control" /></div>
+<div class="col-md-8 mb-3"><label asp-for="Title" class="form-label"></label><input asp-for="Title" class="form-control" /></div></div>
+<div class="row"><div class="col-md-4 mb-3"><label asp-for="Credits" class="form-label"></label><input asp-for="Credits" type="number" min="0.1" max="18" step="0.1" class="form-control" /></div>
+<div class="col-md-8 mb-3"><label asp-for="Type" class="form-label"></label><select asp-for="Type" class="form-select">
+@foreach(var type in new [] {"Theory", "Lab", "Project", "Thesis", "Internship"}) {<option value="@type">@type</option>}</select></div></div>
+<div class="mb-3"><label asp-for="PrerequisiteIds" class="form-label">Prerequisite courses (Ctrl/Cmd-click multiple)</label>
+<select asp-for="PrerequisiteIds" multiple size="6" class="form-select">
+@foreach(var c in candidates){<option value="@c.Id">@c.Code — @c.Title</option>}</select></div>
+<p class="small text-muted">Approved curricula protect referenced courses from structural edits. Create a new course code for future versions instead.</p>
+<button class="btn btn-primary">Save course</button></form>

@@ -1,0 +1,12 @@
+@model BatchDto
+@{ ViewData["Title"] = "Batch details"; }
+<h1>@Model.Department — @Model.Year intake</h1>
+<p>Seat limit: @Model.SeatLimit · Pinned curriculum version: v@Model.CurriculumVersion</p>
+<table class="table table-striped"><thead><tr><th>Section</th><th>Capacity</th><th>Students assigned</th></tr></thead><tbody>
+@foreach(var s in Model.Sections){<tr><td>@s.Name</td><td>@s.Capacity</td><td>@s.Occupancy</td></tr>}
+</tbody></table>
+<div class="card p-3" style="max-width:550px"><h2 class="h5">Open an additional section</h2><p class="small text-muted">Use when existing sections exceed the allowed configured overflow. A-03 placement is processed during student enrollment/rejoin.</p>
+<form method="post" asp-action="AddSection"><input type="hidden" name="BatchId" value="@Model.Id"/>
+<div class="row"><div class="col mb-2"><label for="sname">Section name</label><input id="sname" name="Name" class="form-control" required maxlength="10"/></div>
+<div class="col mb-2"><label for="scap">Capacity</label><input id="scap" name="Capacity" type="number" min="1" max="1000" value="40" class="form-control"/></div></div>
+<button class="btn btn-outline-primary">Add section</button></form></div>

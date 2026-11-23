@@ -1,0 +1,4 @@
+@model FacultyForm
+@{ ViewData["Title"] = "New faculty profile"; }
+<h1>New faculty profile</h1><p>A faculty account and its initial role are created in the same database transaction.</p>
+<form asp-action="Create" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form>

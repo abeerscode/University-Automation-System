@@ -1,0 +1,16 @@
+@model SettingsForm
+@{ ViewData["Title"] = "Academic configuration"; IReadOnlyList<CalendarTermDto> terms = ViewBag.Terms; }
+<h1>Department academic configuration</h1>
+<p>Settings are versioned through the existing configuration service, effective from an academic term.</p>
+<form asp-action="Settings" method="post" class="card p-4" style="max-width:650px"><div asp-validation-summary="All" class="text-danger"></div>
+<input asp-for="DepartmentId" type="hidden" />
+<div class="mb-3"><label asp-for="TermId" class="form-label">Effective academic term</label><select asp-for="TermId" class="form-select">
+@foreach(var t in terms){<option value="@t.Id">@t.Year — Term @t.TermNo</option>}</select></div>
+<div class="mb-3"><label asp-for="NormalCredits" class="form-label">Normal credits per semester (12–18)</label><input asp-for="NormalCredits" type="number" min="12" max="18" class="form-control" /></div>
+<div class="mb-3"><label asp-for="MinimumAttendance" class="form-label">Minimum attendance (75–100%)</label><input asp-for="MinimumAttendance" type="number" min="75" max="100" step="0.01" class="form-control" /></div>
+<div class="row"><div class="col"><label asp-for="ClassStarts" class="form-label">Class start (HH:mm)</label><input asp-for="ClassStarts" type="time" class="form-control" /></div>
+<div class="col"><label asp-for="ClassEnds" class="form-label">Class end (HH:mm)</label><input asp-for="ClassEnds" type="time" class="form-control" /></div></div>
+<h2 class="h5 mt-4">Yearly intake</h2><p class="small text-muted">Configured seats and section capacity are used when batches are created.</p>
+<div class="row"><div class="col"><label asp-for="SeatsPerIntake" class="form-label">Seats per January intake</label><input asp-for="SeatsPerIntake" type="number" min="1" max="10000" class="form-control" /></div>
+<div class="col"><label asp-for="SectionCapacity" class="form-label">Section capacity</label><input asp-for="SectionCapacity" type="number" min="1" max="1000" class="form-control" /></div></div>
+<button class="btn btn-primary mt-3">Save new settings version</button></form>

@@ -1,0 +1,4 @@
+@model StudentDetailDto
+<h2>Stored documents</h2><ul>
+@foreach(var item in Model.Documents){<li>@item.Type (@item.UploadedAt.ToString("yyyy-MM-dd")) — <a asp-area="" asp-controller="Files" asp-action="Download" asp-route-id="@item.Id">Secure download (subject to staff permission)</a></li>}
+</ul>

@@ -1,0 +1,13 @@
+@using UA.Facade.DTO.Student
+@{ var report = (StudentImportPreview)ViewBag.Report; var token = (string)ViewBag.Token; ViewData["Title"]="Student import preview"; }
+<h1>Student import preview</h1><p>Valid rows: <strong>@report.ValidRows</strong>. Errors: <strong>@report.Issues.Count</strong>. Nothing has been saved.</p>
+@if(report.Issues.Count > 0){
+<p><a asp-action="ErrorReport" asp-route-token="@token">Download validation error report (CSV)</a></p>
+<table class="table table-striped"><thead><tr><th>Row</th><th>Reason</th></tr></thead><tbody>
+@foreach(var issue in report.Issues){<tr><td>@issue.Line</td><td>@issue.Message</td></tr>}
+</tbody></table><p class="alert alert-warning">Correct every error and upload the file again before importing.</p>
+} else {
+<p class="alert alert-info">All student rows passed validation. Confirm to save students, their account records and initial histories in one transaction.</p>
+<form method="post" asp-action="Commit"><input type="hidden" name="token" value="@token"/><button class="btn btn-primary">Confirm import and download one-time login credentials</button></form>
+}
+<p class="small-note">Previews expire in 15 minutes. The server checks all rows again before saving.</p>

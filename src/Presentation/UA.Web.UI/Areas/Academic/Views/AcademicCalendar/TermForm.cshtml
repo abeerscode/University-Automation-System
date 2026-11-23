@@ -1,0 +1,9 @@
+@model TermForm
+@{ ViewData["Title"] = Model.Id == 0 ? "New academic term" : "Edit academic term"; }
+<h1>@ViewData["Title"]</h1><p>Term 1 runs Jan–Jun, term 2 Jul–Dec. Drop deadline cannot follow registration deadline.</p>
+<form method="post" asp-action="Save" class="card p-4" style="max-width:650px"><div asp-validation-summary="All" class="text-danger"></div><input asp-for="Id" type="hidden"/>
+<div class="row"><div class="col mb-3"><label asp-for="Year" class="form-label"></label><input asp-for="Year" type="number" class="form-control" min="2000" max="2100" /></div><div class="col mb-3"><label asp-for="TermNo" class="form-label">Term number</label><select asp-for="TermNo" class="form-select"><option value="1">1 (Jan–Jun)</option><option value="2">2 (Jul–Dec)</option></select></div></div>
+<div class="mb-3"><label asp-for="RegistrationDeadline" class="form-label"></label><input asp-for="RegistrationDeadline" type="date" class="form-control"/></div>
+<div class="mb-3"><label asp-for="DropDeadline" class="form-label"></label><input asp-for="DropDeadline" type="date" class="form-control"/></div>
+<div class="mb-3"><label asp-for="RetakeDeadline" class="form-label"></label><input asp-for="RetakeDeadline" type="date" class="form-control"/></div>
+<button class="btn btn-primary">Save term</button></form>

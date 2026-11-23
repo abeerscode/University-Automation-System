@@ -1,0 +1,8 @@
+@model IReadOnlyList<FacultyWorkloadRowDto>
+@{ ViewData["Title"] = "Faculty workload"; }
+<h1>Faculty workload</h1><p class="text-muted">Read-only credit-hour report from existing offering assignments. Offering creation and assignment occur in Phase 6.</p>
+<form method="get" class="d-flex gap-2 mb-3"><select name="departmentId" class="form-select w-auto"><option value="">Choose department</option>
+@foreach(var d in ViewBag.Departments){<option value="@d.Id">@d.Code</option>}</select>
+<input name="termId" type="number" min="1" value="@ViewBag.TermId" class="form-control w-auto" placeholder="Term ID (optional)" /><button class="btn btn-outline-primary">Report</button></form>
+<table class="table table-striped"><thead><tr><th>Employee ref</th><th>Faculty</th><th>Term</th><th>Assigned offerings</th><th>Credit hours</th></tr></thead><tbody>
+@foreach(var r in Model){<tr><td>@r.EmployeeRef</td><td>@r.FacultyName</td><td>@r.TermLabel</td><td>@r.OfferingCount</td><td>@r.Credits</td></tr>}</tbody></table>

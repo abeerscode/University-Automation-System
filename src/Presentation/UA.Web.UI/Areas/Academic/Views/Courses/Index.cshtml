@@ -1,0 +1,7 @@
+@model IReadOnlyList<CourseDto>
+@{ ViewData["Title"] = "Course master"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>Course master</h1><a asp-action="Create" class="btn btn-primary">Add course</a></div>
+<p>Academic course types and prerequisite links (prerequisites flag students later; they do not block enrollment).</p>
+<table class="table table-striped"><thead><tr><th>Code</th><th>Title</th><th>Department ID</th><th>Credits</th><th>Type</th><th>Prerequisites</th><th></th></tr></thead><tbody>
+@foreach (var c in Model){<tr><td>@c.Code</td><td>@c.Title</td><td>@c.DepartmentId</td><td>@c.Credits</td><td>@c.Type</td><td>@string.Join(", ", c.Prerequisites.Select(x => Model.FirstOrDefault(c2 => c2.Id == x)?.Code ?? $"#{x}"))</td><td><a asp-action="Edit" asp-route-id="@c.Id">Edit</a></td></tr>}
+</tbody></table>

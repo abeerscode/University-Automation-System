@@ -1,0 +1,10 @@
+@model IReadOnlyList<MentorAssignmentDto>
+@{ ViewData["Title"] = "Mentor assignments"; }
+<h1>Mentor assignments</h1>
+<form method="get" class="mb-3 d-flex gap-2"><select name="departmentId" class="form-select w-auto" aria-label="Department">
+<option value="">Select department</option>@foreach(var d in ViewBag.Departments){<option value="@d.Id">@d.Code</option>}</select>
+<button class="btn btn-outline-primary">View</button></form>
+@if(ViewBag.DepartmentId is int departmentId){<p><a asp-action="Assign" asp-route-departmentId="@departmentId" class="btn btn-primary">Assign mentor</a></p>}
+<table class="table table-striped"><thead><tr><th>Mentor</th><th>Batch</th><th>Section</th><th>Assigned</th><th>Ended</th><th></th></tr></thead><tbody>
+@foreach(var a in Model){<tr><td>@a.FacultyName</td><td>@a.AdmissionYear</td><td>@(a.Section ?? "Whole batch")</td><td>@a.AssignedOn.ToShortDateString()</td><td>@a.EndedOn?.ToShortDateString()</td>
+<td>@if(a.EndedOn is null){<form method="post" asp-action="End" asp-route-id="@a.Id"><input type="hidden" name="departmentId" value="@ViewBag.DepartmentId" /><button class="btn btn-sm btn-outline-danger">End assignment</button></form>}</td></tr>}</tbody></table>

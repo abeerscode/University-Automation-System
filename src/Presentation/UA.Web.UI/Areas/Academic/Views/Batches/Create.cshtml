@@ -1,0 +1,11 @@
+@model BatchForm
+@{ ViewData["Title"] = "Create batch"; IReadOnlyList<DepartmentDto> departments = ViewBag.Departments; }
+<h1>Create admission batch</h1><p>The default configuration produces 120 seats divided into three sections of 40 (A, B, C).</p>
+<form asp-action="Create" method="post" class="card p-4" style="max-width:650px"><div asp-validation-summary="All" class="text-danger"></div>
+<div class="mb-3"><label asp-for="DepartmentId" class="form-label">Department</label><select asp-for="DepartmentId" class="form-select"><option value="">Choose department</option>
+@foreach(var d in departments){<option value="@d.Id">@d.Code — @d.Name</option>}</select></div>
+<div class="mb-3"><label asp-for="Year" class="form-label">Admission year</label><input asp-for="Year" type="number" class="form-control" /></div>
+<p class="small text-muted">If department intake settings exist for the academic term, the system uses those values instead of the fallback numbers below.</p>
+<div class="row"><div class="col mb-3"><label asp-for="Seats" class="form-label">Seats</label><input asp-for="Seats" type="number" min="1" max="10000" class="form-control" /></div>
+<div class="col mb-3"><label asp-for="SectionCapacity" class="form-label">Section capacity</label><input asp-for="SectionCapacity" type="number" min="1" max="1000" class="form-control" /></div></div>
+<button class="btn btn-primary">Create batch and sections</button></form>

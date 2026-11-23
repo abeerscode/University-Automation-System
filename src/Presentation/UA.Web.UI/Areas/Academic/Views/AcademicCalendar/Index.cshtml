@@ -1,0 +1,8 @@
+@model IReadOnlyList<CalendarTermDto>
+@{ ViewData["Title"] = "Academic calendar"; }
+<div class="d-flex justify-content-between mb-3 align-items-center"><h1>Academic calendar</h1><a asp-action="Create" class="btn btn-primary">New term</a></div>
+<p>Central Registrar-controlled term dates and deadlines used by registration, drop, retake and examinations.</p>
+<table class="table table-striped"><thead><tr><th>Term</th><th>Range</th><th>Registration</th><th>Drop</th><th>Retake</th><th></th></tr></thead><tbody>
+@foreach(var t in Model){<tr><td>@t.Year / @t.TermNo</td><td>@t.Starts.ToString("yyyy-MM-dd") – @t.Ends.ToString("yyyy-MM-dd")</td><td>@t.RegistrationDeadline.ToString("yyyy-MM-dd")</td><td>@t.DropDeadline.ToString("yyyy-MM-dd")</td><td>@t.RetakeDeadline.ToString("yyyy-MM-dd")</td>
+<td><a asp-action="Edit" asp-route-id="@t.Id">Edit</a> · <a asp-action="Events" asp-route-id="@t.Id">Events</a></td></tr>}
+</tbody></table>

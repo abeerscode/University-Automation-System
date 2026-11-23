@@ -27,6 +27,7 @@ if (string.IsNullOrWhiteSpace(universityConnectionString))
 builder.Services.AddUniversityBusiness(universityConnectionString);
 builder.Services.AddUniversityIntegration();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddMemoryCache();
 builder.Services.AddScoped<ICurrentUser, HttpCurrentUser>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o =>

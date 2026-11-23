@@ -1,0 +1,8 @@
+@model ProfileForm
+@{ ViewData["Title"] = "Edit my contact information"; }
+<h1>Edit my contact information</h1><p>For changes to legal name, date of birth, guardian or other core details, contact your department office with the paper approval.</p>
+<form asp-action="Edit" method="post" enctype="multipart/form-data"><div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="mb-3"><label asp-for="Phone" class="form-label"></label><input asp-for="Phone" class="form-control"/><span asp-validation-for="Phone" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Address" class="form-label"></label><textarea asp-for="Address" class="form-control"></textarea><span asp-validation-for="Address" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Photo">Optional photo — JPEG or PNG, up to 1 MB</label><input asp-for="Photo" type="file" accept="image/jpeg,image/png" class="form-control"/><span asp-validation-for="Photo" class="text-danger"></span></div>
+<button class="btn btn-primary">Save</button></form>

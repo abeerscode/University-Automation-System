@@ -1,0 +1,10 @@
+@model StudentDetailDto
+@{ ViewData["Title"] = "Student dashboard"; }
+<h1>Welcome, @Model.FullName</h1>
+<p>Student ID <strong>@Model.StudentId</strong> · @Model.DepartmentCode · Section @Model.Section · @Model.Status</p>
+<div class="row g-3 mb-4"><div class="col-md-6"><div class="card"><div class="card-body"><h2 class="h5">Profile</h2>
+<p>Review your student record and update your phone, address or photo.</p>
+<a asp-area="Portal" asp-controller="Profile" asp-action="Index">View my profile</a></div></div></div>
+<div class="col-md-6"><div class="card"><div class="card-body"><h2 class="h5">University notifications</h2>
+<p>Notices and messages from the existing notification service.</p><a asp-area="" asp-controller="Notifications" asp-action="Index">Open inbox</a></div></div></div></div>
+<p class="text-muted">Courses, attendance, examinations, results, CGPA and finance appear here when their corresponding later phases are implemented.</p>

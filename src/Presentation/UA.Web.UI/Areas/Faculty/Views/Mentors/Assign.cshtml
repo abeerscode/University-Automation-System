@@ -1,0 +1,11 @@
+@model MentorAssignForm
+@{ ViewData["Title"] = "Assign mentor"; var options = (MentorOptionsDto)ViewBag.Options; }
+<h1>Assign mentor</h1><p>Assign a mentor to a complete batch or one section. Replacing a mentor ends the previous assignment but preserves history.</p>
+<form asp-action="Assign" method="post"><div asp-validation-summary="All" class="text-danger"></div><input type="hidden" asp-for="DepartmentId" />
+<div class="mb-3"><label class="form-label" asp-for="FacultyId">Faculty member</label><select asp-for="FacultyId" class="form-select">
+<option value="0">Choose faculty</option>@foreach(var f in options.Faculty){<option value="@f.Id">@f.Label</option>}</select></div>
+<div class="mb-3"><label asp-for="BatchId" class="form-label">Batch</label><select asp-for="BatchId" class="form-select"><option value="0">Choose batch</option>
+@foreach(var b in options.Batches){<option value="@b.Id">@b.Label</option>}</select></div>
+<div class="mb-3"><label asp-for="SectionId" class="form-label">Section (optional; leave blank for entire batch)</label><select asp-for="SectionId" class="form-select"><option value="">Whole batch</option>
+@foreach(var b in options.Batches){<optgroup label="Batch @b.Label">@foreach(var s in b.Sections){<option value="@s.Id">@s.Name</option>}</optgroup>}</select></div>
+<button class="btn btn-primary">Assign mentor</button></form>

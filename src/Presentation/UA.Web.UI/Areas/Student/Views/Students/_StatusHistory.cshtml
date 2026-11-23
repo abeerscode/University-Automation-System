@@ -1,0 +1,4 @@
+@model StudentDetailDto
+<h2>Status history</h2><table class="table"><thead><tr><th>Effective</th><th>Status</th><th>Reason</th><th>Approval</th></tr></thead><tbody>
+@foreach(var x in Model.StatusHistory){<tr><td>@x.EffectiveDate.ToString("yyyy-MM-dd")</td><td>@x.Status</td><td>@x.Reason</td><td>@x.ApprovalReference</td></tr>}
+</tbody></table>

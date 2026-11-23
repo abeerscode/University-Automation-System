@@ -1,0 +1,7 @@
+@model IReadOnlyList<CalendarEventDto>
+@{ ViewData["Title"] = "Calendar events"; CalendarTermDto t = ViewBag.Term; }
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>@t.Year · Term @t.TermNo — Events</h1><a asp-action="CreateEvent" asp-route-termId="@t.Id" class="btn btn-primary">New event</a></div>
+<p>Enter class periods, midterms, finals, make-up dates, results, fees and academic breaks.</p>
+<table class="table table-striped"><thead><tr><th>Type</th><th>Title</th><th>Starts</th><th>Ends</th><th></th></tr></thead><tbody>
+@foreach(var e in Model){<tr><td>@e.Type</td><td>@e.Title</td><td>@e.Starts.ToString("yyyy-MM-dd")</td><td>@e.Ends.ToString("yyyy-MM-dd")</td><td><a asp-action="EditEvent" asp-route-id="@e.Id" asp-route-termId="@e.TermId">Edit</a></td></tr>}
+</tbody></table><a asp-action="Index">Back to terms</a>

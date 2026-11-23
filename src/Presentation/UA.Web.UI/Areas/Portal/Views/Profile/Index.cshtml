@@ -1,0 +1,19 @@
+@model StudentDetailDto
+@{ ViewData["Title"] = "My student profile"; }
+<h1>My student profile</h1>
+@if(Model.HasPhoto){<img alt="Your student photo" src="@Url.Action("Photo","Profile", new {area="Portal"})" style="max-height:180px;max-width:150px;object-fit:contain" />}
+<p><a class="btn btn-primary" asp-action="Edit">Update phone, address or photo</a></p>
+<dl class="row"><dt class="col-sm-4">Student ID</dt><dd class="col-sm-8">@Model.StudentId</dd>
+<dt class="col-sm-4">Full name</dt><dd class="col-sm-8">@Model.FullName</dd>
+<dt class="col-sm-4">Department</dt><dd class="col-sm-8">@Model.DepartmentCode</dd>
+<dt class="col-sm-4">Status</dt><dd class="col-sm-8">@Model.Status</dd>
+<dt class="col-sm-4">Admission batch ID</dt><dd class="col-sm-8">@Model.AdmissionBatchId</dd>
+<dt class="col-sm-4">Current batch ID</dt><dd class="col-sm-8">@Model.CurrentBatchId</dd>
+<dt class="col-sm-4">Section and roll</dt><dd class="col-sm-8">@Model.Section, @Model.RollNo</dd>
+<dt class="col-sm-4">Date of birth</dt><dd class="col-sm-8">@Model.DateOfBirth.ToString("yyyy-MM-dd")</dd>
+<dt class="col-sm-4">Guardian</dt><dd class="col-sm-8">@Model.GuardianName — @Model.GuardianPhone</dd>
+<dt class="col-sm-4">Phone</dt><dd class="col-sm-8">@Model.Phone</dd>
+<dt class="col-sm-4">Address</dt><dd class="col-sm-8">@Model.Address</dd></dl>
+@if(Model.PreviousEducation is not null){<h2>Previous education</h2>
+<p>SSC: @Model.PreviousEducation.SscBoard, roll @Model.PreviousEducation.SscRoll; result @Model.PreviousEducation.SscResult.<br />
+HSC: @Model.PreviousEducation.HscBoard, roll @Model.PreviousEducation.HscRoll; result @Model.PreviousEducation.HscResult.</p>}

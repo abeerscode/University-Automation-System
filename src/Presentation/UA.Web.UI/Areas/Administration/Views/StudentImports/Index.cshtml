@@ -1,0 +1,8 @@
+@{ViewData["Title"]="Student data import";}
+<h1>Phase 3 — Student import</h1>
+<p>Import initial/test student records into an <strong>existing department, batch and section</strong>. A student ID and separate login are generated for every valid row. The initial merits must follow the fixed section roll ranges.</p>
+<p><a asp-action="Template">Download CSV template</a> or <a asp-action="ExcelTemplate">Download Excel template (.xlsx)</a>.</p>
+<form method="post" asp-action="Upload" enctype="multipart/form-data"><label class="form-label">CSV or Excel (.xlsx) file, maximum 2 MB and 5,000 students</label>
+<input type="file" name="upload" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" required />
+<button class="btn btn-primary mt-2">Validate and preview</button></form>
+<p class="text-muted mt-3">The preview writes no records. Import proceeds only after explicit confirmation, with a second validation. The one-time credentials report is produced on successful import. Do not import historical cohorts without deciding how previous academic results will be handled (blueprint O-5).</p>

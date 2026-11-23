@@ -1,0 +1,6 @@
+@model FacultyCreatedDto
+@{ ViewData["Title"] = "Faculty account created"; }
+<h1>Faculty account created</h1>
+<p class="alert alert-warning">These temporary credentials are displayed only on this response. Share them securely and ask the teacher to change the password.</p>
+<dl><dt>Username</dt><dd><code>@Model.Username</code></dd><dt>Temporary password</dt><dd><code>@Model.TemporaryPassword</code></dd></dl>
+<a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">View profile</a>

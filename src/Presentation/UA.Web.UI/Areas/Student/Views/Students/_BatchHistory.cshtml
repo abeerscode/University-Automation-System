@@ -1,0 +1,4 @@
+@model StudentDetailDto
+<h2>Batch and section history</h2><table class="table"><thead><tr><th>Batch</th><th>Section</th><th>From</th><th>Until</th><th>Reason</th><th>Approval</th></tr></thead><tbody>
+@foreach(var x in Model.BatchHistory){<tr><td>@x.AdmissionYear</td><td>@x.Section</td><td>@x.From.ToString("yyyy-MM-dd")</td><td>@x.To?.ToString("yyyy-MM-dd")</td><td>@x.Reason</td><td>@x.ApprovalReference</td></tr>}
+</tbody></table>

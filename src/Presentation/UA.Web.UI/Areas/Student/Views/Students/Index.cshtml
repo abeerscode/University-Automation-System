@@ -1,0 +1,21 @@
+@model PagedResult<StudentListItem>
+@{ ViewData["Title"] = "Students"; var f = (StudentSearchInput)ViewBag.Filter; }
+<h1>Student records</h1>
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-3"><label class="form-label">ID or name</label><input class="form-control" name="query" value="@f.Query" /></div>
+    <div class="col-md-2"><label class="form-label">Department ID</label><input type="number" min="1" class="form-control" name="departmentId" value="@f.DepartmentId" /></div>
+    <div class="col-md-2"><label class="form-label">Batch ID</label><input type="number" min="1" class="form-control" name="batchId" value="@f.BatchId" /></div>
+    <div class="col-md-2"><label class="form-label">Section ID</label><input type="number" min="1" class="form-control" name="sectionId" value="@f.SectionId" /></div>
+    <div class="col-md-2"><label class="form-label">Status</label><select class="form-select" name="status"><option value="">All statuses</option>
+        @foreach (var status in new[]{"Active","Dropped","Graduated","Withdrawn","Expelled","Suspended","Alumni"}) {
+            if (f.Status == status) { <option selected value="@status">@status</option> }
+            else { <option value="@status">@status</option> }
+        }</select></div>
+    <div class="col-md-1 align-self-end"><button class="btn btn-primary">Search</button></div>
+</form>
+<p>@Model.Total record(s) found. Page @Model.Page.</p>
+<div class="table-responsive"><table class="table table-striped"><thead><tr><th>ID</th><th>Name</th><th>Dept.</th><th>Admission batch</th><th>Current batch</th><th>Section</th><th>Roll</th><th>Status</th></tr></thead><tbody>
+@foreach(var s in Model.Items) { <tr><td><a asp-action="Details" asp-route-id="@s.StudentId">@s.StudentId</a></td><td>@s.FullName</td><td>@s.DepartmentCode</td><td>@s.AdmissionYear</td><td>@s.CurrentBatchYear</td><td>@s.Section</td><td>@s.RollNo</td><td>@s.Status</td></tr> }
+</tbody></table></div>
+@if(Model.Page > 1){ <a class="btn btn-outline-secondary" asp-action="Index" asp-route-query="@f.Query" asp-route-departmentId="@f.DepartmentId" asp-route-batchId="@f.BatchId" asp-route-sectionId="@f.SectionId" asp-route-status="@f.Status" asp-route-page="@(Model.Page-1)">Previous</a> }
+@if(Model.Page * Model.PageSize < Model.Total){ <a class="btn btn-outline-secondary" asp-action="Index" asp-route-query="@f.Query" asp-route-departmentId="@f.DepartmentId" asp-route-batchId="@f.BatchId" asp-route-sectionId="@f.SectionId" asp-route-status="@f.Status" asp-route-page="@(Model.Page+1)">Next</a> }

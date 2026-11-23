@@ -1,0 +1,6 @@
+@model IReadOnlyList<TeachingAssignmentDto>
+@{ ViewData["Title"] = "My assigned courses"; }
+<h1>My assigned courses</h1><p>Only active assignments made to your faculty account are shown. Cross-department teaching is supported.</p>
+<table class="table table-striped"><thead><tr><th>Term</th><th>Course</th><th>Section</th><th>Credits</th><th>Status</th></tr></thead><tbody>
+@foreach(var c in Model){<tr><td>@c.TermLabel</td><td>@c.CourseCode — @c.CourseTitle</td><td>@c.Section</td><td>@c.Credits</td><td>@c.Status</td></tr>}</tbody></table>
+@if(Model.Count==0){<p class="text-muted">No active course assignments yet. Offering assignments are scheduled for Phase 6.</p>}

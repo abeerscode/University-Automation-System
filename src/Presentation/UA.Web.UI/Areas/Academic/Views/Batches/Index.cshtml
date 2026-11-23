@@ -1,0 +1,7 @@
+@model IReadOnlyList<BatchDto>
+@{ ViewData["Title"] = "Batches and sections"; }
+<div class="d-flex align-items-center justify-content-between mb-3"><h1>Batches and sections</h1><a asp-action="Create" class="btn btn-primary">Create intake batch</a></div>
+<p>Each batch is permanently pinned to the curriculum version approved for its admission year.</p>
+<table class="table table-striped"><thead><tr><th>Department</th><th>Intake</th><th>Curriculum</th><th>Seats</th><th>Sections</th><th></th></tr></thead><tbody>
+@foreach(var b in Model){<tr><td>@b.Department</td><td>@b.Year</td><td>v@b.CurriculumVersion</td><td>@b.SeatLimit</td><td>@b.Sections.Count</td><td><a asp-action="Details" asp-route-id="@b.Id">Details</a></td></tr>}
+</tbody></table>

@@ -1,0 +1,9 @@
+@model CurriculumCreateForm
+@{ ViewData["Title"] = "Create draft curriculum"; IReadOnlyList<DepartmentDto> programs = ViewBag.Programs; }
+<h1>Create draft curriculum</h1>
+<p>Only approved versions apply to batches. Existing batches retain their assigned version.</p>
+<form asp-action="Create" method="post" class="card p-4" style="max-width:600px"><div asp-validation-summary="All" class="text-danger"></div>
+<div class="mb-3"><label asp-for="ProgramId" class="form-label">Program</label><select asp-for="ProgramId" class="form-select">
+<option value="">Choose program</option>@foreach(var p in programs){<option value="@p.ProgramId">@p.Code — @p.ProgramName</option>}</select></div>
+<div class="mb-3"><label asp-for="EffectiveYear" class="form-label">First admission year</label><input asp-for="EffectiveYear" type="number" min="2000" max="2100" class="form-control" /></div>
+<button class="btn btn-primary">Create draft</button></form>
