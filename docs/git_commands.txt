@@ -1,0 +1,77 @@
+# Only once for the first commit in a new repository
+
+1. `git init` → Initialize Git (if not already)
+2. `git add .` → Add all files in the folder
+3. `git commit -m "Initial commit"` → Commit your files
+4. `git branch -M main` → Rename local branch to `main`
+5. `git remote add origin https://github.com/githubUsername/RepoName.git` → Add GitHub remote
+6. `git push -u origin main` → Push code to GitHub
+
+# Commit, Push & Pull
+
+1. `git remote -v` → Check linked repository
+2. `git status` → Check current branch and file status
+3. `git add .` → Add changes
+4. `git commit -m "comments"` → Commit changes
+5. `git push origin main` → Push `main` branch
+6. `git pull` → Get latest changes from GitHub
+
+# Version Tag
+
+**After committing and pushing your project:**
+
+1. `git tag -a v1.0.0 -m "First stable release"` → Create an annotated version tag for the latest commit
+2. `git push origin v1.0.0` → Push the tag to GitHub
+
+**If you need to correct or move an existing tag:**
+
+1. `git tag -f -a v1.0.0 -m "First stable release"` → Move the existing local tag to the current commit
+2. `git push origin v1.0.0 --force` → Update the existing remote tag
+
+**View tags:**
+
+- `git tag` → List all tags
+- `git show v1.0.0` → Show the commit associated with a tag
+
+# Branch
+
+1. `git branch` → Show all local branches
+2. `git branch -a` → Show local and remote branches
+3. `git branch branchname` → Create a new branch
+4. `git switch branchname` → Switch to a branch
+5. `git switch -c branchname` → Create and switch to a new branch
+6. `git push -u origin branchname` → First push of a new branch
+7. `git push origin branchname` → Push a specific branch
+8. `git push` → Push current branch (after `-u` is set)
+
+# Delete Folder & File
+
+1. `git rm filename` → Delete file from Git
+2. `git rm -r foldername` → Delete folder from Git
+3. `git rm --cached filename` → Delete from Git, keep locally
+4. `git rm -r --cached foldername` → Delete from Git, keep locally
+5. `git commit -m "Delete ..."` → Commit deletion
+
+# Clone a GitHub Repository
+
+1. `git clone https://github.com/githubUsername/RepoName.git` → Download the repo and set up Git locally
+2. `cd RepoName` → Move into the cloned folder
+3. `git pull` → Update local copy with latest changes from GitHub
+
+# Folder Navigation
+
+1. `cd ..` → Go back one folder
+2. `cd ../..` → Go back two folders
+3. `cd ~` → Go to home folder
+4. `cd -` → Go to the previous location
+
+# C# / .NET Project
+
+1. `dotnet new console -n projectName` → Create a new Console project
+2. `cd projectName` → Move into the project folder
+3. `dotnet run` → Run the project
+4. `dotnet new mvc -n MyWebApp` → Create a new MVC project
+
+# VS Code Run
+
+1. `dotnet run` → Run the C# project in VS Code
