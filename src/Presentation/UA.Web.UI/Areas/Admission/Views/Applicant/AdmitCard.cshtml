@@ -1,0 +1,3 @@
+@model AdmitCardInfo
+@{ViewData["Title"]="Admission test admit card";}
+<h1>Admission test admit card</h1><img src="@Url.Action("Photo",new{id=ViewBag.ApplicationId})" alt="Applicant photo" width="120"/><dl><dt>Applicant ID</dt><dd>@Model.ApplicantId</dd><dt>Name</dt><dd>@Model.Name</dd><dt>Department</dt><dd>@Model.Department</dd><dt>Test date</dt><dd>@Model.Test.ToString("D")</dd><dt>Venue</dt><dd>@Model.Venue</dd></dl><button type="button" data-print-document class="btn btn-outline-secondary no-print">Print / Save PDF</button>

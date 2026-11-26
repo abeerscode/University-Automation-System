@@ -1,0 +1,20 @@
+namespace UA.Facade.DTO.Academic;
+// Entities stay inside DataAccess/Facade. These DTOs are the public Academic boundary.
+public record DepartmentDto(int Id, string Code, string Name, string IdCode, string Status, int? ProgramId, string? ProgramName, short? TotalCredits);
+public record ProgramInput(int DepartmentId, string Name, short TotalCredits);
+public record DepartmentSettingsDto(int DepartmentId, int TermId, int NormalCredits, decimal MinimumAttendance, string ClassStarts, string ClassEnds, int SeatsPerIntake, int SectionCapacity);
+public record DepartmentSettingsInput(int DepartmentId, int TermId, int NormalCredits, decimal MinimumAttendance, string ClassStarts, string ClassEnds, int SeatsPerIntake, int SectionCapacity);
+public record CourseDto(int Id, int DepartmentId, string Code, string Title, decimal Credits, string Type, IReadOnlyList<int> Prerequisites);
+public record CourseInput(int Id, int DepartmentId, string Code, string Title, decimal Credits, string Type, IReadOnlyList<int> Prerequisites);
+public record CurriculumRowDto(int CourseId, string CourseCode, string CourseTitle, decimal Credits, byte Semester);
+public record CurriculumDto(int Id, int ProgramId, string ProgramName, int DepartmentId, int Version, short EffectiveYear, string Status, int? ApprovalId, IReadOnlyList<CurriculumRowDto> Courses);
+public record CurriculumInput(int ProgramId, short EffectiveYear);
+public record CalendarTermDto(int Id, short Year, byte TermNo, DateTime Starts, DateTime Ends, DateTime RegistrationDeadline, DateTime DropDeadline, DateTime RetakeDeadline);
+public record CalendarTermInput(int Id, short Year, byte TermNo, DateTime RegistrationDeadline, DateTime DropDeadline, DateTime RetakeDeadline);
+public record CalendarEventDto(int Id, int TermId, string Type, string Title, DateTime Starts, DateTime Ends);
+public record CalendarEventInput(int Id, int TermId, string Type, string Title, DateTime Starts, DateTime Ends);
+public record BatchDto(int Id, int DepartmentId, string Department, short Year, int CurriculumId, int CurriculumVersion, short SeatLimit, IReadOnlyList<SectionDto> Sections);
+public record SectionDto(int Id, string Name, short Capacity, int Occupancy);
+public record BatchInput(int DepartmentId, short Year, short Seats, short SectionCapacity);
+public record RoomDto(int Id, string Name, short Capacity, string Type);
+public record RoomInput(int Id, string Name, short Capacity, string Type);

@@ -4,7 +4,7 @@ using UA.Web.UI.Areas.Website.Models;
 using UA.Web.UI.Infrastructure.Authorization;
 namespace UA.Web.UI.Areas.Website.Controllers;
 [Area("Website"), HasPermission("notices.edit")]
-public sealed class NoticesController(INoticeFacade facade) : Controller
+public sealed class NoticesController(INoticeFacade facade,Microsoft.AspNetCore.OutputCaching.IOutputCacheStore cache) : Controller
 {
     public async Task<IActionResult> Index() => View(await facade.ListAsync());
     [HttpGet] public IActionResult Create() => View(new NoticeFormViewModel());
@@ -17,5 +17,5 @@ public sealed class NoticesController(INoticeFacade facade) : Controller
     }
     [HasPermission("notices.approve"), HttpPost]
     public async Task<IActionResult> Approve(int id)
-    { await facade.ApproveAsync(id); return RedirectToAction(nameof(Index)); }
+    { await facade.ApproveAsync(id); await cache.EvictByTagAsync("public-site",HttpContext.RequestAborted); return RedirectToAction(nameof(Index)); }
 }

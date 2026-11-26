@@ -1,0 +1,5 @@
+@model RetakeShortlistRow[]
+@{ViewData["Title"]="Retake shortlist";}
+<h1>Retake shortlist</h1><p>Latest published failed attempts for active students, grouped by course.</p>
+@foreach(var group in Model.GroupBy(x=>x.Course)){<h2 class="h5 mt-3">@group.Key</h2><table class="table"><thead><tr><th>Student ID</th><th>Name</th><th>Attempts</th></tr></thead><tbody>@foreach(var r in group){<tr><td>@r.StudentId</td><td>@r.Name</td><td>@r.Attempts</td></tr>}</tbody></table>}
+@if(Model.Length==0){<p>No outstanding published failures.</p>}

@@ -1,0 +1,4 @@
+@model ExamJob
+@{ViewData["Title"]="Examination job";}
+<h1>Examination job #@Model.Id</h1><p>@Model.Type — @Model.Status</p><progress value="@Model.Progress" max="100"></progress> @Model.Progress%<p>@Model.Error</p><a asp-action="Index">Return to examinations</a>
+@if(Model.Status=="Queued"||Model.Status=="Running"){<script>setTimeout(()=>location.reload(),5000);</script>}

@@ -1,0 +1,3 @@
+@model IReadOnlyList<string>
+@{ViewData["Title"]="Import validation";}
+<h1>Import rejected</h1><p>No result rows were saved. Correct the following errors and retry.</p><button type="button" id="download-import-errors" class="btn btn-outline-primary mb-3">Download error CSV</button><script src="~/js/admission-errors.js" asp-append-version="true" defer></script><ul id="import-errors">@foreach(var e in Model){<li>@e</li>}</ul><a asp-action="Applications" asp-route-id="@ViewBag.CircularId">Return to applications</a>

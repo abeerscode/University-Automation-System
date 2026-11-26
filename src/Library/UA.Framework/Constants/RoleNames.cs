@@ -8,6 +8,7 @@ public static class RoleNames
     public const string Head = "Department Head";
     public const string Coordinator = "Department Coordinator";
     public const string Faculty = "Faculty";
+    public const string GuestFaculty = "Guest Faculty";
     public const string Student = "Student";
     public const string Applicant = "Applicant";
     public const string Admission = "Admission Committee / Officer";

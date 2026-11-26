@@ -8,6 +8,7 @@ using UA.Framework.Exceptions;
 using UA.Framework.Security;
 using UA.Framework.Time;
 namespace UA.Facade.Implementation.Website;
+
 public sealed class NoticeFacade(INoticeRepository notices, IUnitOfWork work, IUserAccessFacade access,
     ICurrentUser current, IClock clock) : INoticeFacade
 {
@@ -32,8 +33,14 @@ public sealed class NoticeFacade(INoticeRepository notices, IUnitOfWork work, IU
         else await access.RequireAsync("notices.edit", departmentId, ct);
         if (current.UserId is not int id) throw new ForbiddenException();
         if (title.Length is < 1 or > 200) throw new BusinessRuleException("Title must be 1–200 characters.");
-        var notice = new Notice { DepartmentId = departmentId, Title = title,
-            Body = body, IsPublic = isPublic, AuthorId = id };
+        var notice = new Notice
+        {
+            DepartmentId = departmentId,
+            Title = title,
+            Body = body,
+            IsPublic = isPublic,
+            AuthorId = id
+        };
         await notices.AddAsync(notice, ct); await work.SaveChangesAsync(ct); return notice.NoticeId;
     }
     public async Task ApproveAsync(int noticeId, CancellationToken ct = default)

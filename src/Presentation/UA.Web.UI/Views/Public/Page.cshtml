@@ -1,0 +1,3 @@
+@model UA.Facade.DTO.Website.PublicPage
+@{ViewData["Title"]=Model.Title;}
+<h1>@Model.Title</h1><article class="public-card table-responsive">@Html.Raw(UA.Facade.Rules.Website.PublicContent.Render(Model.Content))</article>

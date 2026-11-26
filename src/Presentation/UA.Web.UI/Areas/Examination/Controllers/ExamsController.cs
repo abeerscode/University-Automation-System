@@ -1,0 +1,50 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using UA.Facade.DTO.Examination;
+using UA.Facade.DTO.Academic;
+using UA.Facade.Interface.Examination;
+using UA.Facade.Interface.Integration;
+using UA.Framework.Exceptions;
+using System.Globalization;
+namespace UA.Web.UI.Areas.Examination.Controllers;
+[Area("Examination"),Authorize]
+public sealed class ExamsController(IExaminationFacade facade,IStudentImportReader reader,IAcademicWorkbookWriter workbook,IExcelWriter csv,IExamPdfWriter pdf):Controller
+{
+    public async Task<IActionResult> Index()=>View(await facade.HomeAsync(HttpContext.RequestAborted));
+    public async Task<IActionResult> Event(int id)=>View(await facade.EventAsync(id,HttpContext.RequestAborted));
+    public async Task<IActionResult> Marks(int id)=>View(await facade.MarksAsync(id,HttpContext.RequestAborted));
+    public async Task<IActionResult> MyExams()=>View("Student",await facade.StudentAsync(ct:HttpContext.RequestAborted));
+    public async Task<IActionResult> Student(string id)=>View(await facade.StudentAsync(id,HttpContext.RequestAborted));
+    public async Task<IActionResult> Job(int id)=>View(await facade.JobAsync(id,HttpContext.RequestAborted));
+    [HttpPost] public async Task<IActionResult> Create(int termId,string type){if(!ModelState.IsValid)return BadRequest();try{return RedirectToAction(nameof(Event),new{id=await facade.CreateEventAsync(termId,type)});}catch(BusinessRuleException e){TempData["Error"]=e.Message;return RedirectToAction(nameof(Index));}}
+    [HttpPost] public async Task<IActionResult> CreateSpecial(int termId,DateTime date){if(!ModelState.IsValid)return BadRequest();try{return RedirectToAction(nameof(Event),new{id=await facade.CreateSpecialEventAsync(termId,date)});}catch(BusinessRuleException ex){TempData["Error"]=ex.Message;return RedirectToAction(nameof(Index));}}
+    [HttpPost] public Task<IActionResult> Generate(int id,TimeSpan start,TimeSpan end,int minutes)=>Run(()=>facade.GenerateRoutineAsync(id,start,end,minutes),nameof(Event),new{id});
+    [HttpPost] public Task<IActionResult> Edit(int id,int sittingId,DateTime date,TimeSpan start,TimeSpan end)=>Run(()=>facade.EditSittingAsync(id,sittingId,date,start,end),nameof(Event),new{id});
+    [HttpPost] public Task<IActionResult> MoveSeat(int id,int sittingId,string studentId,int roomId,int seatNo)=>Run(()=>facade.MoveSeatAsync(id,sittingId,studentId,roomId,seatNo),nameof(Event),new{id});
+    [HttpPost] public Task<IActionResult> ConfirmClash(int id,int sittingId,string studentId,string reason)=>Run(()=>facade.ConfirmClashAsync(id,sittingId,studentId,reason),nameof(Event),new{id});
+    [HttpPost] public Task<IActionResult> AssignMakeup(int id,int sittingId,string studentId,DateTime date,int roomId,int seatNo)=>Run(()=>facade.AssignMakeupAsync(id,sittingId,studentId,date,roomId,seatNo),nameof(Event),new{id});
+    [HttpPost] public Task<IActionResult> Release(int id,int holdId,string reason)=>Run(()=>facade.ReleaseAsync(holdId,reason),nameof(Event),new{id});
+    [HttpPost] public async Task<IActionResult> Queue(int id,string kind){if(!ModelState.IsValid)return BadRequest();try{return RedirectToAction(nameof(Job),new{id=await facade.QueueAsync(id,kind)});}catch(BusinessRuleException e){TempData["Error"]=e.Message;return RedirectToAction(nameof(Event),new{id});}}
+    [HttpPost] public Task<IActionResult> Save(int id,MarkInput[] input)=>Run(()=>facade.SaveMarksAsync(id,input),nameof(Marks),new{id});
+    [HttpPost] public Task<IActionResult> Disposition(int id,int enrollmentId,string status,string reason)=>Run(()=>facade.SetDispositionAsync(id,enrollmentId,status,reason),nameof(Marks),new{id});
+    [HttpPost] public Task<IActionResult> Transition(int id,string actionName,string? comment)=>Run(()=>facade.TransitionAsync(id,actionName,comment),nameof(Marks),new{id});
+    public async Task<IActionResult> Template(int id){var p=await facade.MarksAsync(id);if(!p.CanEnter)throw new ForbiddenException();return File(workbook.Write(new[]{"EnrollmentId","ComponentId","Marks","Absent"},p.Students.SelectMany(s=>p.Parts.Where(x=>!x.Attendance&&x.Retake==(s.EnrollmentType=="Retake")&&(!x.Retake||p.CanEnterRetake)).Select(x=>new[]{s.Id.ToString(),x.Id.ToString(),"","false"}))),"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","marks-template.xlsx");}
+    [HttpPost,RequestSizeLimit(2_100_000)] public async Task<IActionResult> Import(int id,IFormFile? file)
+    {return await Run(async()=>{if(file is null||file.Length is <1 or >2_000_000)throw new BusinessRuleException("Upload a workbook of at most 2 MB.");using var stream=new MemoryStream();await file.CopyToAsync(stream);var sheet=reader.Read(stream.ToArray(),Path.GetExtension(file.FileName));var rows=new List<MarkInput>();foreach(var row in sheet.Rows){var v=row.Values;if(!v.TryGetValue("EnrollmentId",out var e)||!int.TryParse(e,out int en)||!v.TryGetValue("ComponentId",out var c)||!int.TryParse(c,out int comp)||!v.TryGetValue("Absent",out var a)||!bool.TryParse(a,out var absent)||!v.TryGetValue("Marks",out var m)||v.ContainsKey("__error"))throw new BusinessRuleException($"Invalid template row {row.Line}.");decimal? mark=null;if(!string.IsNullOrWhiteSpace(m)){if(!decimal.TryParse(m,NumberStyles.Number,CultureInfo.InvariantCulture,out var n))throw new BusinessRuleException($"Invalid mark at row {row.Line}.");mark=n;}rows.Add(new(en,comp,mark,absent));}await facade.SaveMarksAsync(id,rows);},nameof(Marks),new{id});}
+    [HttpPost] public Task<IActionResult> Correct(int id,int resultId,decimal total,string status,string reason,int approvalId)=>Run(()=>facade.CorrectAsync(resultId,total,status,reason,approvalId),nameof(Report),new{termId=id});
+    public async Task<IActionResult> Report(int termId,int? batchId){ViewBag.TermId=termId;ViewBag.BatchId=batchId;return View(await facade.ReportAsync(termId,batchId));}
+    private static string[] Headers=>["Student ID","Course","Term","Semester","Credits","Total","Grade","Points","Status","Version","Admission batch"];
+    private static string[] ResultCells(ResultRow r)=>[r.Student,r.Course,r.TermId.ToString(),r.Semester.ToString(),r.Credits.ToString(CultureInfo.InvariantCulture),r.Status is "Withheld" or "Expelled"?"":r.Total.ToString(CultureInfo.InvariantCulture),r.Grade+(r.Replaced?" (R)":""),r.Status is "Withheld" or "Expelled"?"":r.Points.ToString(CultureInfo.InvariantCulture),r.Status,r.Version.ToString(),r.BatchId.ToString()];
+    public async Task<IActionResult> Export(int termId,int? batchId,string format="xlsx") {var rows=await facade.ReportAsync(termId,batchId);await facade.AuditExportAsync("Tabulation",termId.ToString());return Document("Tabulation and grade sheet",Headers,rows.Select(ResultCells),format);}
+    public async Task<IActionResult> Transcript(string? studentId,string format="print"){var p=await facade.StudentAsync(studentId);await facade.AuditExportAsync("Transcript",p.Student);return Document("Transcript - "+p.Student,Headers,p.Results.Select(ResultCells),format);}
+    public async Task<IActionResult> Merit(int termId,int batchId,string format="print")
+    {var rows=await facade.ReportAsync(termId,batchId);var ranked=rows.GroupBy(x=>x.Student).Where(g=>g.All(x=>x.Status is "Normal" or "Absent")).Select(g=>new {Student=g.Key,Gpa=UA.Facade.Rules.Examination.ExamRules.Gpa(g.Select(x=>(x.Credits,x.Points)))}).OrderByDescending(x=>x.Gpa).ThenBy(x=>x.Student).ToArray();await facade.AuditExportAsync("Merit",termId+"/"+batchId);return Document("Semester GPA merit list - batch "+batchId,["Rank","Student ID","Semester GPA"],ranked.Select((r,i)=>new[]{(Array.FindIndex(ranked,x=>x.Gpa==r.Gpa)+1).ToString(),r.Student,r.Gpa.ToString("F2",CultureInfo.InvariantCulture)}),format);}
+    public async Task<IActionResult> Backlog(int termId,int? batchId,string format="print")
+    {var rows=await facade.ReportAsync(termId,batchId);await facade.AuditExportAsync("Failed course shortlist",termId.ToString());return Document("Failed course shortlist",Headers,rows.Where(r=>!r.Replaced&&(r.Grade=="F"||r.Status=="Absent")).Select(ResultCells),format);}
+    public async Task<IActionResult> AdmitCard(int eventId,string format="pdf")
+    {var p=await facade.StudentAsync();var e=p.Seats.Where(x=>x.EventId==eventId).ToArray();if(e.Length==0)throw new BusinessRuleException("No eligible seat allocations for this examination.");await facade.AuditExportAsync("Admit card",p.Student+"/"+eventId);return Document("Admit card - "+p.Student+" / Event "+eventId,["Course","Date","Start","End","Room","Seat"],e.Select(x=>new[]{x.Course,x.Date.ToString("yyyy-MM-dd"),x.Start.ToString(),x.End.ToString(),x.Room,x.Seat}),format);}
+    public async Task<IActionResult> SeatPlan(int id,string format="xlsx"){var e=await facade.EventAsync(id);await facade.AuditExportAsync("Seat plan",id.ToString());return Document("Seat plan - Event "+id,["Student","Course","Date","Start","End","Room","Seat"],e.Seats.Where(x=>!x.ClashConfirmed||x.Makeup).Select(x=>new[]{x.Student,x.Course,x.Date.ToString("yyyy-MM-dd"),x.Start.ToString(),x.End.ToString(),x.Room,x.Seat}),format);}
+    private IActionResult Document(string title,string[] headers,IEnumerable<string[]> rows,string format)
+    {var data=rows.ToArray();return format switch{"xlsx"=>File(workbook.Write(headers,data),"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","examination.xlsx"),"csv"=>File(csv.WriteCsv(headers,data),"text/csv; charset=utf-8","examination.csv"),"pdf"=>File(pdf.Write(title,headers,data),"application/pdf","examination.pdf"),"print"=>View("~/Areas/Academic/Views/Operations/PrintReport.cshtml",new AcademicPrintReport(title,headers,data)),_=>BadRequest()};}
+    private async Task<IActionResult> Run(Func<Task> operation,string target,object route){if(!ModelState.IsValid){TempData["Error"]="Invalid form values.";return RedirectToAction(target,route);}try{await operation();TempData["Message"]="Operation saved.";}catch(BusinessRuleException e){TempData["Error"]=e.Message;}return RedirectToAction(target,route);}
+}

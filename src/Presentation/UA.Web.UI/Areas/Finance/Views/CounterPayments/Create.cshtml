@@ -1,0 +1,8 @@
+@model LedgerDto
+@{ ViewData["Title"]="Counter payment"; }
+<h1>Counter payment</h1><form method="get" class="d-flex gap-2 mb-3"><input name="studentId" value="@Model?.StudentId" class="form-control" maxlength="8" placeholder="Student ID" required /><button class="btn btn-primary">Find</button></form>
+@if(Model is not null){<h2 class="h4">Student @Model.StudentId</h2><p>Balance: BDT @Model.Balance.ToString("F2")</p>
+<form asp-action="Create" method="post"><input type="hidden" name="studentId" value="@Model.StudentId" />
+<p>Select dues or leave all unchecked to allocate oldest first.</p>
+@foreach(var d in Model.Dues.Where(d=>d.Balance>0 && (d.Status=="Unpaid" || d.Status=="Partially paid"))){<div class="form-check"><input type="checkbox" class="form-check-input" name="dueIds" value="@d.Id" id="due-@d.Id" /><label class="form-check-label" for="due-@d.Id">@d.Fee — BDT @d.Balance.ToString("F2") (due @d.Deadline.ToString("yyyy-MM-dd"))</label></div>}
+<label class="form-label mt-3">Amount received (BDT)</label><input name="amount" type="number" step="0.01" min="0.01" max="99999999.99" required class="form-control" /><button class="btn btn-primary mt-3">Record counter payment</button></form>}

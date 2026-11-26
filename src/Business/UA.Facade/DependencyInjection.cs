@@ -1,10 +1,19 @@
 using Microsoft.Extensions.DependencyInjection;
 using UA.DataAccess;
 using UA.Facade.Implementation.Administration;
+using UA.Facade.Implementation.Academic;
 using UA.Facade.Implementation.Website;
+using UA.Facade.Implementation.Student;
+using UA.Facade.Implementation.Faculty;
+using UA.Facade.Interface.Faculty;
+using UA.Facade.Rules.Faculty;
 using UA.Facade.Interface.Administration;
+using UA.Facade.Interface.Academic;
 using UA.Facade.Interface.Website;
+using UA.Facade.Interface.Student;
 using UA.Facade.Rules.Administration;
+using UA.Facade.Rules.Academic;
+using UA.Facade.Rules.Student;
 using UA.Framework.Security;
 using UA.Framework.Time;
 namespace UA.Facade;
@@ -13,6 +22,9 @@ public static class DependencyInjection
     public static IServiceCollection AddUniversityBusiness(this IServiceCollection services, string connectionString)
     {
         services.AddUniversityDataAccess(connectionString);
+        services.AddScoped<UA.Facade.Implementation.Examination.ExaminationFacade>();
+        services.AddScoped<UA.Facade.Interface.Examination.IExaminationFacade>(p=>p.GetRequiredService<UA.Facade.Implementation.Examination.ExaminationFacade>());
+        services.AddScoped<UA.Facade.Interface.Examination.IExamJobProcessor>(p=>p.GetRequiredService<UA.Facade.Implementation.Examination.ExaminationFacade>());
         services.AddSingleton<IClock, DhakaClock>();
         services.AddScoped<ICurrentUser, SystemCurrentUser>(); // Web replaces with HttpCurrentUser
         services.AddSingleton<IPasswordPolicy, PasswordPolicy>();
@@ -29,10 +41,58 @@ public static class DependencyInjection
         services.AddScoped<IImportFacade, ImportFacade>();
         services.AddScoped<IUploadedDocumentFacade, UploadedDocumentFacade>();
         services.AddScoped<INoticeFacade, NoticeFacade>();
+        services.AddScoped<UA.Facade.Interface.Admission.IAdmissionFacade, UA.Facade.Implementation.Admission.AdmissionFacade>();
+        services.AddScoped<IPublicWebsiteFacade, PublicWebsiteFacade>();
+        services.AddScoped<UA.Facade.Interface.Admission.IAdmissionReportJobs, UA.Facade.Implementation.Admission.AdmissionReportJobs>();
+        services.AddScoped<UA.Facade.Interface.Admission.IAdmissionMaintenance, UA.Facade.Implementation.Admission.AdmissionMaintenance>();
+        services.AddScoped<UA.Facade.Interface.Finance.ILateFeeScan, UA.Facade.Implementation.Finance.LateFeeScan>();
+        services.AddScoped<UA.Facade.Interface.Finance.IFeeWaiverFacade, UA.Facade.Implementation.Finance.FeeWaiverFacade>();
         services.AddScoped<IUniversityBootstrapper, UniversityBootstrapper>();
         services.AddScoped<IPlatformOperationsFacade, PlatformOperationsFacade>();
         services.AddScoped<IManualAuditService, ManualAuditService>();
         services.AddScoped<IAcademicRulesFacade, AcademicRulesFacade>();
+        services.AddSingleton<ISectionAllocator, SectionAllocator>();
+        services.AddSingleton<ICalendarDeadlineService, CalendarDeadlineService>();
+        services.AddSingleton<ICurriculumVersionResolver, CurriculumVersionResolver>();
+        services.AddScoped<IDepartmentFacade, DepartmentFacade>();
+        services.AddScoped<ICourseFacade, CourseFacade>();
+        services.AddScoped<ICurriculumFacade, CurriculumFacade>();
+        services.AddScoped<IAcademicCalendarFacade, AcademicCalendarFacade>();
+        services.AddScoped<IBatchFacade, BatchFacade>();
+        services.AddScoped<IRoomFacade, RoomFacade>();
+        services.AddSingleton<IStudentIdGenerator, StudentIdGenerator>();
+        services.AddSingleton<IStudentStatusTransitionPolicy, StudentStatusTransitionPolicy>();
+        services.AddScoped<StudentApprovalGuard>();
+        services.AddScoped<IStudentRecordCreator, StudentRecordCreator>();
+        services.AddScoped<IStudentFacade, StudentFacade>();
+        services.AddScoped<LifecycleFacade>();
+        services.AddScoped<ILifecycleFacade>(p=>p.GetRequiredService<LifecycleFacade>());
+        services.AddScoped<ILifecycleWarningScan>(p=>p.GetRequiredService<LifecycleFacade>());
+        services.AddScoped<IStudentStatusFacade, StudentStatusFacade>();
+        services.AddScoped<ISectionChangeFacade, SectionChangeFacade>();
+        services.AddScoped<IStudentPortalFacade, StudentPortalFacade>();
+        services.AddScoped<IStudentImportFacade, StudentImportFacade>();
+        services.AddScoped<IFacultyFacade, FacultyFacade>();
+        services.AddScoped<IFacultyPortalFacade, FacultyPortalFacade>();
+        services.AddScoped<ITeacherAssignmentFacade, TeacherAssignmentFacade>();
+        services.AddScoped<IMentorFacade, MentorFacade>();
+        services.AddScoped<ITeacherAssignmentGuard, TeacherAssignmentGuard>();
+        services.AddSingleton<IWorkloadCalculator, WorkloadCalculator>();
+        services.AddSingleton<UA.Facade.Rules.Finance.IFeeCalculator, UA.Facade.Rules.Finance.FeeCalculator>();
+        services.AddSingleton<UA.Facade.Rules.Finance.ILateFeePolicy, UA.Facade.Rules.Finance.LateFeePolicy>();
+        services.AddSingleton<UA.Facade.Rules.Finance.IPaymentAllocator, UA.Facade.Rules.Finance.PaymentAllocator>();
+        services.AddSingleton<UA.Facade.Rules.Finance.IReceiptNumberGenerator, UA.Facade.Rules.Finance.ReceiptNumberGenerator>();
+        services.AddScoped<UA.Facade.Implementation.Finance.FinanceFacade>();
+        services.AddScoped<UA.Facade.Interface.Finance.IFeeTypeFacade>(p => p.GetRequiredService<UA.Facade.Implementation.Finance.FinanceFacade>());
+        services.AddScoped<UA.Facade.Interface.Finance.IDueFacade>(p => p.GetRequiredService<UA.Facade.Implementation.Finance.FinanceFacade>());
+        services.AddScoped<UA.Facade.Interface.Finance.IDueGenerator>(p => p.GetRequiredService<UA.Facade.Implementation.Finance.FinanceFacade>());
+        services.AddScoped<UA.Facade.Interface.Finance.IFeeClearanceChecker>(p => p.GetRequiredService<UA.Facade.Implementation.Finance.FinanceFacade>());
+        services.AddScoped<UA.Facade.Interface.Finance.ILedgerFacade>(p => p.GetRequiredService<UA.Facade.Implementation.Finance.FinanceFacade>());
+        services.AddScoped<UA.Facade.Interface.Finance.IPaymentFacade>(p => p.GetRequiredService<UA.Facade.Implementation.Finance.FinanceFacade>());
+        services.AddSingleton<IAttendanceMarkConverter, AttendanceMarkConverter>();
+        services.AddScoped<AcademicOperationsFacade>();
+        services.AddScoped<IAcademicOperationsFacade>(p => p.GetRequiredService<AcademicOperationsFacade>());
+        services.AddScoped<IRegistrationJobProcessor>(p => p.GetRequiredService<AcademicOperationsFacade>());
         return services;
     }
 }

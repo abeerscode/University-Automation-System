@@ -1,15 +1,66 @@
 @model UA.Framework.Common.PagedResult<FacultySummaryDto>
-@{ ViewData["Title"] = "Faculty members"; var filter = (FacultySearchInput)ViewBag.Filter; }
-<div class="d-flex justify-content-between align-items-center mb-3"><h1>Faculty members</h1>
-<a asp-action="Create" class="btn btn-primary">New faculty profile</a></div>
+@{
+    ViewData["Title"] = "Faculty members"; var filter = (FacultySearchInput)ViewBag.Filter;
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Faculty members</h1>
+    <a asp-action="Create" class="btn btn-primary">New faculty profile</a>
+</div>
 <form method="get" class="row g-2 mb-3" aria-label="Faculty filters">
-<div class="col-md-4"><input class="form-control" name="query" value="@filter.Query" placeholder="Name or employee reference" /></div>
-<div class="col-md-2"><input type="number" min="1" name="departmentId" value="@filter.DepartmentId" class="form-control" placeholder="Department ID" /></div>
-<div class="col-md-2"><select name="type" class="form-select"><option value="">All types</option><option value="Full-time">Full-time</option><option value="Part-time">Part-time</option><option value="Guest">Guest</option></select></div>
-<div class="col-md-2"><select name="status" class="form-select"><option value="">All statuses</option><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Left">Left</option></select></div>
-<div class="col-md-2"><button class="btn btn-outline-primary w-100">Search</button></div></form>
-<table class="table table-striped table-responsive"><thead><tr><th>Employee ref</th><th>Name</th><th>Department</th><th>Designation</th><th>Type</th><th>Status</th><th></th></tr></thead><tbody>
-@foreach(var x in Model.Items){<tr><td>@x.EmployeeRef</td><td>@x.FullName</td><td>@x.Department</td><td>@x.Designation</td><td>@x.Type</td><td>@x.Status</td><td><a asp-action="Details" asp-route-id="@x.Id">Details</a></td></tr>}
-</tbody></table><p class="text-muted">@Model.Total record(s). Page @Model.Page.</p>
-@if(Model.Page>1){<a asp-action="Index" asp-route-query="@filter.Query" asp-route-departmentId="@filter.DepartmentId" asp-route-page="@(Model.Page-1)" class="btn btn-sm btn-outline-secondary">Previous</a>}
-@if (Model.Page * Model.PageSize < Model.Total){<a asp-action="Index" asp-route-query="@filter.Query" asp-route-departmentId="@filter.DepartmentId" asp-route-page="@(Model.Page+1)" class="btn btn-sm btn-outline-secondary">Next</a>}
+    <div class="col-md-4"><input class="form-control" name="query" value="@filter.Query"
+                                     placeholder="Name or employee reference" /></div>
+        <div class="col-md-2"><input type="number" min="1" name="departmentId" value="@filter.DepartmentId"
+                                         class="form-control" placeholder="Department ID" /></div>
+            <div class="col-md-2"><select name="type" class="form-select">
+                <option value="">All types</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Guest">Guest</option>
+            </select></div>
+            <div class="col-md-2"><select name="status" class="form-select">
+                <option value="">All statuses</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Left">Left</option>
+            </select></div>
+            <div class="col-md-2"><button class="btn btn-outline-primary w-100">Search</button></div>
+        </form>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Employee ref</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model.Items)
+                {
+                    <tr>
+                        <td>@x.EmployeeRef</td>
+                        <td>@x.FullName</td>
+                        <td>@x.Department</td>
+                        <td>@x.Designation</td>
+                        <td>@x.Type</td>
+                        <td>@x.Status</td>
+                        <td><a asp-action="Details" asp-route-id="@x.Id">Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p class="text-muted">@Model.Total record(s). Page @Model.Page.</p>
+        @if (Model.Page > 1)
+        {
+            <a asp-action="Index" asp-route-query="@filter.Query" asp-route-departmentId="@filter.DepartmentId"
+               asp-route-page="@(Model.Page-1)" class="btn btn-sm btn-outline-secondary">Previous</a>
+        }
+        @if (Model.Page * Model.PageSize < Model.Total)
+        {
+            <a asp-action="Index" asp-route-query="@filter.Query"
+               asp-route-departmentId="@filter.DepartmentId" asp-route-page="@(Model.Page+1)"
+               class="btn btn-sm btn-outline-secondary">Next</a>
+        }

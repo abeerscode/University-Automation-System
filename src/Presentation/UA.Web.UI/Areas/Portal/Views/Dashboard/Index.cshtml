@@ -7,4 +7,5 @@
 <a asp-area="Portal" asp-controller="Profile" asp-action="Index">View my profile</a></div></div></div>
 <div class="col-md-6"><div class="card"><div class="card-body"><h2 class="h5">University notifications</h2>
 <p>Notices and messages from the existing notification service.</p><a asp-area="" asp-controller="Notifications" asp-action="Index">Open inbox</a></div></div></div></div>
-<p class="text-muted">Courses, attendance, examinations, results, CGPA and finance appear here when their corresponding later phases are implemented.</p>
+<div class="card mb-3"><div class="card-body"><h2 class="h5">My finances</h2><p>View your dues, payment history and receipts.</p><a asp-area="Portal" asp-controller="Finance" asp-action="Index">Open my finances</a></div></div>
+<div class="card mb-3"><div class="card-body"><h2 class="h5">My academic courses</h2><a asp-controller="AcademicCourses" asp-action="Index">Courses, registration, routine and attendance</a></div></div><p class="text-muted">Examinations, results and CGPA follow in later phases.</p>

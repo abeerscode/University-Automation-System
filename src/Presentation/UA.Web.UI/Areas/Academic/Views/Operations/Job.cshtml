@@ -1,0 +1,15 @@
+@model RegistrationJobRow
+@{ViewData["Title"]="Registration job";}
+<h1>Registration job #@Model.Id</h1>
+<p>Status: <strong>@Model.Status</strong></p>
+@if(Model.Status=="Queued" || Model.Status=="Running"){
+    <p>The API background worker processes the batch atomically. The current stage is not a student-level completion percentage.</p>
+    <a class="btn btn-outline-primary" asp-action="Job" asp-route-id="@Model.Id">Refresh status</a>
+}
+@if(Model.Status=="Failed"){
+    <p>Registration did not complete. Correct the underlying issue before retrying.</p>
+    <p>@Model.FailureReason</p>
+    <a class="btn btn-outline-primary" asp-action="RegistrationError" asp-route-id="@Model.Id">Download failure summary (CSV)</a>
+}
+@if(Model.Status=="Completed"){<p>Enrollment and semester dues processing completed. Return to academic operations to confirm the batch.</p>}
+<p class="mt-3"><a asp-action="Index" asp-route-batchId="@Model.BatchId" asp-route-termId="@Model.TermId">Back to academic operations</a> | <a asp-action="RegistrationJobs" asp-route-batchId="@Model.BatchId">Batch registration jobs</a></p>

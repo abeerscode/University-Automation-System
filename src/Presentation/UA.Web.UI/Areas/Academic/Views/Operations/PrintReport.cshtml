@@ -1,0 +1,7 @@
+@model AcademicPrintReport
+@{Layout=null;}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><title>Academic report — @Model.Title</title>
+<style>body{font-family:system-ui,sans-serif;margin:24px;color:#111}table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #999;padding:5px;text-align:left;overflow-wrap:anywhere}thead{display:table-header-group}tr{break-inside:avoid}@@media print{.no-print{display:none}body{margin:0}}@@page{size:A4 landscape;margin:12mm}</style></head>
+<body><p class="no-print">Use your browser's Print command (Ctrl+P or Command+P), then choose Save as PDF.</p><h1>University Automation System</h1><h2>Academic report — @Model.Title</h2>
+<table><thead><tr>@foreach(var h in Model.Headers){<th>@h</th>}</tr></thead><tbody>@foreach(var row in Model.Rows){<tr>@foreach(var v in row){<td>@v</td>}</tr>}</tbody></table></body></html>

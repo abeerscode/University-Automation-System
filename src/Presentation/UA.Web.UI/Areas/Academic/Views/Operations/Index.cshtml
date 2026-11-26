@@ -1,0 +1,21 @@
+@model OperationsPage
+@{ ViewData["Title"] = "Academic operations"; }
+<h1>Academic operations</h1>
+<p>Generate curriculum offerings, assign teachers, register students, and confirm registration.</p>
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-4"><label for="termId">Term filter</label><select id="termId" name="termId" class="form-select"><option value="">All terms</option>@foreach(var t in Model.Terms){<option value="@t.Id">@t.Label</option>}</select></div>
+    <div class="col-md-4"><label for="batchId">Batch filter</label><select id="batchId" name="batchId" class="form-select"><option value="">All batches</option>@foreach(var b in Model.Batches){<option value="@b.Id">@b.Label</option>}</select></div><div class="col-md-2 align-self-end"><button class="btn btn-outline-primary">Filter</button></div>
+</form>
+@foreach(var b in Model.Batches){
+<div class="card mb-3"><div class="card-body"><h2 class="h5">@b.Label</h2>
+<a asp-action="Sections" asp-route-batchId="@b.Id">Section lists and credit progress</a>
+@if(b.CanRegister){<p><a asp-action="RegistrationJobs" asp-route-batchId="@b.Id">Registration jobs and status</a></p>}
+@if(b.CanGenerate || b.CanRegister){<form method="post" class="row g-2 mt-2">@Html.AntiForgeryToken()<input type="hidden" name="batchId" value="@b.Id"/><div class="col-md-4"><label>Term</label><select name="termId" class="form-select" required><option value="">Select term</option>@foreach(var t in Model.Terms){<option value="@t.Id">@t.Label</option>}</select></div><div class="col-md-8 align-self-end">
+@if(b.CanGenerate){<button class="btn btn-primary" asp-action="Generate">Generate offerings</button>}
+@if(b.CanRegister){<button class="btn btn-outline-primary" asp-action="Register">Queue / retry registration</button> <button class="btn btn-outline-success" asp-action="Confirm">Bulk confirm</button>}
+</div></form>}
+</div></div>}
+<h2 class="h4">Offerings</h2><div class="table-responsive"><table class="table table-striped"><thead><tr><th>Term</th><th>Batch</th><th>Course</th><th>Section</th><th>Semester</th><th>Status</th><th></th></tr></thead><tbody>
+@foreach(var o in Model.Offerings){<tr><td>@(Model.Terms.FirstOrDefault(t=>t.Id==o.TermId)?.Label)</td><td>@(Model.Batches.FirstOrDefault(b=>b.Id==o.BatchId)?.Label)</td><td>@o.Course</td><td>@o.Section</td><td>@o.Semester</td><td>@o.Status</td><td><a asp-action="Details" asp-route-id="@o.Id">Manage / view</a></td></tr>}
+</tbody></table></div>
+@if(Model.Offerings.Count==0){<p>No offerings yet. Generate them from an approved batch curriculum.</p>}

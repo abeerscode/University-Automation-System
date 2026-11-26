@@ -1,0 +1,10 @@
+@model UA.Facade.DTO.Academic.OfferingDetail
+@{ViewData["Title"]="Class list and attendance";}
+<a asp-controller="FacultyCourses" asp-action="Index">Back to my courses</a><h1>@Model.Offering.Course</h1><p>Section @Model.Offering.Section · @Model.Offering.Status</p>
+<h2 class="h4">Class routine</h2><table class="table"><thead><tr><th>Day (Monday=1)</th><th>Room</th><th>Time</th></tr></thead><tbody>@foreach(var r in Model.Routine){<tr><td>@r.Day</td><td>@r.Room</td><td>@r.Start.ToString(@"hh\:mm") – @r.End.ToString(@"hh\:mm")</td></tr>}</tbody></table>
+<h2 class="h4">Regular class list</h2><p>Only confirmed regular enrollments can receive attendance. Select present students; all unchecked confirmed students are recorded absent. To correct a session, resubmit the complete list before the lock date.</p>
+<form asp-action="Session" method="get"><input type="hidden" name="id" value="@Model.Offering.Id"/>
+<div class="row g-2 mb-3"><div class="col-md-6"><label>Routine slot</label><select name="routineId" class="form-select" required><option value="">Choose slot</option>@foreach(var r in Model.Routine){<option value="@r.Id">Day @r.Day · @r.Room · @r.Start</option>}</select></div><div class="col-md-4"><label>Class date</label><input name="date" type="date" class="form-control" required/></div><div class="col-md-2 align-self-end"><button class="btn btn-primary">Load session</button></div></div></form>
+<table class="table"><thead><tr><th>Student ID</th><th>Name</th><th>Registration</th><th>Present / classes</th><th>Attendance</th></tr></thead><tbody>
+@foreach(var s in Model.Students){<tr><td>@s.StudentId</td><td>@s.Name</td><td>@s.Status</td><td>@s.Present / @s.Classes</td><td>@(s.Percent?.ToString("F2")??"—") @(s.Shortage?"% — shortage":"")</td></tr>}
+</tbody></table>

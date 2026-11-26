@@ -1,0 +1,11 @@
+@model UA.Facade.DTO.Academic.AttendanceSession
+@{ViewData["Title"]="Attendance session";}
+<a asp-action="Teaching" asp-route-id="@Model.Detail.Offering.Id">Back to class list</a>
+<h1>@Model.Detail.Offering.Course — attendance</h1><p>@Model.Date.ToString("yyyy-MM-dd") · Slot @Model.RoutineId</p>
+@if(Model.HasRecords){<p class="alert alert-info">Existing attendance is loaded. Make any necessary corrections before saving.</p>}else{<p>New session: select all students who are present. Unchecked students are recorded absent.</p>}
+<form asp-action="Attendance" method="post"><input type="hidden" name="id" value="@Model.Detail.Offering.Id"/><input type="hidden" name="routineId" value="@Model.RoutineId"/><input type="hidden" name="date" value="@Model.Date.ToString("yyyy-MM-dd")"/>
+<table class="table"><thead><tr><th>Present</th><th>ID</th><th>Name</th></tr></thead><tbody>
+@foreach(var s in Model.Detail.Students.Where(s=>s.Status=="Confirmed")){<tr><td><input type="hidden" name="enrollmentIds" value="@s.Id"/><input type="checkbox" name="presentIds" value="@s.Id" checked="@(Model.PresentIds.Contains(s.Id)?"checked":null)" aria-label="Present: @s.StudentId"/></td><td>@s.StudentId</td><td>@s.Name</td></tr>}
+</tbody></table>
+@if(Model.Detail.Offering.Status=="Active" && Model.Detail.Students.Any(s=>s.Status=="Confirmed")){<button class="btn btn-primary">Save complete attendance</button>}
+</form>

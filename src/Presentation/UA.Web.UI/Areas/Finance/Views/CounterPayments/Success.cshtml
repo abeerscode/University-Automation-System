@@ -1,0 +1,5 @@
+@model ReceiptDto
+@{ ViewData["Title"]="Payment recorded"; }
+<h1>Payment recorded</h1><p>Receipt: @Model.Number</p><p>Student: @Model.StudentId</p><p>Received: BDT @Model.Amount.ToString("F2")</p><ul>@foreach(var a in Model.Allocations){<li>@a</li>}</ul>
+<a class="btn btn-primary" asp-controller="Payments" asp-action="Receipt" asp-route-id="@ViewBag.PaymentId">Download PDF receipt</a>
+<a asp-controller="Ledger" asp-action="Index" asp-route-studentId="@Model.StudentId" class="btn btn-outline-secondary">View ledger</a>

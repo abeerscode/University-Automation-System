@@ -1865,6 +1865,10 @@ namespace UA.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("course_id");
 
+                    b.Property<bool>("IsSpecialRetake")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_special_retake");
+
                     b.Property<int>("SectionId")
                         .HasColumnType("int")
                         .HasColumnName("section_id");
@@ -1891,7 +1895,7 @@ namespace UA.DataAccess.Migrations
 
                     b.HasIndex("SectionId");
 
-                    b.HasIndex(new[] { "TermId", "SectionId", "CourseId" }, "UQ_Offering_term_id_section_id_course_id")
+                    b.HasIndex(new[] { "TermId", "SectionId", "CourseId", "IsSpecialRetake" }, "UQ_Offering_term_id_section_id_course_id")
                         .IsUnique();
 
                     b.ToTable("Offering");
@@ -2347,7 +2351,8 @@ namespace UA.DataAccess.Migrations
                     b.HasIndex("TargetBatchId");
 
                     b.HasIndex(new[] { "StudentId" }, "UQ_Semester_Drop_student_id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[status] <> N'Rejected'");
 
                     b.ToTable("Semester_Drop");
                 });

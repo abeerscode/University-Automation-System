@@ -1,0 +1,9 @@
+@model IReadOnlyList<RegistrationJobListRow>
+@{ViewData["Title"]="Registration jobs";}
+<h1>Registration jobs</h1>
+<p>Automatic registration runs during an open registration window when all required offerings exist. Failed jobs can be retried manually after the cause is corrected.</p>
+<a asp-action="RegistrationJobs" asp-route-batchId="@ViewBag.BatchId">Refresh</a>
+<table class="table"><thead><tr><th>Job</th><th>Type / batch / term</th><th>Created</th><th>Status</th><th>Failure summary</th></tr></thead><tbody>
+@foreach(var j in Model){<tr><td><a asp-action="Job" asp-route-id="@j.Id">@j.Id</a></td><td>@j.Type</td><td>@j.Created.ToString("yyyy-MM-dd HH:mm")</td><td>@j.Status</td><td>@if(j.Status=="Failed"){<a asp-action="RegistrationError" asp-route-id="@j.Id">Download CSV</a>}</td></tr>}
+</tbody></table>
+<a asp-action="Index" asp-route-batchId="@ViewBag.BatchId">Back</a>

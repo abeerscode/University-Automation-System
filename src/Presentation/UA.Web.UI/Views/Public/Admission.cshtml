@@ -1,0 +1,6 @@
+@inject UA.Framework.Time.IClock Clock
+@model IReadOnlyList<UA.Facade.DTO.Admission.CircularRow>
+@{ViewData["Title"]="Admission";}
+<h1>Admission</h1><p>Published circulars, dates and seat availability. Online payments are not enabled yet.</p><a class="btn btn-primary mb-3" asp-area="Admission" asp-controller="Applicant" asp-action="Register">Create applicant account</a> <a class="btn btn-outline-primary mb-3" asp-area="Admission" asp-controller="Applicant" asp-action="Index">Applicant portal</a>
+@if(Model.Count==0){<p>No circular has been published.</p>}
+@foreach(var c in Model){<article class="public-card mb-3"><h2>Intake @c.Year</h2><p>@c.Status</p><dl><dt>Application window</dt><dd>@c.Open.ToString("D") – @c.Close.ToString("D")</dd><dt>Test</dt><dd>@c.Test.ToString("D") · @c.Venue</dd><dt>Result date</dt><dd>@c.Result.ToString("D")</dd><dt>Enrollment deadline</dt><dd>@c.Deadline.ToString("D")</dd></dl><ul>@foreach(var s in c.Seats){<li>@s.Department: @s.Seats seats</li>}</ul>@if(c.Status=="Published"&&Clock.Today>=c.Open&&Clock.Today<=c.Close){<a class="btn btn-primary" asp-area="Admission" asp-controller="Applicant" asp-action="Apply" asp-route-id="@c.Id">Apply</a>}</article>}

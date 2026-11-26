@@ -155,6 +155,7 @@ public sealed class UniversityDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<SemesterDrop>().HasIndex(x=>x.StudentId,"UQ_Semester_Drop_student_id").IsUnique().HasFilter("[status] <> N'Rejected'");
 
         ConfigureRelationships(modelBuilder);
         ConfigureIntegrityConstraints(modelBuilder);

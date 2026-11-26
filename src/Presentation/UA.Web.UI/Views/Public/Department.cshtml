@@ -1,0 +1,3 @@
+@model UA.Facade.DTO.Website.PublicDepartment
+@{ViewData["Title"]=Model.Name;var pages=(UA.Facade.DTO.Website.PublicPage[])ViewBag.Pages;}
+<h1>@Model.Name</h1><article class="public-card"><h2>Academic program</h2><p>@Model.Program</p><p>Credits: @Model.Credits · Semesters: @Model.Semesters</p></article>@foreach(var p in pages){<article class="public-card mt-3"><h2>@p.Title</h2><div class="table-responsive">@Html.Raw(UA.Facade.Rules.Website.PublicContent.Render(p.Content))</div></article>}

@@ -3,7 +3,7 @@ namespace UA.Entities;
 /// <summary>Course offered to a batch and section in a term.</summary>
 /// <remarks>Requirements: FR-ACA-06, BR-06</remarks>
 [Table("Offering")]
-[Index(nameof(TermId), nameof(SectionId), nameof(CourseId), IsUnique = true, Name = "UQ_Offering_term_id_section_id_course_id")]
+[Index(nameof(TermId), nameof(SectionId), nameof(CourseId), nameof(IsSpecialRetake), IsUnique = true, Name = "UQ_Offering_term_id_section_id_course_id")]
 public class Offering
 {
     /// <summary>Offering identifier</summary>
@@ -35,6 +35,9 @@ public class Offering
     [Required, MaxLength(15)]
     [Column("status")]
     public string Status { get; set; } = string.Empty;
+
+    [Column("is_special_retake")]
+    public bool IsSpecialRetake { get; set; }
 
     // Navigation
     [ForeignKey(nameof(TermId))]

@@ -28,6 +28,7 @@ builder.Services.AddUniversityBusiness(universityConnectionString);
 builder.Services.AddUniversityIntegration();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
+builder.Services.AddOutputCache();
 builder.Services.AddScoped<ICurrentUser, HttpCurrentUser>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o =>
@@ -56,6 +57,9 @@ builder.Services.AddScoped<IAuthorizationHandler, PermissionHandler>();
 builder.Services.AddRateLimiter(o =>
 {
     o.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    o.AddPolicy("public-result", context => RateLimitPartition.GetFixedWindowLimiter(
+        context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
+        { PermitLimit = 5, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
     o.AddPolicy("auth", context => RateLimitPartition.GetFixedWindowLimiter(
         context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
         { PermitLimit = 10, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
@@ -69,6 +73,7 @@ app.UseRouting();
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseOutputCache();
 app.MapControllerRoute("areas", "{area:exists}/{controller=Users}/{action=Index}/{id?}");
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 if (builder.Configuration.GetValue<bool>("Uas:SeedOnStartup"))

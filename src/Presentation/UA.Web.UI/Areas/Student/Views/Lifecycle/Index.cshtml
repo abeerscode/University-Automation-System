@@ -1,0 +1,6 @@
+@model LifecycleRow[]
+@inject UA.Framework.Time.IClock Clock
+@{ViewData["Title"]="Student lifecycle";}
+<h1>Student lifecycle</h1><p class="text-muted">Retake backlog, semester drop, junior batch rejoin, seven-year limit and graduation.</p>
+<p><a asp-action="Shortlist" class="btn btn-outline-primary">Retake shortlist</a> <a asp-action="GraduationList" asp-route-format="print" class="btn btn-outline-secondary">Graduation list / PDF</a> <a asp-action="GraduationList" asp-route-format="csv" class="btn btn-outline-secondary">CSV</a></p>
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th>Student</th><th>Status</th><th>Drop / rejoin</th><th>Seven-year limit</th><th></th></tr></thead><tbody>@foreach(var s in Model.OrderByDescending(x=>Clock.Today>x.Limit).ThenBy(x=>x.StudentId)){<tr><td>@s.StudentId<br/>@s.Name</td><td>@s.Status</td><td>@s.DropStatus @if(s.DropSemester.HasValue){<span> · Semester @s.DropSemester</span>}</td><td>@s.Limit.ToString("yyyy-MM-dd") @if(Clock.Today>s.Limit && s.Status is not ("Graduated" or "Alumni")){<span class="badge bg-danger">Limit reached</span>}else if(Clock.Today.Year==s.Limit.Year && s.Status is not ("Graduated" or "Alumni")){<span class="badge bg-warning text-dark">Final year</span>}</td><td><a asp-action="Details" asp-route-id="@s.StudentId">Open</a></td></tr>}</tbody></table></div>

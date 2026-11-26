@@ -1,0 +1,5 @@
+@model IReadOnlyList<SectionStudent>
+@{ViewData["Title"]="Section lists and credit progress";}
+<h1>Section lists and credit progress</h1><p>Earned credits are based on published passing results; result processing is Phase 7.</p><a asp-action="ExportSections" asp-route-batchId="@ViewBag.BatchId">Export CSV</a> · <a asp-action="ExportSections" asp-route-batchId="@ViewBag.BatchId" asp-route-format="xlsx">Export Excel</a> · <a asp-action="ExportSections" asp-route-batchId="@ViewBag.BatchId" asp-route-format="print">Print / save PDF</a>
+@foreach(var g in Model.GroupBy(s=>s.Section)){<h2 class="h5 mt-3">Section @g.Key</h2><table class="table"><thead><tr><th>Student ID</th><th>Name</th><th>Status</th><th>Earned credits</th></tr></thead><tbody>@foreach(var s in g){<tr><td>@s.StudentId</td><td>@s.Name</td><td>@s.Status</td><td>@s.EarnedCredits</td></tr>}</tbody></table>}
+<a asp-action="Index">Back</a>

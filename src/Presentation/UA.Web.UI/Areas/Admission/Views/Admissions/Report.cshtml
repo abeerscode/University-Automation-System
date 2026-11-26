@@ -1,0 +1,4 @@
+@model UA.Facade.DTO.Administration.JobDto
+@{ViewData["Title"]="Admission report job";}
+<h1>Admission report</h1><p>Job @Model.Id. Keep the API background worker running. Completed reports expire after 24 hours.</p>
+<div id="admission-report-job" data-status-url="@Url.Action("ReportStatus",new{id=Model.Id})" class="card card-body"><p id="report-state">@Model.Status</p><progress id="report-progress" max="100" value="@Model.Progress"></progress><p id="report-failure" hidden="@(Model.Status!="Failed")">Report failed. Check the API log using the job ID and request a new report.</p><a id="report-download" asp-action="DownloadReport" asp-route-id="@Model.Id" hidden="@(Model.Status!="Completed")" class="btn btn-primary mt-2">Download report</a></div><a asp-action="Index">Return to circulars</a><script src="~/js/admission-report.js" asp-append-version="true" defer></script>

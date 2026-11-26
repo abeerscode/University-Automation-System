@@ -2,6 +2,9 @@
 @inject UA.Facade.Interface.Administration.IUserAccessFacade Access
 @{
     var userId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int parsed) ? parsed : 0;
+    var admissionStaff = userId > 0 && await Access.AllowedAsync(userId, "circulars.manage");
+    var applicant = userId > 0 && (await Access.ForUserAsync(userId)).Assignments.Any(x=>x.RoleName == UA.Framework.Constants.RoleNames.Applicant);
+    var cms = userId > 0 && (await Access.AllowedAsync(userId,"pages.edit") || await Access.AllowedAsync(userId,"pages.approve") || await Access.AllowedAsync(userId,"departmentpage.edit"));
     var admin = userId > 0 && await Access.AllowedAsync(userId, "users.view");
     var audit = userId > 0 && await Access.AllowedAsync(userId, "audit.view");
     var approval = userId > 0 && await Access.AllowedAsync(userId, "approvals.record");
@@ -19,45 +22,858 @@
     var facultyRecords = userId > 0 && await Access.AllowedAsync(userId, "faculty.view");
     var facultyMentors = userId > 0 && await Access.AllowedAsync(userId, "mentors.manage");
     var facultyWorkload = userId > 0 && await Access.AllowedAsync(userId, "workload.view");
+    var feeRates = userId > 0 && await Access.AllowedAsync(userId, "fees.manage");
+    var dueList = userId > 0 && await Access.AllowedAsync(userId, "dues.view");
+    var ledger = userId > 0 && await Access.AllowedAsync(userId, "ledger.view");
+    var counter = userId > 0 && await Access.AllowedAsync(userId, "payments.record");
     var isFaculty = userId > 0 && (await Access.ForUserAsync(userId)).Assignments.Any(x =>
         x.RoleName is UA.Framework.Constants.RoleNames.Faculty or UA.Framework.Constants.RoleNames.GuestFaculty);
-    var isStudent = userId > 0 && (await Access.ForUserAsync(userId)).Assignments.Any(x => x.RoleName == UA.Framework.Constants.RoleNames.Student);
+    var isStudent = userId > 0 && (await Access.ForUserAsync(userId)).Assignments.Any(x => x.RoleName ==
+UA.Framework.Constants.RoleNames.Student);
 }
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@ViewData["Title"] | UAS</title><link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /></head>
-<body><header class="navbar navbar-expand-lg navbar-dark app-nav"><div class="container-fluid">
-<a class="navbar-brand" asp-controller="Home" asp-area="" asp-action="Index">UAS <small>Administration</small></a>
-<nav class="navbar-nav flex-row flex-wrap gap-3">
-@if(admin){<a class="nav-link" asp-area="Administration" asp-controller="Users" asp-action="Index">Users</a><a class="nav-link" asp-area="Administration" asp-controller="Roles" asp-action="Index">Roles</a>}
-@if(approval){<a class="nav-link" asp-area="Administration" asp-controller="Approvals" asp-action="Index">Approvals</a>}
-@if(audit){<a class="nav-link" asp-area="Administration" asp-controller="Audit" asp-action="Index">Audit</a>}
-@if(config){<a class="nav-link" asp-area="Administration" asp-controller="ConfigParameters" asp-action="Index">Configuration</a>}
-@if(notice){<a class="nav-link" asp-area="Website" asp-controller="Notices" asp-action="Index">Notices</a>}
-@if(import){<a class="nav-link" asp-area="Administration" asp-controller="DataImport" asp-action="Index">Import validation</a><a class="nav-link" asp-area="Administration" asp-controller="StudentImports" asp-action="Index">Student import</a>}
-@if(config){<a class="nav-link" asp-area="Administration" asp-controller="GradeScales" asp-action="Index">Grades</a><a class="nav-link" asp-area="Administration" asp-controller="MarkSchemes" asp-action="Index">Marks</a><a class="nav-link" asp-area="Administration" asp-controller="AttendanceScales" asp-action="Index">Attendance rules</a>}
-@if(templates){<a class="nav-link" asp-area="Administration" asp-controller="NotificationTemplates" asp-action="Index">Templates</a>}
-@if(depts){<a class="nav-link" asp-area="Academic" asp-controller="Departments" asp-action="Index">Departments</a>}
-@if(courses){<a class="nav-link" asp-area="Academic" asp-controller="Courses" asp-action="Index">Courses</a>}
-@if(curriculum){<a class="nav-link" asp-area="Academic" asp-controller="Curriculum" asp-action="Index">Curriculum</a>}
-@if(calendar){<a class="nav-link" asp-area="Academic" asp-controller="AcademicCalendar" asp-action="Index">Calendar</a>}
-@if(batches){<a class="nav-link" asp-area="Academic" asp-controller="Batches" asp-action="Index">Batches</a>}
-@if(studentRecords){<a class="nav-link" asp-area="Student" asp-controller="Students" asp-action="Index">Students</a>}
-@if(facultyRecords){<a class="nav-link" asp-area="Faculty" asp-controller="FacultyMembers" asp-action="Index">Faculty</a>}
-@if(facultyMentors){<a class="nav-link" asp-area="Faculty" asp-controller="Mentors" asp-action="Index">Mentors</a>}
-@if(facultyWorkload){<a class="nav-link" asp-area="Faculty" asp-controller="Workload" asp-action="Index">Workload</a>}
-@if(isFaculty){<a class="nav-link" asp-area="Portal" asp-controller="FacultyDashboard" asp-action="Index">Faculty portal</a>}
-@if(isStudent){<a class="nav-link" asp-area="Portal" asp-controller="Dashboard" asp-action="Index">My Portal</a>}
-@if(rooms){<a class="nav-link" asp-area="Academic" asp-controller="Rooms" asp-action="Index">Rooms</a>}
-@if(userId > 0){<a class="nav-link" asp-area="" asp-controller="Notifications" asp-action="Index">Inbox</a><a class="nav-link" asp-area="" asp-controller="Jobs" asp-action="Index">Jobs</a>}
-</nav><div class="ms-auto d-flex gap-2 align-items-center text-white small">
-@if(userId > 0){ <span>@User.Identity?.Name</span><a class="btn btn-sm btn-outline-light" asp-area="" asp-controller="Account" asp-action="ChangePassword">Password</a>
-<form method="post" asp-area="" asp-controller="Account" asp-action="Logout"><button class="btn btn-sm btn-light">Sign out</button></form> }
-else{<a class="btn btn-sm btn-light" asp-area="" asp-controller="Account" asp-action="Login">Sign in</a>}
-</div></div></header>
-<main class="container main-content">@if(TempData["Message"] is string message){<div class="alert alert-success">@message</div>}
-@if(TempData["Error"] is string error){<div class="alert alert-danger">@error</div>}
-@RenderBody()</main><footer class="border-top container py-3 text-muted"><small>University Automation System · Phase 4</small></footer>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/form-guard.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)</body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | UAS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+            @@media print { .app-sidebar,.sb-topbar,.guest-bar,footer,.no-print {display:none!important} .app-content {margin:0!important} .main-content {padding:0!important} .table-responsive {overflow:visible!important} }
+
+            :root {
+                --sb-width: 264px;
+                --sb-bg: #f3f4f6;
+                --sb-ink: #1c1f26;
+                --sb-muted: #6b7280;
+                --sb-dark: #15171c;
+                --sb-line: #e3e5e9;
+                --sb-hover: #e8eaee;
+            }
+
+            body {
+                background: #fff;
+            }
+
+            /* ---------- shell ---------- */
+            .app-shell {
+                display: flex;
+                min-height: 100vh;
+            }
+
+            .app-sidebar {
+                position: fixed;
+                inset: 0 auto 0 0;
+                width: var(--sb-width);
+                background: var(--sb-bg);
+                border-right: 1px solid var(--sb-line);
+                display: flex;
+                flex-direction: column;
+                z-index: 1040;
+                font-size: .925rem;
+                color: var(--sb-ink);
+            }
+
+            .app-content {
+                flex: 1;
+                min-width: 0;
+                margin-left: var(--sb-width);
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .app-content>main {
+                flex: 1;
+            }
+
+            /* ---------- brand ---------- */
+            .sb-brand {
+                padding: 1.1rem 1.25rem .9rem;
+                flex: none;
+            }
+
+            .sb-brand a {
+                color: var(--sb-ink);
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 1.15rem;
+                letter-spacing: .01em;
+            }
+
+            .sb-brand small {
+                font-weight: 400;
+                color: var(--sb-muted);
+                font-size: .8rem;
+                margin-left: .25rem;
+            }
+
+            /* ---------- scrolling nav ---------- */
+            .sb-nav {
+                flex: 1;
+                overflow-y: auto;
+                padding: .25rem .75rem 1rem;
+            }
+
+            .sb-nav::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .sb-nav::-webkit-scrollbar-thumb {
+                background: #cfd2d8;
+                border-radius: 3px;
+            }
+
+            .sb-module {
+                margin-bottom: .2rem;
+            }
+
+            .sb-toggle {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: .65rem;
+                padding: .6rem .75rem;
+                border: 0;
+                background: transparent;
+                color: var(--sb-ink);
+                border-radius: 999px;
+                font-weight: 500;
+                text-align: left;
+                cursor: pointer;
+                transition: background .15s, color .15s;
+            }
+
+            .sb-toggle:hover {
+                background: var(--sb-hover);
+            }
+
+            .sb-toggle:focus-visible,
+            .sub-link:focus-visible,
+            .sb-foot a:focus-visible,
+            .sb-foot button:focus-visible {
+                outline: 2px solid #4f6bed;
+                outline-offset: 2px;
+            }
+
+            .sb-toggle .label {
+                flex: 1;
+            }
+
+            .sb-toggle .ico {
+                width: 18px;
+                height: 18px;
+                flex: none;
+            }
+
+            .sb-toggle .pm {
+                width: 14px;
+                height: 14px;
+                flex: none;
+                position: relative;
+            }
+
+            .sb-toggle .pm::before,
+            .sb-toggle .pm::after {
+                content: "";
+                position: absolute;
+                background: currentColor;
+                border-radius: 1px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .sb-toggle .pm::before {
+                width: 12px;
+                height: 1.6px;
+            }
+
+            .sb-toggle .pm::after {
+                width: 1.6px;
+                height: 12px;
+                transition: transform .15s, opacity .15s;
+            }
+
+            .sb-toggle[aria-expanded="true"] {
+                background: var(--sb-dark);
+                color: #fff;
+            }
+
+            .sb-toggle[aria-expanded="true"] .pm::after {
+                transform: translate(-50%, -50%) scaleY(0);
+                opacity: 0;
+            }
+
+            /* ---------- sub menu ---------- */
+            .sub-list {
+                position: relative;
+                margin: .3rem 0 .4rem 1.35rem;
+                padding-left: .85rem;
+                border-left: 1px solid #d6d9df;
+                display: flex;
+                flex-direction: column;
+                gap: .15rem;
+            }
+
+            .sub-link {
+                display: flex;
+                align-items: center;
+                gap: .6rem;
+                padding: .5rem .75rem;
+                border-radius: 999px;
+                color: #3a3f4a;
+                text-decoration: none;
+                transition: background .15s, color .15s, box-shadow .15s;
+            }
+
+            .sub-link .ico {
+                width: 16px;
+                height: 16px;
+                flex: none;
+                color: var(--sb-muted);
+            }
+
+            .sub-link:hover {
+                background: var(--sb-hover);
+                color: var(--sb-ink);
+            }
+
+            .sub-link.active {
+                background: #fff;
+                color: var(--sb-ink);
+                font-weight: 600;
+                box-shadow: 0 1px 3px rgba(20, 23, 28, .12), 0 0 0 1px var(--sb-line);
+            }
+
+            .sub-link.active .ico {
+                color: var(--sb-ink);
+            }
+
+            .sub-list:not(:has(a))::after {
+                content: "No pages yet";
+                padding: .35rem .75rem;
+                color: var(--sb-muted);
+                font-size: .85rem;
+                font-style: italic;
+            }
+
+            .sb-divider {
+                height: 1px;
+                background: var(--sb-line);
+                margin: .6rem .5rem;
+            }
+
+            .sb-plain {
+                display: flex;
+                align-items: center;
+                gap: .65rem;
+                padding: .55rem .75rem;
+                border-radius: 999px;
+                color: var(--sb-ink);
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+            .sb-plain .ico {
+                width: 18px;
+                height: 18px;
+            }
+
+            .sb-plain:hover {
+                background: var(--sb-hover);
+            }
+
+            .sb-plain.active {
+                background: #fff;
+                font-weight: 600;
+                box-shadow: 0 1px 3px rgba(20, 23, 28, .12), 0 0 0 1px var(--sb-line);
+            }
+
+            /* ---------- footer: account ---------- */
+            .sb-foot {
+                flex: none;
+                border-top: 1px solid var(--sb-line);
+                padding: .85rem 1rem;
+                background: var(--sb-bg);
+            }
+
+            .sb-user {
+                font-weight: 600;
+                margin-bottom: .55rem;
+                word-break: break-word;
+            }
+
+            .sb-foot .btn {
+                border-radius: 999px;
+            }
+
+            /* ---------- guest (not signed in): no sidebar ---------- */
+            .no-sidebar .app-content {
+                margin-left: 0;
+            }
+
+            .guest-bar {
+                display: flex;
+                align-items: center;
+                gap: .75rem;
+                padding: .7rem 1.5rem;
+                background: var(--sb-bg);
+                border-bottom: 1px solid var(--sb-line);
+            }
+
+            .guest-brand {
+                color: var(--sb-ink);
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 1.15rem;
+            }
+
+            .guest-brand small {
+                font-weight: 400;
+                color: var(--sb-muted);
+                font-size: .8rem;
+                margin-left: .25rem;
+            }
+
+            /* ---------- mobile ---------- */
+            .sb-topbar {
+                display: none;
+            }
+
+            .sb-backdrop {
+                display: none;
+            }
+
+            @@media (max-width: 991.98px) {
+                .app-sidebar {
+                    transform: translateX(-100%);
+                    transition: transform .2s ease;
+                    box-shadow: none;
+                }
+
+                body.nav-open .app-sidebar {
+                    transform: none;
+                    box-shadow: 0 0 40px rgba(0, 0, 0, .25);
+                }
+
+                body.nav-open .sb-backdrop {
+                    display: block;
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0, 0, 0, .35);
+                    z-index: 1030;
+                }
+
+                .app-content {
+                    margin-left: 0;
+                }
+
+                .sb-topbar {
+                    display: flex;
+                    align-items: center;
+                    gap: .75rem;
+                    padding: .6rem 1rem;
+                    background: var(--sb-bg);
+                    border-bottom: 1px solid var(--sb-line);
+                    position: sticky;
+                    top: 0;
+                    z-index: 1020;
+                }
+
+                .sb-topbar button {
+                    border: 1px solid var(--sb-line);
+                    background: #fff;
+                    border-radius: 8px;
+                    padding: .3rem .55rem;
+                    line-height: 1;
+                }
+
+                .sb-topbar strong {
+                    font-size: 1.05rem;
+                }
+            }
+
+            @@media (prefers-reduced-motion: reduce) {
+
+                .app-sidebar,
+                .sb-toggle,
+                .sub-link,
+                .sb-toggle .pm::after {
+                    transition: none;
+                }
+            }
+    </style>
+</head>
+
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            </symbol>
+            <symbol id="i-admission" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="8" r="3.5" />
+                <path d="M2.5 20a6.5 6.5 0 0 1 13 0" />
+                <path d="M19 8v6M16 11h6" />
+            </symbol>
+            <symbol id="i-student" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 9l10-5 10 5-10 5z" />
+                <path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5" />
+            </symbol>
+            <symbol id="i-academic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" />
+                <path d="M4 21V5" />
+                <path d="M9 8h6" />
+            </symbol>
+            <symbol id="i-exam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="4" width="14" height="17" rx="2" />
+                <path d="M9 4V3h6v1" />
+                <path d="M9 13l2 2 4-4" />
+            </symbol>
+            <symbol id="i-fees" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="6" width="18" height="13" rx="2" />
+                <path d="M3 10h18" />
+                <path d="M16 15h2" />
+            </symbol>
+            <symbol id="i-faculty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="12" rx="2" />
+                <path d="M8 20h8M12 16v4" />
+                <circle cx="12" cy="10" r="2" />
+            </symbol>
+            <symbol id="i-admin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z" />
+                <path d="M9 12l2 2 4-4" />
+            </symbol>
+            <symbol id="i-web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <path d="M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9z" />
+            </symbol>
+            <symbol id="i-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 13l3-8h12l3 8v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+                <path d="M3 13h5l1 3h6l1-3h5" />
+            </symbol>
+            <symbol id="i-jobs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="app-shell @(userId > 0 ? "" : "no-sidebar")">
+
+        @if (userId > 0)
+        {
+            <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation">
+                <div class="sb-brand">
+                    <a asp-controller="Home" asp-area="" asp-action="Index">UAS <small>Administration</small></a>
+                </div>
+
+                <nav class="sb-nav" id="sideNav">
+
+                    @* ===== 1. Admission (no pages built yet) ===== *@
+                    <div class="sb-module">
+                        <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-admission"
+                                data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-admission">
+                            <svg class="ico">
+                                <use href="#i-admission" />
+                            </svg><span class="label">Admission</span><span class="pm"></span>
+                        </button>
+                        <div class="collapse" id="mod-admission">
+                            <div class="sub-list">
+                                @if(admissionStaff){<a class="sub-link" asp-area="Admission" asp-controller="Admissions" asp-action="Index">Admission circulars</a>}
+                                @if(applicant){<a class="sub-link" asp-area="Admission" asp-controller="Applicant" asp-action="Index">My applications</a>}
+                                <a class="sub-link" asp-area="" asp-controller="Public" asp-action="Admission">Public admission</a>
+                                @if(cms){<a class="sub-link" asp-area="Website" asp-controller="Pages" asp-action="Index">Website content</a>}
+                                <a class="sub-link" asp-area="" asp-controller="Public" asp-action="Index">Public website</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* ===== 2. Student Management ===== *@
+                    <div class="sb-module">
+                        <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-student"
+                                data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-student">
+                            <svg class="ico">
+                                <use href="#i-student" />
+                            </svg><span class="label">Student Management</span><span class="pm"></span>
+                        </button>
+                        <div class="collapse" id="mod-student">
+                            <div class="sub-list">
+                                @if (studentRecords)
+                                {
+                                    <a class="sub-link" asp-area="Student" asp-controller="Students" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Students</a>
+                                    <a class="sub-link" asp-area="Student" asp-controller="Lifecycle" asp-action="Index">Student lifecycle</a>
+                                }
+                                @if (import)
+                                {
+                                    <a class="sub-link" asp-area="Administration" asp-controller="StudentImports"
+                                       asp-action="Index"><svg class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Student import</a>
+                                }
+                                @if (isStudent)
+                                {
+                                    <a class="sub-link" asp-area="Portal" asp-controller="Dashboard" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>My Portal</a>
+                                    <a class="sub-link" asp-area="Student" asp-controller="Lifecycle" asp-action="Details">My academic progress</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    @* ===== 3. Academic Management ===== *@
+                    <div class="sb-module">
+                        <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-academic"
+                                data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-academic">
+                            <svg class="ico">
+                                <use href="#i-academic" />
+                            </svg><span class="label">Academic Management</span><span class="pm"></span>
+                        </button>
+                        <div class="collapse" id="mod-academic">
+                            <div class="sub-list">
+                                @if (userId > 0 && (await Access.AllowedAsync(userId, "offerings.manage") || await Access.AllowedAsync(userId, "reports.view") || await Access.AllowedAsync(userId, "assignments.manage") || await Access.AllowedAsync(userId, "routine.manage")))
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="Operations" asp-action="Index">Academic operations</a>
+                                }
+                                @if (depts)
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="Departments" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Departments</a>
+                                }
+                                @if (courses)
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="Courses" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Courses</a>
+                                }
+                                @if (curriculum)
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="Curriculum" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Curriculum</a>
+                                }
+                                @if (calendar)
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="AcademicCalendar"
+                                       asp-action="Index"><svg class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Calendar</a>
+                                }
+                                @if (batches)
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="Batches" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Batches</a>
+                                }
+                                @if (rooms)
+                                {
+                                    <a class="sub-link" asp-area="Academic" asp-controller="Rooms" asp-action="Index"><svg
+                                        class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Rooms</a>
+                                }
+                                @if (config)
+                                {
+                                    <a class="sub-link" asp-area="Administration" asp-controller="AttendanceScales"
+                                       asp-action="Index"><svg class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Attendance rules</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    @* ===== 4. Examination & Results ===== *@
+                    <div class="sb-module">
+                        <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-exam"
+                                data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-exam">
+                            <svg class="ico">
+                                <use href="#i-exam" />
+                            </svg><span class="label">Examination &amp; Results</span><span class="pm"></span>
+                        </button>
+                        <div class="collapse" id="mod-exam">
+                            <div class="sub-list">
+                                @if (isStudent)
+                                {<a class="sub-link" asp-area="Examination" asp-controller="Exams" asp-action="MyExams">My exams and results</a>}
+                                @if (userId > 0 && (await Access.AllowedAsync(userId,"exams.manage") || await Access.AllowedAsync(userId,"reports.view") || await Access.AllowedAsync(userId,"marks.enter") || await Access.AllowedAsync(userId,"hold.release.dues") || await Access.AllowedAsync(userId,"hold.release.attendance")))
+                                {<a class="sub-link" asp-area="Examination" asp-controller="Exams" asp-action="Index">Examination operations</a>}
+                                @if (config)
+                                {
+                                    <a class="sub-link" asp-area="Administration" asp-controller="GradeScales"
+                                       asp-action="Index"><svg class="ico">
+                                        <use href="#i-folder" />
+                                    </svg>Grades</a><a class="sub-link" asp-area="Administration"
+                                                   asp-controller="MarkSchemes" asp-action="Index"><svg class="ico">
+                                    <use href="#i-folder" />
+                                </svg>Marks</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                @* ===== 5. Fees & Finance ===== *@
+                <div class="sb-module">
+                    <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-fees"
+                            data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-fees">
+                        <svg class="ico">
+                            <use href="#i-fees" />
+                        </svg><span class="label">Fees &amp; Finance</span><span class="pm"></span>
+                    </button>
+                    <div class="collapse" id="mod-fees">
+                        <div class="sub-list">
+                            @if(feeRates){<a class="sub-link" asp-area="Finance" asp-controller="FeeTypes" asp-action="Index">Fee rates and generation</a>}
+                            @if(dueList){<a class="sub-link" asp-area="Finance" asp-controller="Dues" asp-action="Index">Student dues</a>}
+                            @if(ledger){<a class="sub-link" asp-area="Finance" asp-controller="Ledger" asp-action="Index">Student ledger</a>}
+                            @if(counter){<a class="sub-link" asp-area="Finance" asp-controller="CounterPayments" asp-action="Create">Counter payment</a>}
+                            @if(isStudent){<a class="sub-link" asp-area="Portal" asp-controller="Finance" asp-action="Index">My finances</a>}
+                        </div>
+                    </div>
+                </div>
+
+                @* ===== 6. Faculty Management ===== *@
+                <div class="sb-module">
+                    <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-faculty"
+                            data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-faculty">
+                        <svg class="ico">
+                            <use href="#i-faculty" />
+                        </svg><span class="label">Faculty Management</span><span class="pm"></span>
+                    </button>
+                    <div class="collapse" id="mod-faculty">
+                        <div class="sub-list">
+                            @if (facultyRecords)
+                            {
+                                <a class="sub-link" asp-area="Faculty" asp-controller="FacultyMembers"
+                                   asp-action="Index"><svg class="ico">
+                                    <use href="#i-folder" />
+                                </svg>Faculty</a>
+                            }
+                            @if (facultyMentors)
+                            {
+                                <a class="sub-link" asp-area="Faculty" asp-controller="Mentors" asp-action="Index"><svg
+                                    class="ico">
+                                    <use href="#i-folder" />
+                                </svg>Mentors</a>
+                            }
+                            @if (facultyWorkload)
+                            {
+                                <a class="sub-link" asp-area="Faculty" asp-controller="Workload" asp-action="Index"><svg
+                                    class="ico">
+                                    <use href="#i-folder" />
+                                </svg>Workload</a>
+                            }
+                            @if (isFaculty)
+                            {
+                                <a class="sub-link" asp-area="Portal" asp-controller="FacultyDashboard"
+                                   asp-action="Index"><svg class="ico">
+                                    <use href="#i-folder" />
+                                </svg>Faculty portal</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                @* ===== 7. Administration & Security ===== *@
+                <div class="sb-module">
+                    <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-admin"
+                            data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-admin">
+                        <svg class="ico">
+                            <use href="#i-admin" />
+                        </svg><span class="label">Administration &amp; Security</span><span class="pm"></span>
+                    </button>
+                    <div class="collapse" id="mod-admin">
+                        <div class="sub-list">
+                            @if (admin)
+                            {
+                                <a class="sub-link" asp-area="Administration" asp-controller="Users" asp-action="Index"><svg
+                                    class="ico">
+                                    <use href="#i-folder" />
+                                </svg>Users</a><a class="sub-link" asp-area="Administration" asp-controller="Roles"
+                                              asp-action="Index"><svg class="ico">
+                                <use href="#i-folder" />
+                            </svg>Roles</a>
+                        }
+                        @if (approval)
+                        {
+                            <a class="sub-link" asp-area="Administration" asp-controller="Approvals"
+                               asp-action="Index"><svg class="ico">
+                                <use href="#i-folder" />
+                            </svg>Approvals</a>
+                        }
+                        @if (audit)
+                        {
+                            <a class="sub-link" asp-area="Administration" asp-controller="Audit" asp-action="Index"><svg
+                                class="ico">
+                                <use href="#i-folder" />
+                            </svg>Audit</a>
+                        }
+                        @if (config)
+                        {
+                            <a class="sub-link" asp-area="Administration" asp-controller="ConfigParameters"
+                               asp-action="Index"><svg class="ico">
+                                <use href="#i-folder" />
+                            </svg>Configuration</a>
+                        }
+                        @if (import)
+                        {
+                            <a class="sub-link" asp-area="Administration" asp-controller="DataImport"
+                               asp-action="Index"><svg class="ico">
+                                <use href="#i-folder" />
+                            </svg>Import validation</a>
+                        }
+                        @if (templates)
+                        {
+                            <a class="sub-link" asp-area="Administration" asp-controller="NotificationTemplates"
+                               asp-action="Index"><svg class="ico">
+                                <use href="#i-folder" />
+                            </svg>Templates</a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @* ===== 8. University Website ===== *@
+            <div class="sb-module">
+                <button type="button" class="sb-toggle" data-bs-toggle="collapse" data-bs-target="#mod-web"
+                        data-bs-parent="#sideNav" aria-expanded="false" aria-controls="mod-web">
+                    <svg class="ico">
+                        <use href="#i-web" />
+                    </svg><span class="label">University Website</span><span class="pm"></span>
+                </button>
+                <div class="collapse" id="mod-web">
+                    <div class="sub-list">
+                        @if (notice)
+                        {
+                            <a class="sub-link" asp-area="Website" asp-controller="Notices" asp-action="Index"><svg
+                                class="ico">
+                                <use href="#i-folder" />
+                            </svg>Notices</a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @* ===== Personal shortcuts (not part of any module) ===== *@
+            @if (userId > 0)
+            {
+                <div class="sb-divider"></div>
+                <a class="sb-plain" asp-area="" asp-controller="Notifications" asp-action="Index"><svg class="ico">
+                    <use href="#i-inbox" />
+                </svg>Inbox</a>
+                <a class="sb-plain" asp-area="" asp-controller="Jobs" asp-action="Index"><svg class="ico">
+                    <use href="#i-jobs" />
+                </svg>Jobs</a>
+            }
+        </nav>
+
+        <div class="sb-foot">
+            @if (userId > 0)
+            {
+                <div class="sb-user">@User.Identity?.Name</div>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-sm btn-outline-dark flex-fill" asp-area="" asp-controller="Account"
+                       asp-action="ChangePassword">Password</a>
+                    <form method="post" asp-area="" asp-controller="Account" asp-action="Logout"
+                          class="flex-fill d-flex"><button class="btn btn-sm btn-dark flex-fill">Sign out</button></form>
+                </div>
+            }
+            else
+            {
+
+                <a class="btn btn-sm btn-dark w-100" asp-area="" asp-controller="Account" asp-action="Login">Sign
+                    in</a>
+                }
+            </div>
+        </aside>
+        <div class="sb-backdrop" id="sbBackdrop"></div>
+    }
+
+    <div class="app-content">
+        @if (userId > 0)
+        {
+            <div class="sb-topbar">
+                <button type="button" id="sbOpen" aria-label="Open menu" aria-controls="appSidebar">&#9776;</button>
+                <strong>UAS</strong>
+            </div>
+        }
+        else
+        {
+            <header class="guest-bar">
+                <a class="guest-brand" asp-controller="Home" asp-area="" asp-action="Index">UAS
+                    <small>Administration</small></a>
+                    <a class="btn btn-sm btn-dark ms-auto" asp-area="" asp-controller="Account" asp-action="Login">Sign
+                        in</a>
+                    </header>
+                }
+                <main class="container-fluid main-content py-3 px-4">@if(TempData["Message"] is string message){
+                    <div class="alert alert-success">@message</div>
+                }
+                @if (TempData["Error"] is string error)
+                {
+                    <div class="alert alert-danger">@error</div>
+                }
+                @RenderBody()
+            </main>
+            <footer class="border-top container-fluid py-3 px-4 text-muted"><small>University Automation System</small>
+            </footer>
+        </div>
+
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/print-document.js" asp-append-version="true"></script>
+    <script src="~/js/form-guard.js" asp-append-version="true"></script>
+    <script>
+            (function () {
+                // Highlight the current page and open the module it belongs to.
+                var path = location.pathname.replace(/\/+$/, '') || '/';
+                var best = null, bestLen = -1;
+                document.querySelectorAll('#sideNav a.sub-link, #sideNav a.sb-plain').forEach(function (a) {
+                    var p = (a.getAttribute('href') || '').split('?')[0].replace(/\/+$/, '') || '/';
+                    if (p === '/') return;
+                    if ((path === p || path.indexOf(p + '/') === 0) && p.length > bestLen) { best = a; bestLen = p.length; }
+                });
+                if (best) {
+                    best.classList.add('active');
+                    var panel = best.closest('.collapse');
+                    if (panel) {
+                        panel.classList.add('show');
+                        var t = document.querySelector('[data-bs-target="#' + panel.id + '"]');
+                        if (t) t.setAttribute('aria-expanded', 'true');
+                    }
+                }
+                // Mobile drawer
+                var body = document.body;
+                var open = document.getElementById('sbOpen'), back = document.getElementById('sbBackdrop');
+                if (open) open.addEventListener('click', function () { body.classList.add('nav-open'); });
+                if (back) back.addEventListener('click', function () { body.classList.remove('nav-open'); });
+            })();
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

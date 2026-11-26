@@ -1,0 +1,1 @@
+document.getElementById('add-part').addEventListener('click',function(){const p=document.getElementById('parts'),i=p.children.length;if(i>=20)return;const row=p.firstElementChild.cloneNode(true);row.querySelectorAll('input').forEach(x=>{x.name=x.name.replace('[0]','['+i+']');x.value='';});p.appendChild(row);});

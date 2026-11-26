@@ -39,10 +39,18 @@ public sealed class ConfigurationFacade(IConfigParameterRepository configs, IRep
         if (departmentId is null) await access.RequireGlobalAsync("config.manage", ct);
         else await access.RequireAsync("config.manage", departmentId, ct);
         if (key.Length is < 1 or > 60 || value.Length > 255) throw new BusinessRuleException("Configuration key or value exceeds field size.");
+        if (key == UA.Framework.Constants.ConfigKeys.AttendanceLockDate && !DateTime.TryParseExact(value, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _))
+            throw new BusinessRuleException("Attendance lock date must be YYYY-MM-DD.");
         if (key == UA.Framework.Constants.ConfigKeys.AttendanceMinimum &&
             (!decimal.TryParse(value, System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out var percentage)
               || percentage < 75 || percentage > 100))
             throw new BusinessRuleException("Attendance threshold must be at least 75% and no more than 100%.");
+        if (key == UA.Framework.Constants.ConfigKeys.BatchSeats &&
+            (!int.TryParse(value, out var seats) || seats is < 1 or > 10000))
+            throw new BusinessRuleException("Intake seats must be between 1 and 10000.");
+        if (key == UA.Framework.Constants.ConfigKeys.SectionCapacity &&
+            (!int.TryParse(value, out var sectionSize) || sectionSize is < 1 or > 1000))
+            throw new BusinessRuleException("Section capacity must be between 1 and 1000.");
         if (key == UA.Framework.Constants.ConfigKeys.NormalCredits &&
             (!int.TryParse(value, out var credits) || credits is < 12 or > 18))
             throw new BusinessRuleException("Normal credit load must be between 12 and 18.");

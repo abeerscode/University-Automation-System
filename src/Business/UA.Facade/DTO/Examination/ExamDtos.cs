@@ -1,0 +1,18 @@
+namespace UA.Facade.DTO.Examination;
+public sealed record ExamOption(int Id,string Label);
+public sealed record EventRow(int Id,int TermId,string Type,DateTime Start,DateTime End,string Status);
+public sealed record SittingRow(int Id,string Course,DateTime Date,TimeSpan Start,TimeSpan End);
+public sealed record HoldRow(int Id,string Student,string Course,string Type,string Reason,bool Released,bool CanRelease);
+public sealed record SeatRow(int EventId,int SittingId,string Student,string Course,DateTime Date,TimeSpan Start,TimeSpan End,string Room,string Seat,bool Retake=false,bool ClashConfirmed=false,bool Makeup=false,bool CanConfirm=false);
+public sealed record OfferingExamRow(int Id,string Label,string Status,bool CanEnter,bool CanVerify,bool CanApprove);
+public sealed record ExamHome(ExamOption[] Terms,EventRow[] Events,OfferingExamRow[] Offerings,bool Controller);
+public sealed record EventPage(EventRow Event,SittingRow[] Sittings,HoldRow[] Holds,SeatRow[] Seats,bool Controller,ExamOption[] Halls);
+public sealed record MarkPart(int Id,string Name,decimal Maximum,bool Attendance,bool Retake=false);
+public sealed record MarkCell(int EnrollmentId,int ComponentId,decimal? Marks,bool Absent);
+public sealed record Examinee(int Id,string Student,string Name,string Disposition,string EnrollmentType="Regular");
+public sealed record MarksPage(int OfferingId,string Course,string Status,Examinee[] Students,MarkPart[] Parts,MarkCell[] Cells,bool CanEnter,bool CanVerify,bool CanApprove,bool CanEnterRetake=false);
+public sealed record MarkInput(int EnrollmentId,int ComponentId,decimal? Marks,bool Absent);
+public sealed record ResultRow(int Id,string Student,string Course,int TermId,int Semester,decimal Credits,decimal Total,string Grade,decimal Points,string Status,int Version,DateTime Published,bool Replaced,int BatchId,byte Attempt);
+public sealed record GpaRow(int TermId,int Semester,decimal Earned,decimal Gpa,decimal Cgpa,int Version);
+public sealed record StudentExamPage(string Student,SeatRow[] Seats,HoldRow[] Holds,ResultRow[] Results,GpaRow[] Gpas,bool IsOwn,EventRow[]? SpecialEvents=null);
+public sealed record ExamJob(int Id,string Type,string Status,int Progress,string? Error);

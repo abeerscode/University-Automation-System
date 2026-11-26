@@ -1,0 +1,9 @@
+@model IReadOnlyList<DueRow>
+@{ ViewData["Title"]="Student dues"; var lookups=(FinanceLookup)ViewBag.Lookups; }
+<h1>Student dues</h1><form method="get" class="row g-2 mb-3">
+<div class="col-md-3"><label>Department</label><select name="departmentId" class="form-select"><option value="">All</option>@foreach(var d in lookups.Departments){<option value="@d.Key" selected="@(ViewBag.DepartmentId==d.Key)">@d.Value</option>}</select></div>
+<div class="col-md-3"><label>Batch</label><select name="batchId" class="form-select"><option value="">All</option>@foreach(var d in lookups.Batches){<option value="@d.Key" selected="@(ViewBag.BatchId==d.Key)">@d.Value</option>}</select></div>
+<div class="col-md-3"><label>Section</label><select name="sectionId" class="form-select"><option value="">All</option>@foreach(var d in lookups.Sections){<option value="@d.Key" selected="@(ViewBag.SectionId==d.Key)">@d.Value</option>}</select></div>
+<div class="col-md-2"><label>Status</label><select name="status" class="form-select"><option value="">All</option>@foreach(var s in new[]{"Unpaid","Partially paid","Paid","Waived","Reversed"}){<option selected="@(ViewBag.Status==s)">@s</option>}</select></div><div class="col-md-1 align-self-end"><button class="btn btn-primary">Filter</button></div></form>
+<div class="table-responsive"><table class="table"><thead><tr><th>Student</th><th>Fee</th><th>Term ID</th><th>Amount</th><th>Paid</th><th>Balance</th><th>Deadline</th><th>Status</th></tr></thead><tbody>@foreach(var d in Model){<tr><td><a asp-controller="Ledger" asp-action="Index" asp-route-studentId="@d.StudentId">@d.StudentId</a> — @d.StudentName</td><td>@d.Fee</td><td>@d.TermId</td><td>@d.Amount.ToString("F2")</td><td>@d.Paid.ToString("F2")</td><td>@d.Balance.ToString("F2")</td><td>@d.Deadline.ToString("yyyy-MM-dd")</td><td>@d.Status</td></tr>}</tbody></table></div>
+@if(Model.Count==0){<p>No matching dues.</p>}

@@ -1,0 +1,3 @@
+@model string
+@{ViewData["Title"]=Model=="contact"?"Contact":"About the university";}
+<h1>@ViewData["Title"]</h1><p>Official information has not yet been published by the university. Please check the public notices or admission circulars for currently available information.</p><a asp-action="Notices">Public notices</a>
